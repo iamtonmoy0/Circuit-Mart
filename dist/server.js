@@ -4,8 +4,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+// initializing application
 const init = () => {
     let app = (0, express_1.default)();
+    let routes = [
+        {
+            method: 'get',
+            path: '/new',
+            headers: (req, res) => {
+                res.send(`route is working \n on method ${req.method} `);
+            }
+        }
+    ];
+    routes.forEach(route => {
+        app[route.method](route.path, route.headers);
+    });
+    // basic route root
     app.get('/', (req, res) => {
         res.send('hello world');
     });
