@@ -5,6 +5,7 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import App from "../App";
 import Home from "../pages/HomePage/Home/Home";
+import RegisterComplete from "../pages/Auth/Complete/RegisterComplete";
 const route = createBrowserRouter([
 	{
 		path:routePath.ROOT,
@@ -22,6 +23,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.REGISTER,
 				element:<Register/>
+			},
+			{
+				path:routePath.REGISTERCOMPLETED,
+				element:<RegisterComplete/>
 			}
 		]
 	}
