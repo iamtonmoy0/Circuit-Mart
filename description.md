@@ -13,4 +13,6 @@
  * React Router
  * React Selector
  * Material UI
+ * Aos
+ * React-Hot-Toast
  * 
