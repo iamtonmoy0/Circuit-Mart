@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import {getAuth, sendSignInLinkToEmail }from 'firebase/auth'
+import {getAuth, sendSignInLinkToEmail, signInWithEmailLink }from 'firebase/auth'
 import app  from "../lib/firebase.config";
 
 export const AuthContext =createContext()
@@ -9,9 +9,15 @@ const AuthProvider = ({children}) => {
 	const registerWithEmail = (email,config)=>{
 		return sendSignInLinkToEmail(auth,email,config)
 	}
+	// sign in with email link
+	const emailSignIn =(email,key)=>{
+		return signInWithEmailLink(email,key)
+	}
 	const authInfo ={
 		auth,
 		registerWithEmail,
+		emailSignIn,
+		
 
 	}
 	return (

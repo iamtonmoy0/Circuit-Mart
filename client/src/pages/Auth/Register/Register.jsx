@@ -34,7 +34,7 @@ const Register = () => {
 		<div className="flex pt-10 justify-center">
 			<form  data-aos='fade-down' className="grid grid-cols-1" onSubmit={handleSubmit}>
 			<p className="text-2xl text-left">Register</p>
-			<input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="rounded  p-2 border-b-2 focus:border-b-2 focus:border-green-500 outline-none text-black  border-indigo-500 bg-gray-100 mt-2 w-[400px]" />
+			<input type="text" required name="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="rounded  p-2 border-b-2 focus:border-b-2 focus:border-green-500 outline-none text-black  border-indigo-500 bg-gray-100 mt-2 w-[400px]" />
 			<button className="btn py-3 bg-[tomato] rounded-full w-52 mx-auto mt-5 " type="submit">Register</button>
 			</form>
 		</div>
