@@ -8,14 +8,22 @@ import {  HelmetProvider } from 'react-helmet-async';
 import 'aos/dist/aos.css'
 import AuthProvider from './context/AuthProvider.jsx';
 
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import rootReducer from './reducers/index.js';
+
+//store
+const store = createStore(rootReducer,composeWithDevTools());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
         <HelmetProvider>
-            <AuthProvider>
-                <RouterProvider router={route}>
-                    
+            <Provider store={store}>
+             <AuthProvider>
+                <RouterProvider router={route}>                
                         <App />
                  </RouterProvider>
-            </AuthProvider>
+             </AuthProvider>
+            </Provider>
         </HelmetProvider>
 )
