@@ -5,16 +5,25 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 import {FiLogOut} from 'react-icons/fi'
+import { useDispatch } from 'react-redux';
 
 const Header = () => {
 
   const {logout,user}= useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch =useDispatch();
   // handle logout
   const handleLogout=()=>{
     logout()
-    toast.success('Logout successful');
-    navigate('/')
+    .then(()=>{
+      toast.success('Logout successful');
+      navigate('/')
+      dispatch({type:'LOGOUT',payload:{
+        email:null,
+        token:null
+      }})
+
+    })
   }
 	return (
 	<>
