@@ -7,10 +7,6 @@ const {readdirSync} = require('fs');
 require('dotenv').config();
 require('colors');
 
-// importing routes
-
-
-
 // app
 const app = express();
 
@@ -28,7 +24,7 @@ app.use(cors()) //cross origin policy
 
 
 // route middlewares
-readdirSync('./routes').map(fileName=>app.use('/api/v1',require('./routes/'+fileName)))
+readdirSync('./routes').map(fileName=>app.use('/api/v1',require('./routes/'+fileName)));
 
 app.all('*',(req,res)=>{
 	res.send('invalid route!')
