@@ -1,5 +1,5 @@
 const initialState ={
-	email:'@examble.com'
+	email:null
 }
 export const userReducer=(state=initialState ,action)=>{
 switch(action.type){

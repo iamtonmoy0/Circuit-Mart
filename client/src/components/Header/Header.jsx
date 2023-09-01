@@ -1,8 +1,20 @@
 import {BiGridAlt, BiUserPlus} from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as routePath from '../../routes/routePath';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
+import {FiLogOut} from 'react-icons/fi'
 
 const Header = () => {
+  const {logout}= useContext(AuthContext);
+  const navigate = useNavigate()
+  // handle logout
+  const handleLogout=()=>{
+    logout()
+    toast.success('Logout successful');
+    navigate('/')
+  }
 	return (
 	<>
 	<header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
@@ -65,8 +77,9 @@ const Header = () => {
             <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
               Downloads
             </a>
-            <a className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-              Team Account
+            <a onClick={handleLogout} className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+              <FiLogOut/>
+              Logout
             </a>
           </div>
         </div>
