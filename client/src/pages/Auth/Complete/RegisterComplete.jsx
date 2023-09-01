@@ -5,7 +5,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
 
 const RegisterComplete = () => {
-	const {emailSignIn,user} = useContext(AuthContext);
+	const {emailSignIn,user,createUser} = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,21 +24,27 @@ const RegisterComplete = () => {
 			toast.error('Password  should be minimum 6 character')
 			return
 		}
-		// TODO: need to test .firebase daily limit passed
-		try {
-			const result=emailSignIn(email,window.location.href)
-			if(result.user.emailVerified){
-				localStorage.removeItem('emailForRegistration') //remove email from local storage
-				// get user id Token
-				await user.updatePassword(password)
-				const idTokenResult=await user.getIdTokenResult()
-				// TODO:Redux Store
-				// TODO:redirect user
-			}
-		} catch (error) {
-			toast.error('Failed to register',error)
-		}
+		createUser(email,password)
+		.then(()=>{
+        // remove user email fom local storage
+        window.localStorage.removeItem("emailForRegistration");
+		toast.success('Account created successfully');
+		
+		})
+		.catch(error=>{
+			toast.error(error)
+		})
+		// console.log(result)
+		// if(result.user.emailVerified){
+		// 	// get user id Token
+		// 	// await user.updatePassword(password)
+		// 	const idTokenResult=await user.getIdTokenResult()
+			// TODO:Redux Store
+			// TODO:redirect user
+		// }
+	
 	}
+	
 
 	return (
 		<>
