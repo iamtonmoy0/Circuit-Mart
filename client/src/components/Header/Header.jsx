@@ -7,7 +7,8 @@ import toast from 'react-hot-toast';
 import {FiLogOut} from 'react-icons/fi'
 
 const Header = () => {
-  const {logout}= useContext(AuthContext);
+
+  const {logout,user}= useContext(AuthContext);
   const navigate = useNavigate()
   // handle logout
   const handleLogout=()=>{
@@ -40,10 +41,12 @@ const Header = () => {
         {/* <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">UserName</a> */}
         {/* <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">Work</a> */}
         
-
+{ user? 
         <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
           <button type="button" className="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium dark:text-gray-400 dark:hover:text-gray-500 ">
-            UserName
+            {
+              user.displayName || user.email
+            }
             <svg className="ml-2 w-2.5 h-2.5 text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
             </svg>
@@ -81,8 +84,11 @@ const Header = () => {
               <FiLogOut/>
               Logout
             </a>
+            
           </div>
         </div>
+        :
+        <>
 		<Link to={routePath.REGISTER} className=" flex items-center font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">
 			<BiUserPlus className='text-xl'/>
 
@@ -94,6 +100,8 @@ const Header = () => {
           </svg>
           Log in
         </Link>
+        </>
+}
       </div>
     </div>
   </nav>
