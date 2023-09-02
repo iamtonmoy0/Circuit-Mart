@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
-const {ObjectId} =mongoose.schema;
+// const {ObjectId} = mongoose.schema;
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
 	name:String,
+	picture:{
+		type:String,
+		required:true
+	},
 	email:{
 		type:String,
 		required:true,
+		unique:true,
 		index:true 
 	},
 	role:{
