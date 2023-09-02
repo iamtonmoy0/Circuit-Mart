@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { ROOT } from "./routePath";
 import toast from "react-hot-toast";
 
-const SecureRoute = ({children}) => {
+const UserRoute = ({children}) => {
 	const navigate =useNavigate()
 	const {user} = useSelector(state=>({...state}))
 	useEffect(()=>{
-		if(user && user.token ) {
+		if(!user.email) {
 		toast.error('Invalid Route')
 		navigate(ROOT)
 	}
@@ -17,4 +17,4 @@ const SecureRoute = ({children}) => {
 	return children
 }
 
-export default SecureRoute;
+export default UserRoute;

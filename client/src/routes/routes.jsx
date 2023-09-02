@@ -8,6 +8,9 @@ import Home from "../pages/HomePage/Home/Home";
 import RegisterComplete from "../pages/Auth/Complete/RegisterComplete";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 import SecureRoute from "./secureRoute";
+import History from '../pages/User/History/History'
+import UserRoute from "./userRoute";
+
 const route = createBrowserRouter([
 	{
 		path:routePath.ROOT,
@@ -24,7 +27,7 @@ const route = createBrowserRouter([
 			},
 			{
 				path:routePath.REGISTER,
-				element: <SecureRoute>  <Register/></SecureRoute>
+				element: <SecureRoute><Register/> </SecureRoute>
 			},
 			{
 				path:routePath.REGISTERCOMPLETED,
@@ -32,7 +35,11 @@ const route = createBrowserRouter([
 			},
 			{
 				path:routePath.RESETPASS,
-				element:<ForgotPassword/>
+				element:<SecureRoute> <ForgotPassword/></SecureRoute> 
+			},
+			{
+				path:routePath.WELCOMEASUSER,
+				element:<UserRoute> <History/> </UserRoute>  
 			},
 		]
 	}

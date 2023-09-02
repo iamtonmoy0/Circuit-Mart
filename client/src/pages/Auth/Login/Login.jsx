@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {  REGISTER, RESETPASS } from "../../../routes/routePath";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
@@ -10,6 +10,7 @@ import {createOrUpdate} from '../../../utils/authFunction';
 
 const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 	const {loginWithEmail,googleSignIn} =useContext(AuthContext);
   const {user} = useSelector(state=>({...state}))
   
@@ -27,22 +28,8 @@ const Login = () => {
     toast.dismiss()
 		toast.success('Logged In successful')
 		form.reset()
-    // TODO:need to add redirect user based on user type--line40-------------!
-    // dispatch
-  //  await createOrUpdate(user?.token)
-  //    .then((res)=>{
-  //     dispatch({
-  //             type:'LOGGED_IN_USER',
-  //             payload:{
-  //               name:res.data.data.name,
-  //               email:res.data.data.email,
-  //               role:res.data.data.role,
-  //               _id:res.data.data._id,
-  //               token:user.token
-  //             }
-  //           })
-  //    })
-	})
+   
+  })
 	.catch(error=>{
     toast.dismiss()
 		return toast.error(error.message)
