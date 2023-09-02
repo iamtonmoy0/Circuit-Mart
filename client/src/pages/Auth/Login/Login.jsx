@@ -1,31 +1,52 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {  REGISTER, RESETPASS } from "../../../routes/routePath";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
 import {GoMail} from 'react-icons/go'
+import axios from 'axios';
+import { useSelector } from "react-redux";
+
+const createOrUpdate=async(token)=>{
+  return await axios.post('http://localhost:3000/api/v1/auth',{},{
+    headers:{
+    token,
+    }
+  })
+}
 
 const Login = () => {
 	const {loginWithEmail,googleSignIn} =useContext(AuthContext);
+  const {user} = useSelector(state=>({...state}))
+  console.log(user)
+
 	// login handler
-	const handleLogin =(e)=>{
+	const handleLogin =async(e)=>{
 		e.preventDefault()
     toast.loading('Please Wait!')
 	const form = e.target
 	const email = form.email.value;
 	const password = form.password.value;
+
+// register 
 	loginWithEmail(email,password)
 	.then(()=>{
     toast.dismiss()
 		toast.success('Logged In successful')
+    // createOrUpdate(token.token)
 		form.reset();
 	})
 	.catch(error=>{
-		toast.error(error.message)
+		return toast.error(error.message)
 	})
+  
+}
+// sending token to backend
+useEffect(()=>{
+  createOrUpdate(user?.token)
 
-	}
+},[user])
 	return (
 		<div className="dark:bg-slate-900 bg-gray-100 flex h-full items-center mt-0">
 {/* helmet */}
