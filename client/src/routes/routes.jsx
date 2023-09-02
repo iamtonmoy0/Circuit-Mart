@@ -39,7 +39,7 @@ const route = createBrowserRouter([
 			},
 			{
 				path:routePath.WELCOMEASUSER,
-				element:<UserRoute> <History/> </UserRoute>  
+				element: <History/>  
 			},
 		]
 	}

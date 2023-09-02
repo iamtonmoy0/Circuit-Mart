@@ -1,14 +1,15 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ROOT } from "./routePath";
 import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthProvider";
 
 const UserRoute = ({children}) => {
 	const navigate =useNavigate()
-	const {user} = useSelector(state=>({...state}))
+	const {user}=useContext(AuthContext)
 	useEffect(()=>{
-		if(!user.email) {
+		if(!user) {
 		toast.error('Invalid Route')
 		navigate(ROOT)
 	}
