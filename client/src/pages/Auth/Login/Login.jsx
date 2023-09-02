@@ -27,6 +27,7 @@ const Login = () => {
     toast.dismiss()
 		toast.success('Logged In successful')
 		form.reset()
+    // TODO:need to add redirect user based on user type--line40-------------!
     // dispatch
   //  await createOrUpdate(user?.token)
   //    .then((res)=>{
@@ -52,7 +53,6 @@ const Login = () => {
 useEffect(()=>{
   createOrUpdate(user?.token)
    .then(res=>{
-    // console.log(res.data.data)
     // changing state using backend info
     dispatch({
       type:'LOGGED_IN_USER',
@@ -63,7 +63,7 @@ useEffect(()=>{
         _id:res.data.data._id,
         token:user.token
       }
-    })
+    });
 
    })
 

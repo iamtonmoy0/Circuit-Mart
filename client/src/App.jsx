@@ -15,6 +15,7 @@ function App() {
         const idTokenResult = await user.getIdTokenResult();
   // dispatch  state using firebase info
         dispatch({ type: 'LOGGED_IN_USER', payload:{ 
+          name:user.email.split('@')[0],
           email:user.email,
           token:idTokenResult.token 
         }});
