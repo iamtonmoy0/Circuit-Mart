@@ -1,16 +1,20 @@
-import Aos from "aos";
 import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrUpdate } from "../../../utils/authFunction";
 
 const RegisterComplete = () => {
-	const {emailSignIn,user,createUser} = useContext(AuthContext);
+	const {createUser} = useContext(AuthContext);
+	const { user } = useSelector((state) => ({ ...state }));
+	const dispatch = useDispatch()
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-	Aos.init()
+
 	setEmail(localStorage.getItem("emailForRegistration"));
   }, []);
   
@@ -38,12 +42,30 @@ const RegisterComplete = () => {
 		// if(result.user.emailVerified){
 		// 	// get user id Token
 		// 	// await user.updatePassword(password)
-		// 	const idTokenResult=await user.getIdTokenResult()
 			// TODO:Redux Store
 			// TODO:redirect user
 		// }
 	
 	}
+	useEffect(()=>{
+		createOrUpdate(user?.token)
+		.then(res=>{
+		// console.log(res.data.data)
+		// changing state using backend info
+		dispatch({
+			type:'LOGGED_IN_USER',
+			payload:{
+			name:res.data.data.email.split('@')[0],
+			email:res.data.data.email,
+			role:res.data.data.role,
+			_id:res.data.data._id,
+			token:user.token
+			}
+		})
+  
+		})
+  
+	},[user])
 	
 
 	return (

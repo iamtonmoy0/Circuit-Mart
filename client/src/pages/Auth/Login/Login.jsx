@@ -5,22 +5,14 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
 import {GoMail} from 'react-icons/go'
-import axios from 'axios';
-import { useSelector } from "react-redux";
-
-const createOrUpdate=async(token)=>{
-  return await axios.post('http://localhost:3000/api/v1/auth',{},{
-    headers:{
-    token,
-    }
-  })
-}
+import { useDispatch, useSelector } from "react-redux";
+import {createOrUpdate} from '../../../utils/authFunction';
 
 const Login = () => {
+  const dispatch = useDispatch()
 	const {loginWithEmail,googleSignIn} =useContext(AuthContext);
   const {user} = useSelector(state=>({...state}))
-  console.log(user)
-
+  
 	// login handler
 	const handleLogin =async(e)=>{
 		e.preventDefault()
@@ -30,21 +22,50 @@ const Login = () => {
 	const password = form.password.value;
 
 // register 
-	loginWithEmail(email,password)
-	.then(()=>{
+	await loginWithEmail(email,password)
+	.then(async()=>{
     toast.dismiss()
 		toast.success('Logged In successful')
-    // createOrUpdate(token.token)
-		form.reset();
+		form.reset()
+    // dispatch
+  //  await createOrUpdate(user?.token)
+  //    .then((res)=>{
+  //     dispatch({
+  //             type:'LOGGED_IN_USER',
+  //             payload:{
+  //               name:res.data.data.name,
+  //               email:res.data.data.email,
+  //               role:res.data.data.role,
+  //               _id:res.data.data._id,
+  //               token:user.token
+  //             }
+  //           })
+  //    })
 	})
 	.catch(error=>{
+    toast.dismiss()
 		return toast.error(error.message)
 	})
-  
+ 
 }
 // sending token to backend
 useEffect(()=>{
   createOrUpdate(user?.token)
+   .then(res=>{
+    // console.log(res.data.data)
+    // changing state using backend info
+    dispatch({
+      type:'LOGGED_IN_USER',
+      payload:{
+        name:res.data.data.name,
+        email:res.data.data.email,
+        role:res.data.data.role,
+        _id:res.data.data._id,
+        token:user.token
+      }
+    })
+
+   })
 
 },[user])
 	return (

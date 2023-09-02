@@ -13,7 +13,7 @@ function App() {
     (async () => {
       try {
         const idTokenResult = await user.getIdTokenResult();
-  
+  // dispatch  state using firebase info
         dispatch({ type: 'LOGGED_IN_USER', payload:{ 
           email:user.email,
           token:idTokenResult.token 

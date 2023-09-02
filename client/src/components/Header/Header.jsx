@@ -18,10 +18,7 @@ const Header = () => {
     .then(()=>{
       toast.success('Logout successful');
       navigate('/')
-      dispatch({type:'LOGOUT',payload:{
-        email:null,
-        token:null
-      }})
+      dispatch({type:'LOGOUT',payload:null})
 
     })
   }

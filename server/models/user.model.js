@@ -6,7 +6,6 @@ const userSchema = new schema({
 	name:String,
 	picture:{
 		type:String,
-		required:true
 	},
 	email:{
 		type:String,
