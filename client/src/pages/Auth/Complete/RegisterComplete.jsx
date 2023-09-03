@@ -29,12 +29,13 @@ const RegisterComplete = () => {
         // remove user email fom local storage
         window.localStorage.removeItem("emailForRegistration");
 		toast.success('Account created successfully');
+		//! might need a another dispatch for more security
 		
 		})
 		.catch(error=>{
 			toast.error(error)
 		})
-		
+
 		// 	// get user id Token
 		// 	// await user.updatePassword(password)
 			// TODO:Redux Store
