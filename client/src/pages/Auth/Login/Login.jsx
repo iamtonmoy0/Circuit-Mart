@@ -1,18 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import {  REGISTER, RESETPASS } from "../../../routes/routePath";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
 import {GoMail} from 'react-icons/go'
-import { useDispatch, useSelector } from "react-redux";
-import {createOrUpdate} from '../../../utils/authFunction';
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-	const {loginWithEmail,googleSignIn} =useContext(AuthContext);
-  const {user} = useSelector(state=>({...state}))
+  const {loginWithEmail,googleSignIn} =useContext(AuthContext);
   
 	// login handler
 	const handleLogin =async(e)=>{
@@ -36,25 +31,7 @@ const Login = () => {
 	})
  
 }
-// sending token to backend
-useEffect(()=>{
-  createOrUpdate(user?.token)
-   .then(res=>{
-    // changing state using backend info
-    dispatch({
-      type:'LOGGED_IN_USER',
-      payload:{
-        name:res.data.data.name,
-        email:res.data.data.email,
-        role:res.data.data.role,
-        _id:res.data.data._id,
-        token:user.token
-      }
-    });
 
-   })
-
-},[user,dispatch])
 	return (
 		<div className="dark:bg-slate-900 bg-gray-100 flex h-full items-center mt-0">
 {/* helmet */}

@@ -14,6 +14,7 @@ function App() {
     (async () => {
       try {
         const idTokenResult = await user.getIdTokenResult();
+        console.log(idTokenResult.token)
   // dispatch  state using firebase info
   createOrUpdate(idTokenResult.token)
   .then(res=>{

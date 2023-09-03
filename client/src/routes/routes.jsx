@@ -7,9 +7,9 @@ import App from "../App";
 import Home from "../pages/HomePage/Home/Home";
 import RegisterComplete from "../pages/Auth/Complete/RegisterComplete";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
-import SecureRoute from "./secureRoute";
+// import SecureRoute from "./secureRoute";
 import History from '../pages/User/History/History'
-import UserRoute from "./userRoute";
+// import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
 	{
@@ -23,19 +23,19 @@ const route = createBrowserRouter([
 			},
 			{
 				path:routePath.LOGIN,
-				element:<SecureRoute> <Login/> </SecureRoute> 
+				element: <Login/> 
 			},
 			{
 				path:routePath.REGISTER,
-				element: <SecureRoute><Register/> </SecureRoute>
+				element: <Register/>
 			},
 			{
 				path:routePath.REGISTERCOMPLETED,
-				element:<SecureRoute> <RegisterComplete/> </SecureRoute> 
+				element: <RegisterComplete/> 
 			},
 			{
 				path:routePath.RESETPASS,
-				element:<SecureRoute> <ForgotPassword/></SecureRoute> 
+				element: <ForgotPassword/> 
 			},
 			{
 				path:routePath.WELCOMEASUSER,
