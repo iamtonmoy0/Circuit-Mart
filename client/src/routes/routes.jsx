@@ -13,6 +13,8 @@ import SecureRoute from "./secureRoute";
 import Wishlist from "../pages/User/Wishlist/Wishlist";
 import Password from "../pages/User/Password/Password";
 import Welcome from "../pages/User/welcome";
+import AdminPage from "../pages/Admin/AdminPage/AdminPage";
+import AdminRoute from "./AdminRoute";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -71,6 +73,10 @@ const route = createBrowserRouter([
 				element: <Wishlist/>  
 			},
 		]  
+	},
+	{
+		path:routePath.WELCOME_AS_ADMIN,
+		element: <AdminRoute> <AdminPage/></AdminRoute>
 	}
 ])
 export default route;

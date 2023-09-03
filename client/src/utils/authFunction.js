@@ -18,3 +18,14 @@ export const createOrUpdate=async(token)=>{
 	);
   };
   
+  export const currentAdmin = async (token) => {
+	return await axios.post('http://localhost:3000/api/v1/current-admin',
+	{},
+	{
+		headers: {
+		token,
+		},
+	}
+	);
+  };
+  
