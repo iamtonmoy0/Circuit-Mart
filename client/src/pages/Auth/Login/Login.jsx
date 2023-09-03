@@ -15,8 +15,8 @@ const Login = () => {
   const dispatch =  useDispatch();
   const user = useSelector(state=>({...state}))
   // role based redirect
-  const roleBasedRedirect = (e) => {
-    if (e.role === "admin") {
+  const roleBasedRedirect = (user) => {
+    if (user.role === "admin") {
       navigate(WELCOME_AS_ADMIN);
     } else {
       navigate(WELCOME_AS_USER);
@@ -48,13 +48,13 @@ const Login = () => {
                 },
               });
 
+              // console.log(token)
+              toast.success('Logged In successful')
+              form.reset()
+              toast.dismiss()
+              // useRedirect()
+              roleBasedRedirect(res.data.data);   
     })
-    // console.log(token)
-    toast.success('Logged In successful')
-		form.reset()
-    toast.dismiss()
-  // useRedirect()
-  roleBasedRedirect(user);   
   })
 	.catch(error=>{
     toast.dismiss()

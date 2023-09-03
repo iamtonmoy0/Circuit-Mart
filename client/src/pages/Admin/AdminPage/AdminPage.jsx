@@ -6,7 +6,7 @@ const AdminPage = () => {
 		<>
 			<Toaster/>
 			<Header/>
-			hello
+			hello this is admin page  hehehe
 		</>
 	);
 }
