@@ -1,18 +1,30 @@
 # Tech:
+---------------Front End-----------------
  * React(Vite)
  * Redux
  * Tailwind Css
  * Preline
  * Antd Design
  * Firebase
+ * React Router Dom
+ * React Selector
+ * Material UI
+ * Aos
+ * React-Hot-Toast
+ * React Helmet Async
+ ------------- Back End ------------------
  * Node js
  * Express
  * Morgan
  * Express-Firebase
  * JWT(json web token)
- * React Router
- * React Selector
- * Material UI
- * Aos
- * React-Hot-Toast
- * 
+ * nodemon
+ * cors
+ * bcryptjs
+ * Body-Parser
+ * Mongoose
+ * Slugify
+ * Colors
+ * Dotenv
+ * Express-Firebase
+ * Firebase-Admin
