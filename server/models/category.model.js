@@ -8,7 +8,7 @@ const categorySchema = new schema({
 		type:String,
 		trim:true,
 		required:true,
-		minlength:[3,'Too short'],
+		minlength:[2,'Too short'],
 		maxlength:[32,'Too long'],
 	},
 	slug:{
