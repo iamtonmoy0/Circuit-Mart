@@ -28,5 +28,4 @@
  * Slugify
  * Colors
  * Dotenv
- * Express-Firebase
  * Firebase-Admin
