@@ -1,13 +1,25 @@
 import { Helmet } from "react-helmet-async";
-import { Link} from "react-router-dom";
-import {  REGISTER, RESETPASS } from "../../../routes/routePath";
+import { Link, useNavigate} from "react-router-dom";
+import {  REGISTER, RESETPASS, WELCOMEASADMIN, WELCOMEASUSER } from "../../../routes/routePath";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
 import {GoMail} from 'react-icons/go'
+import { useSelector } from "react-redux";
+// import useRedirect from "../../../hooks/useRedirect";
 
 const Login = () => {
+  const navigate = useNavigate()
   const {loginWithEmail,googleSignIn} =useContext(AuthContext);
+  const user = useSelector(state=>({...state}))
+  // role based redirect
+  const roleBasedRedirect = (user) => {
+    if (user?.role === "admin") {
+      navigate(WELCOMEASADMIN);
+    } else {
+      navigate(WELCOMEASUSER);
+    }
+  };
   
 	// login handler
 	const handleLogin =async(e)=>{
@@ -20,9 +32,11 @@ const Login = () => {
 // register 
 	await loginWithEmail(email,password)
 	.then(async()=>{
-    toast.dismiss()
-		toast.success('Logged In successful')
+    toast.success('Logged In successful')
 		form.reset()
+    toast.dismiss()
+    // useRedirect()
+    roleBasedRedirect(user);
    
   })
 	.catch(error=>{

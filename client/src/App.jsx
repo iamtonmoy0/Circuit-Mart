@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthProvider";
 import Aos from "aos";
 import { createOrUpdate } from "./utils/authFunction";
+
 function App() {
   const {user}= useContext(AuthContext);
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ function App() {
     (async () => {
       try {
         const idTokenResult = await user.getIdTokenResult();
-        console.log(idTokenResult.token)
+        // console.log(idTokenResult.token)
   // dispatch  state using firebase info
   createOrUpdate(idTokenResult.token)
   .then(res=>{
