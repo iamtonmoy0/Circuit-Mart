@@ -9,6 +9,7 @@ import RegisterComplete from "../pages/Auth/Complete/RegisterComplete";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 // import SecureRoute from "./secureRoute";
 import History from '../pages/User/History/History'
+import SecureRoute from "./secureRoute";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -23,15 +24,15 @@ const route = createBrowserRouter([
 			},
 			{
 				path:routePath.LOGIN,
-				element: <Login/> 
+				element: <SecureRoute> <Login/> </SecureRoute> 
 			},
 			{
 				path:routePath.REGISTER,
-				element: <Register/>
+				element:<SecureRoute>  <Register/></SecureRoute> 
 			},
 			{
 				path:routePath.REGISTERCOMPLETED,
-				element: <RegisterComplete/> 
+				element:<SecureRoute>  <RegisterComplete/> </SecureRoute>  
 			},
 			{
 				path:routePath.RESETPASS,
