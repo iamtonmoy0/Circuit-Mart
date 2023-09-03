@@ -7,9 +7,17 @@ const user = await userModel.findOneAndUpdate({email},{name,picture})
 	console.log('updated user',user)
 	return user;
  }else{
-	const newUser = await userModel.create({name,email,picture})
+	const newUser = await userModel.create({name: email.split("@")[0],email,picture})
 	console.log('new user created' ,newUser)
 	return newUser;
  }
 
 }
+// current user 
+exports.currentUserServices=async(data)=>{
+	const {email}=data;
+	const user = await userModel.findOne({email:email})
+	return user;
+
+}
+// if user is admin

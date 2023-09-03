@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, isSignInWithEmailLink, onAuthStateChanged, sendPasswordResetEmail, sendSignInLinkToEmail, signInWithEmailAndPassword, signInWithEmailLink, signInWithPopup, signOut, updatePassword }from 'firebase/auth'
 import app  from "../lib/firebase.config";
-import { createOrUpdate } from "../utils/authFunction";
+import { currentUser } from "../utils/authFunction";
 import { useDispatch } from "react-redux";
 
 export const AuthContext =createContext()
@@ -56,15 +56,16 @@ const AuthProvider = ({children}) => {
 			unsubscribe()
 		}
 		},[])
-// dispatch 
+// dispatch
 		if(user) {
 		(async () => {
 			try {
 				const idTokenResult = await user.getIdTokenResult();
 				// console.log(idTokenResult.token)
 		// dispatch  state using firebase info
-		createOrUpdate(idTokenResult.token)
+		currentUser(idTokenResult.token)
 		.then(res=>{
+			// console.log(res)
 		// changing state using backend info
 		dispatch({
 			type:'LOGGED_IN_USER',

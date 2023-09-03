@@ -7,3 +7,14 @@ export const createOrUpdate=async(token)=>{
 	}
 	})
   }
+  export const currentUser = async (token) => {
+	return await axios.post('http://localhost:3000/api/v1/current-user',
+	{},
+	{
+		headers: {
+		token,
+		},
+	}
+	);
+  };
+  

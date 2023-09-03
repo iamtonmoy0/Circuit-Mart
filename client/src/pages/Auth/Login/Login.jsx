@@ -5,16 +5,18 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
 import {GoMail} from 'react-icons/go'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrUpdate } from "../../../utils/authFunction";
 // import useRedirect from "../../../hooks/useRedirect";
 
 const Login = () => {
   const navigate = useNavigate()
   const {loginWithEmail,googleSignIn} =useContext(AuthContext);
+  const dispatch =  useDispatch();
   const user = useSelector(state=>({...state}))
   // role based redirect
-  const roleBasedRedirect = (user) => {
-    if (user?.role === "admin") {
+  const roleBasedRedirect = (e) => {
+    if (e.role === "admin") {
       navigate(WELCOME_AS_ADMIN);
     } else {
       navigate(WELCOME_AS_USER);
@@ -28,17 +30,31 @@ const Login = () => {
 	const form = e.target
 	const email = form.email.value;
 	const password = form.password.value;
-
 // register 
 	await loginWithEmail(email,password)
-	.then(async()=>{
+	.then(async(res)=>{
+    // console.log(res)
+    const idToken =await res.user.getIdTokenResult();
+    createOrUpdate(idToken.token)
+    .then((res)=>{
+      dispatch({
+                type: "LOGGED_IN_USER",
+                payload: {
+                  name: res.data.data.name,
+                  email: res.data.data.email,
+                  token: idToken.token,
+                  role: res.data.data.role,
+                  _id: res.data.data._id,
+                },
+              });
+
+    })
+    // console.log(token)
     toast.success('Logged In successful')
 		form.reset()
     toast.dismiss()
-    // useRedirect()
-    roleBasedRedirect(user);
-    // !might need another check form server 
-   
+  // useRedirect()
+  roleBasedRedirect(user);   
   })
 	.catch(error=>{
     toast.dismiss()
