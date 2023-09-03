@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, isSignInWithEmailLink, onAuthStateChanged, sendPasswordResetEmail, sendSignInLinkToEmail, signInWithEmailAndPassword, signInWithEmailLink, signInWithPopup, signOut, updatePassword }from 'firebase/auth'
 import app  from "../lib/firebase.config";
+import { createOrUpdate } from "../utils/authFunction";
+import { useDispatch } from "react-redux";
 
 export const AuthContext =createContext()
 export const auth = getAuth(app);
@@ -9,6 +11,7 @@ const googleProvider =new GoogleAuthProvider();
 
 const AuthProvider = ({children}) => {
 	const [user,setUser] = useState();
+	const dispatch = useDispatch()
 	// console.log(user)
 	// register user
 	const registerWithEmail = (email,config)=>{
@@ -53,6 +56,33 @@ const AuthProvider = ({children}) => {
 			unsubscribe()
 		}
 		},[])
+// dispatch 
+		if(user) {
+		(async () => {
+			try {
+				const idTokenResult = await user.getIdTokenResult();
+				// console.log(idTokenResult.token)
+		// dispatch  state using firebase info
+		createOrUpdate(idTokenResult.token)
+		.then(res=>{
+		// changing state using backend info
+		dispatch({
+			type:'LOGGED_IN_USER',
+			payload:{
+ 				name:res.data.data.name,
+			email:res.data.data.email,
+			role:res.data.data.role,
+			_id:res.data.data._id,
+			token:idTokenResult.token
+			}
+		});
+		
+		})
+		} catch (error) {
+				console.error('Error getting ID token:', error);
+			}
+			})();
+		}
 
 	const authInfo ={
 		auth,
