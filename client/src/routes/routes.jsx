@@ -41,20 +41,9 @@ const route = createBrowserRouter([
 			},
 			{
 				path:routePath.RESET_PASS,
-				element: <ForgotPassword/> 
-			},
-			// {
-			// 	path:routePath.WELCOME_AS_USER,
-			// 	element: <History/>  
-			// },
-			// {
-			// 	path:routePath.USER_PASSWORD,
-			// 	element: <Password/>  
-			// },
-			// {
-			// 	path:routePath.USER_WISHLIST,
-			// 	element: <Wishlist/>  
-			// },
+				element:<SecureRoute> <ForgotPassword/> </SecureRoute> 
+			}
+			
 		]
 	},{
 		path:routePath.WELCOME_AS_USER,
