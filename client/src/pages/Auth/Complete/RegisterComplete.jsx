@@ -29,7 +29,7 @@ const RegisterComplete = () => {
         // remove user email fom local storage
         window.localStorage.removeItem("emailForRegistration");
 		toast.success('Account created successfully');
-		//! might need a another dispatch for more security
+		//TODO! might need a another dispatch for more security same as login but need to check the res in then function..-------<Login/>
 		
 		})
 		.catch(error=>{
