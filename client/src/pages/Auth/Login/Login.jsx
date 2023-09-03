@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate} from "react-router-dom";
-import {  REGISTER, RESETPASS, WELCOMEASADMIN, WELCOMEASUSER } from "../../../routes/routePath";
+import {  REGISTER, RESET_PASS, WELCOME_AS_ADMIN, WELCOME_AS_USER } from "../../../routes/routePath";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
@@ -15,9 +15,9 @@ const Login = () => {
   // role based redirect
   const roleBasedRedirect = (user) => {
     if (user?.role === "admin") {
-      navigate(WELCOMEASADMIN);
+      navigate(WELCOME_AS_ADMIN);
     } else {
-      navigate(WELCOMEASUSER);
+      navigate(WELCOME_AS_USER);
     }
   };
   
@@ -90,7 +90,7 @@ const Login = () => {
                 <div>
                   <div className="flex justify-between items-center">
                     <label for="password" className="block text-sm mb-2 dark:text-white">Password</label>
-                    <Link  to={RESETPASS}className="text-sm text-blue-600 decoration-2 hover:underline font-medium" href="../examples/html/recover-account.html">Forgot password?</Link>
+                    <Link  to={RESET_PASS}className="text-sm text-blue-600 decoration-2 hover:underline font-medium" href="../examples/html/recover-account.html">Forgot password?</Link>
                   </div>
                   <div className="relative">
                     <input placeholder="Enter your password" type="password" id="password" name="password" className="py-3 px-4 block w-full bg-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" required aria-describedby="password-error"/>

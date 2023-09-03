@@ -17,3 +17,4 @@ const SecureRoute = ({children}) => {
 }
 
 export default SecureRoute;
+// NOC: if user logged in then he will not able to access login and register route .this will redirect to home route 

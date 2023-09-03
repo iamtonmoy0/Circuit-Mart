@@ -10,6 +10,9 @@ import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 // import SecureRoute from "./secureRoute";
 import History from '../pages/User/History/History'
 import SecureRoute from "./secureRoute";
+import Wishlist from "../pages/User/Wishlist/Wishlist";
+import Password from "../pages/User/Password/Password";
+import Welcome from "../pages/User/welcome";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -31,18 +34,43 @@ const route = createBrowserRouter([
 				element:<SecureRoute>  <Register/></SecureRoute> 
 			},
 			{
-				path:routePath.REGISTERCOMPLETED,
+				path:routePath.REGISTER_COMPLETED,
 				element:<SecureRoute>  <RegisterComplete/> </SecureRoute>  
 			},
 			{
-				path:routePath.RESETPASS,
+				path:routePath.RESET_PASS,
 				element: <ForgotPassword/> 
 			},
-			{
-				path:routePath.WELCOMEASUSER,
-				element: <History/>  
-			},
+			// {
+			// 	path:routePath.WELCOME_AS_USER,
+			// 	element: <History/>  
+			// },
+			// {
+			// 	path:routePath.USER_PASSWORD,
+			// 	element: <Password/>  
+			// },
+			// {
+			// 	path:routePath.USER_WISHLIST,
+			// 	element: <Wishlist/>  
+			// },
 		]
+	},{
+		path:routePath.WELCOME_AS_USER,
+		element: <History/>,
+		children:[
+			{
+				path:routePath.WELCOME_AS_USER,
+				element:<Welcome/>
+			},
+			{
+				path:routePath.USER_PASSWORD,
+				element: <Password/>  
+			},
+			{
+				path:routePath.USER_WISHLIST,
+				element: <Wishlist/>  
+			},
+		]  
 	}
 ])
 export default route;
