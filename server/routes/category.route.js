@@ -6,9 +6,10 @@ const router  = express.Router();
 // const { createOrUpdateUserController, currentUserController } = require('../controllers/auth.controller');
 
 //middleware
-const {authCheck, adminCheck} =require('../middlewares/auth.middleware')
+const {authCheck, adminCheck} =require('../middlewares/auth.middleware');
+const { createCategoryController } = require('../controllers/category.controller');
 
-router.route('/category').post(authCheck,adminCheck)
+router.route('/category').post(authCheck,adminCheck,createCategoryController);
 
 
 module.exports=router;
