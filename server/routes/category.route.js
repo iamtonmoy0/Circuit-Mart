@@ -3,13 +3,17 @@ const router  = express.Router();
 
 
 // controllers
-// const { createOrUpdateUserController, currentUserController } = require('../controllers/auth.controller');
+const { createCategoryController, getLatestCategoryController, getCategoryBySlugNameController, removeCategoryBySlugNameController, updateCategoryBySlugNameController } = require('../controllers/category.controller');
 
 //middleware
 const {authCheck, adminCheck} =require('../middlewares/auth.middleware');
-const { createCategoryController } = require('../controllers/category.controller');
 
 router.route('/category').post(authCheck,adminCheck,createCategoryController);
+router.route('/categories').get(getLatestCategoryController);
+router.route('/category/:slug')
+ .get(getCategoryBySlugNameController)
+ .patch(authCheck,adminCheck,updateCategoryBySlugNameController)
+ .delete(removeCategoryBySlugNameController)
 
 
 module.exports=router;
