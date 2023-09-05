@@ -7,10 +7,12 @@ import {AiOutlineDelete, AiOutlineEdit} from 'react-icons/ai'
 import Swal from 'sweetalert2'
 import * as routePath from '../../../routes/routePath'
 import CategoryForm from "../../Shared/CategoryForms/CategoryForm";
+import SearchForm from "../../Shared/SearchForm/SearchForm";
 
 const CreateCategory = () => {
   const {user}= useSelector(state=>({...state}));
   const [categories,setCategories]=useState([])
+  const [keywords,setKeywords]=useState('') //for search
  
  
  //render load categories
@@ -65,7 +67,13 @@ getCategories()
     }
     })
   }
-  
+  // handle search
+  const handleChange=(e)=>{
+    e.preventDefault();
+    setKeywords(e.target.value.toLowerCase());
+  }
+  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
 
 	return (
 		<>
@@ -80,9 +88,13 @@ getCategories()
  {/* create category forms */}
  <CategoryForm handleSubmit={handleSubmit} />
 </div>
+
+
+{/* search  form */}
+<SearchForm handleChange={handleChange} keywords={keywords} />
   {/* categories */}
   <div className="pt-10 grid grid-cols-3 gap-2">
-  {categories.map(c=>(
+  {categories.filter(searched(keywords)).map(c=>(
     <div className="bg-gray-200 flex justify-between items-center p-4 rounded-md shadow-md mb-4" key={c._id}>
   <div>{c.name}</div>
 
