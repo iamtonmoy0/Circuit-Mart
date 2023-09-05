@@ -5,7 +5,8 @@ export const REGISTER_COMPLETED =`${REGISTER}/complete`
 export const RESET_PASS ='/Forgot_Password'
 
 export const WELCOME_AS_ADMIN ='/admin/dashboard'
-export const CATEGORY =`${WELCOME_AS_ADMIN}/cartegory`
+export const CATEGORY =`${WELCOME_AS_ADMIN}/category`
+export const UPDATECATEGORY =`${CATEGORY}`
 // user route
 export const WELCOME_AS_USER ='/user/dashboard'
 export const USER_WISHLIST =`${WELCOME_AS_USER}/wishlist`

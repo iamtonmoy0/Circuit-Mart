@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {AiOutlineDelete, AiOutlineEdit} from 'react-icons/ai'
 import Swal from 'sweetalert2'
+import * as routePath from '../../../routes/routePath'
+
 const CreateCategory = () => {
   const {user}= useSelector(state=>({...state}));
   const [categories,setCategories]=useState([])
@@ -80,7 +82,7 @@ getCategories()
       <form onSubmit={e=>handleSubmit(e)} >
         <div className="mb-4 sm:mb-8">
           <label For="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Category Name</label>
-          <input type="text" name="category" id="hs-feedback-post-comment-name-1" className="py-3 px-4 block w-full rounded-md bg-gray-200 text-sm border-b-2 focus:border-b-2 focus:border-green-500 outline-none   sm:p-4 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" placeholder="Enter  name of category"/>
+          <input required type="text" name="category" id="hs-feedback-post-comment-name-1" className="py-3 px-4 block w-full rounded-md bg-gray-200 text-sm border-b-2 focus:border-b-2 focus:border-green-500 outline-none   sm:p-4 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" placeholder="Enter  name of category"/>
         </div>
 
 
@@ -96,18 +98,21 @@ getCategories()
   {categories.map(c=>(
     <div className="bg-gray-200 flex justify-between items-center p-4 rounded-md shadow-md mb-4" key={c._id}>
   <div>{c.name}</div>
-  <div className="flex my-auto  ">
-    <span
-      onClick={() => handleRemove(c.slug)}
-      className="cursor-pointer mr-2  text-red-600"
-    >
-      <AiOutlineDelete className="text-2xl" />
-    </span>
-    <Link to={`/admin/category/${c.slug}`}>
-      <span className="cursor-pointer  text-yellow-600">
+
+  <div className="flex pt-4  ">
+    
+    <Link  to={`${routePath.UPDATECATEGORY}/${c.slug}`}
+    className=" mr-4 ">
+      <span className="cursor-pointer text-yellow-600">
         <AiOutlineEdit className="text-2xl" />
       </span>
     </Link>
+    <span
+      onClick={() => handleRemove(c.slug)}
+      className="cursor-pointer  text-red-600"
+    >
+      <AiOutlineDelete className="text-2xl" />
+    </span>
   </div>
 </div>
 

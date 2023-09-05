@@ -11,7 +11,7 @@ export const  getCategory =async(slug)=>{
 }
 // update category
 export const  updateCategory =async(slug,category,token)=>{
-	return await axios.patch(`${import.meta.env.VITE_Base_Url}/category/${slug}`,category,{
+	return await axios.patch(`${import.meta.env.VITE_Base_Url}/category/${slug}`,{name:category},{
 		headers:{
 			token
 		}

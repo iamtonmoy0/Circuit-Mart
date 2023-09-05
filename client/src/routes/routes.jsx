@@ -17,6 +17,7 @@ import AdminPage from "../pages/Admin/AdminDashboard/AdminDashboard";
 import AdminRoute from "./AdminRoute";
 import AdminHome from "../pages/Admin/AdminHome/AdminHome";
 import CreateCategory from "../pages/Admin/CreateCategory/CreateCategory";
+import UpdateCategory from "../pages/Admin/UpdateCategory/UpdateCategory";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -76,6 +77,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.CATEGORY,
 				element:<CreateCategory/>
+			},
+			{
+				path:`${routePath.UPDATECATEGORY}/:slug`,
+				element:<UpdateCategory/>
 			},
 		]
 	},
