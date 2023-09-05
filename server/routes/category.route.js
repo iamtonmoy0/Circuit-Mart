@@ -13,7 +13,7 @@ router.route('/categories').get(getLatestCategoryController);
 router.route('/category/:slug')
  .get(getCategoryBySlugNameController)
  .patch(authCheck,adminCheck,updateCategoryBySlugNameController)
- .delete(removeCategoryBySlugNameController)
+ .delete(authCheck,adminCheck,removeCategoryBySlugNameController)
 
 
 module.exports=router;

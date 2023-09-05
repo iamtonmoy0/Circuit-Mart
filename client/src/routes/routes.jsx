@@ -15,6 +15,7 @@ import Password from "../pages/User/Password/Password";
 import Welcome from "../pages/User/welcome";
 import AdminPage from "../pages/Admin/AdminPage/AdminPage";
 import AdminRoute from "./AdminRoute";
+import AdminHome from "../pages/Admin/Home/Home";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -65,7 +66,13 @@ const route = createBrowserRouter([
 	},
 	{
 		path:routePath.WELCOME_AS_ADMIN,
-		element: <AdminRoute> <AdminPage/></AdminRoute>
-	}
+		element: <AdminRoute> <AdminPage/></AdminRoute>,
+		children:[
+			{
+				path:routePath.WELCOME_AS_ADMIN,
+				element:<AdminHome/>
+			}
+		]
+	},
 ])
 export default route;
