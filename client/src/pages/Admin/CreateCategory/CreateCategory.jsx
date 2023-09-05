@@ -76,7 +76,7 @@ getCategories()
     </div>
 
     {/* Card */}
-    <div className="mt-5 p-4 relative z-10 bg-white border rounded-xl sm:mt-10 md:p-10 dark:bg-gray-800 dark:border-gray-700">
+    <div className="mt-5 p-4 relative  bg-white border rounded-xl sm:mt-10 md:p-10 dark:bg-gray-800 dark:border-gray-700">
       <form onSubmit={e=>handleSubmit(e)} >
         <div className="mb-4 sm:mb-8">
           <label For="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Category Name</label>

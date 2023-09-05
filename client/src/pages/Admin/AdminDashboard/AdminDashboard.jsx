@@ -7,11 +7,12 @@ const AdminDashboard = () => {
 	return (
 		<>
 			<Toaster/>
-			<Header/>
-
+      <Header  />
+      
+<div className="">
 			{/* ========== MAIN CONTENT ========== */}
   {/* Sidebar Toggle */}
-  <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700 ">
+  <div className="sticky  top-0 inset-x-0 z-20  bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700 ">
     <div className="flex items-center py-4">
       {/* Navigation Toggle */}
       <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar-brand" aria-controls="application-sidebar-brand" aria-label="Toggle navigation">
@@ -40,15 +41,16 @@ const AdminDashboard = () => {
   {/* End Sidebar Toggle */}
 
   {/* Sidebar */}
-  <div id="application-sidebar-brand" className="hs-overlay mt-[69px] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-orange-400 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 ">
-    <div className="px-6">
-      <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Brands</a>
+  <div id="application-sidebar-brand" className="hs-overlay  hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[40]  w-64 bg-orange-400 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 ">
+    
+    <div className="px-6 pt-16">
+      <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Admin Panel</a>
     </div>
 
     <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
       <ul className="space-y-1.5">
         <Link to={routePath.WELCOME_AS_ADMIN}>
-          <a className="flex items-center gap-x-3 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent bg-blue-600 text-sm text-white rounded-md" href="javascript:;">
+          <a className="flex items-center gap-x-3 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent hover:bg-blue-600  text-sm text-white rounded-md" href="javascript:;">
             <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
               <path fillRule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
@@ -250,14 +252,16 @@ const AdminDashboard = () => {
   {/* End Sidebar */}
 
   {/* Content */}
-  <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
+  <div className="w-full   sm:px-6 md:px-8 lg:pl-[260px]">
     {/* Page Heading */}
+    {/* <Header /> */}
+			
    <Outlet/>
     {/* End Page Heading */}
   </div>
   {/* End Content */}
   {/* ========== END MAIN CONTENT ========== */}
-
+  </div>
 		</>
 	);
 }
