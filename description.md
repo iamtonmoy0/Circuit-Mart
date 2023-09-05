@@ -12,6 +12,7 @@
  * Aos
  * React-Hot-Toast
  * React Helmet Async
+ * Sweet Alert 2
 
  ------------- Back End ------------------
  
