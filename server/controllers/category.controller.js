@@ -11,7 +11,7 @@ exports.createCategoryController=async(req,res,next)=>{
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:'Failed to create new category',
+			message:'Failed to create new category / category already exist!',
 			err:error.message
 		})
 	}
