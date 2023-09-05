@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import Header from "../../../components/Header/Header";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import * as routePath from '../../../routes/routePath'
 
 const AdminPage = () => {
 	return (
@@ -46,15 +47,15 @@ const AdminPage = () => {
 
     <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
       <ul className="space-y-1.5">
-        <li>
-          <a className="flex items-center gap-x-3 py-2 px-2.5 bg-blue-600 text-sm text-white rounded-md" href="javascript:;">
+        <Link to={routePath.WELCOME_AS_ADMIN}>
+          <a className="flex items-center gap-x-3 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent bg-blue-600 text-sm text-white rounded-md" href="javascript:;">
             <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
               <path fillRule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
             </svg>
             Dashboard
           </a>
-        </li>
+        </Link>
 
         <li className="hs-accordion" id="users-accordion">
           <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
@@ -182,24 +183,24 @@ const AdminPage = () => {
           </div>
         </li>
 
-        <li className="hs-accordion" id="projects-accordion">
-          <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
+        <Link to={routePath.CATEGORY} className="hs-accordion" id="projects-accordion">
+          <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5   hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-md hover:bg-blue-700" href="javascript:;">
             <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"></path>
               <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z"></path>
             </svg>
             Category
 
-            <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
             </svg>
 
             <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-            </svg>
+            </svg> */}
           </a>
 
-          <div id="projects-accordion-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
+          {/* <div id="projects-accordion-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
             <ul className="pt-2 pl-2">
               <li>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
@@ -217,8 +218,8 @@ const AdminPage = () => {
                 </a>
               </li>
             </ul>
-          </div>
-        </li>
+          </div> */}
+        </Link>
 
         <li><a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">
           <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

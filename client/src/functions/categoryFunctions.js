@@ -29,7 +29,7 @@ export const  removeCategory =async(slug,token)=>{
 }
 // create new category
 export const  createCategory =async(category,token)=>{
-	await axios.delete(`${import.meta.env.VITE_Base_Url}/category`,category,{
+	await axios.post(`${import.meta.env.VITE_Base_Url}/category`,category,{
 		headers:{
 			token
 		}

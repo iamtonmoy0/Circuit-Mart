@@ -15,7 +15,8 @@ import Password from "../pages/User/Password/Password";
 import Welcome from "../pages/User/welcome";
 import AdminPage from "../pages/Admin/AdminPage/AdminPage";
 import AdminRoute from "./AdminRoute";
-import AdminHome from "../pages/Admin/Home/Home";
+import AdminHome from "../pages/Admin/AdminHome/AdminHome";
+import CreateCategory from "../pages/Admin/CreateCategory/CreateCategory";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -71,7 +72,11 @@ const route = createBrowserRouter([
 			{
 				path:routePath.WELCOME_AS_ADMIN,
 				element:<AdminHome/>
-			}
+			},
+			{
+				path:routePath.CATEGORY,
+				element:<CreateCategory/>
+			},
 		]
 	},
 ])
