@@ -3,7 +3,7 @@ import Header from "../../../components/Header/Header";
 import { Link, Outlet } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
 
-const AdminPage = () => {
+const AdminDashboard = () => {
 	return (
 		<>
 			<Toaster/>
@@ -11,7 +11,7 @@ const AdminPage = () => {
 
 			{/* ========== MAIN CONTENT ========== */}
   {/* Sidebar Toggle */}
-  <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
+  <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700 ">
     <div className="flex items-center py-4">
       {/* Navigation Toggle */}
       <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar-brand" aria-controls="application-sidebar-brand" aria-label="Toggle navigation">
@@ -40,9 +40,9 @@ const AdminPage = () => {
   {/* End Sidebar Toggle */}
 
   {/* Sidebar */}
-  <div id="application-sidebar-brand" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-blue-700 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0">
+  <div id="application-sidebar-brand" className="hs-overlay mt-[69px] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-64 bg-orange-400 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 ">
     <div className="px-6">
-      <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Brand</a>
+      <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Brands</a>
     </div>
 
     <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
@@ -262,4 +262,4 @@ const AdminPage = () => {
 	);
 }
 
-export default AdminPage;
+export default AdminDashboard;

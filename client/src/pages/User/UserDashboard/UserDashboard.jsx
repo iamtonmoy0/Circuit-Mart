@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
 import Header from "../../../components/Header/Header";
 import { Toaster } from "react-hot-toast";
-const History = () => {
+const UserDashboard = () => {
 	return (
 		<>
 		{/* header imported here */}
@@ -249,4 +249,4 @@ const History = () => {
 	);
 }
 
-export default History;
+export default UserDashboard;

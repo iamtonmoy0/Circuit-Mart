@@ -8,12 +8,12 @@ import Home from "../pages/HomePage/Home/Home";
 import RegisterComplete from "../pages/Auth/Complete/RegisterComplete";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 // import SecureRoute from "./secureRoute";
-import History from '../pages/User/History/History'
+import History from '../pages/User/UserDashboard/UserDashboard'
 import SecureRoute from "./secureRoute";
 import Wishlist from "../pages/User/Wishlist/Wishlist";
 import Password from "../pages/User/Password/Password";
 import Welcome from "../pages/User/welcome";
-import AdminPage from "../pages/Admin/AdminPage/AdminPage";
+import AdminPage from "../pages/Admin/AdminDashboard/AdminDashboard";
 import AdminRoute from "./AdminRoute";
 import AdminHome from "../pages/Admin/AdminHome/AdminHome";
 import CreateCategory from "../pages/Admin/CreateCategory/CreateCategory";
