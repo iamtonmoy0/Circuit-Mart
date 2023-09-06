@@ -19,4 +19,4 @@ const UserRoute = ({children}) => {
 }
 
 export default UserRoute;
-// NOC:if user not not logged in  then he/she cant access some route
+// !NOC:if user not not logged in  then he/she cant access some route
