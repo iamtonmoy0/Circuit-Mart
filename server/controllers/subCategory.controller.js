@@ -11,7 +11,7 @@ exports.createSubCategoryController=async(req,res,next)=>{
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:'Failed to create new category / category already exist!',
+			message:'Failed to create new sub category / sub category already exist!',
 			err:error.message
 		})
 	}
@@ -28,7 +28,7 @@ exports.getLatestSubCategoryController=async(req,res,next)=>{
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:'Failed to find the categories',
+			message:'Failed to find the sub  categories',
 			err:error.message
 		})
 	}
@@ -45,7 +45,7 @@ exports.getSubCategoryBySlugNameController=async(req,res,next)=>{
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:'Failed to find the category',
+			message:'Failed to find the sub  category',
 			err:error.message
 		})
 	}
@@ -62,7 +62,7 @@ exports.updateSubCategoryBySlugNameController=async(req,res,next)=>{
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:'Failed to update the category',
+			message:'Failed to update the sub category',
 			err:error.message
 		})
 	}
@@ -80,7 +80,7 @@ exports.removeSubCategoryBySlugNameController=async(req,res,next)=>{
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:'Failed to remove the category',
+			message:'Failed to remove the sub category',
 			err:error.message
 		})
 	}

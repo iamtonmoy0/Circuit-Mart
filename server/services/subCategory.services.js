@@ -23,8 +23,8 @@ return  subCategory;
 
 // update sub category by slug name
 exports.updateSubCategoryBySlugNameServices=async(slug,data)=>{
-	const {name}= data;
-const subCategory = await subCategoryModel.findOneAndUpdate({slug},{name,slug:slugify(name)},{new:true} ); 
+	const {name,parent}= data;
+const subCategory = await subCategoryModel.findOneAndUpdate({slug},{name,parent,slug:slugify(name)},{new:true} ); 
 return  subCategory;
 };
 

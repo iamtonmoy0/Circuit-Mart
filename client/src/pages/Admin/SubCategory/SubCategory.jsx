@@ -31,10 +31,10 @@ const SubCategory = () => {
 		getSubCategories()
 		.then(res=>setSubCategories(res.data.data))
 	}
-	// handle parent categroy
+	// handle parent category
 	const handleParent=(e)=>{
 		const selectedValue = e.target.value; // Get the selected value from the event
-		console.log(selectedValue)
+		// console.log(selectedValue)
 		setSelectedCategoryId(selectedValue); // Update the state with the selected value
 	}
 	// handle create sub category
@@ -82,10 +82,10 @@ const SubCategory = () => {
 		<div className="block items-center px-20">
 			{/* parent category  */}
 			<div className="pt-10">
-			<label for="countries"   className="block mb-2 text-md font-medium text-gray-900 dark:text-white">Select an option</label>
+			<label   className="block mb-2 text-md font-medium text-gray-900 dark:text-white">Select an option</label>
 			<select onChange={handleParent}  id="countries" className="bg-gray-50 border outline-none border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 			<option selected>Choose a category</option>
-			{categories.map(c=><option value={c._id}>{c.name} </option>)}
+			{categories.map(c=><option value={c._id}key={c._id} >{c.name} </option>)}
 			</select>
 			</div>
 			{/* sub category */}
@@ -95,7 +95,7 @@ const SubCategory = () => {
 
 
 
-			{/* sub category cart */}
+			{/* sub category table */}
 			<div>
 			<div className="flex flex-col">
   <div className="-m-1.5 overflow-x-auto">
@@ -109,18 +109,18 @@ const SubCategory = () => {
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
             {subCategories.map(c=>
-			<tr className="flex flex-row justify-between items-center">
+			<tr key={c._id} className="flex flex-row justify-between items-center">
 			<td className="flex-grow px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-			  {c.name}
+			{c.name}
 			</td>
 			<Link to={`${routePath.UPDATE_SUB_CATEGORY}/${c.slug}`} className="cursor-pointer px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
-			  <AiOutlineEdit className="text-2xl" />
+			<AiOutlineEdit className="text-2xl" />
 			</Link>
 			<td className="cursor-pointer px-6 py-4 text-sm text-red-800 dark:text-gray-200" onClick={()=>handleRemove(c.slug)}>
-			  <AiOutlineDelete className="text-2xl" />
+			<AiOutlineDelete className="text-2xl" />
 			</td>
-		  </tr>
-		  
+		</tr>
+  
 			)}        
           </tbody>
         </table>
