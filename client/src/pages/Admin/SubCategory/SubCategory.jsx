@@ -3,10 +3,12 @@ import { getCategories } from "../../../functions/categoryFunctions"
 import CategoryForm from "../../Shared/CategoryForms/CategoryForm";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { createSubCategory } from "../../../functions/subCategoryFunctions";
+import { createSubCategory, getSubCategories } from "../../../functions/subCategoryFunctions";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 const SubCategory = () => {
 	const [categories,setCategories]=useState([]);
+	const [subCategories,setSubCategories]=useState([]);
 	const {user}= useSelector(state=>({...state}));
 	const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
@@ -14,11 +16,17 @@ const SubCategory = () => {
 	//render load categories
 	useEffect(()=>{
 		loadCategories()
+		loadSubCategories()
 	},[])
 	// load categories
 	const loadCategories=()=>{
 	getCategories()
 	.then((res)=>setCategories(res.data.data))
+	}
+	// load sub category
+	const loadSubCategories=()=>{
+		getSubCategories()
+		.then(res=>setSubCategories(res.data.data))
 	}
 	// handle parent categroy
 	const handleParent=(e)=>{
@@ -35,6 +43,7 @@ const SubCategory = () => {
 		.then(res=>{
 			toast.success(`${res.data.data.name} created!`)
 			form.reset();
+			loadSubCategories()
 		})
 		.catch(err=>{
 			toast.error(err.message)
@@ -54,6 +63,43 @@ const SubCategory = () => {
 			{/* sub category */}
 			<div>
 			<CategoryForm handleSubmit={handleSubCategory}  button={'Save'} />
+			</div>
+
+
+
+			{/* sub category cart */}
+			<div>
+			<div className="flex flex-col">
+  <div className="-m-1.5 overflow-x-auto">
+    <div className="p-1.5 min-w-full inline-block align-middle">
+      <div className="overflow-hidden">
+        <table className="min-w-full">
+          <thead>
+            <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Name</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            {subCategories.map(c=>
+			<tr className="flex flex-row justify-between items-center">
+			<td className="flex-grow px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+			  {c.name}
+			</td>
+			<td className="px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
+			  <AiOutlineEdit className="text-2xl" />
+			</td>
+			<td className="px-6 py-4 text-sm text-red-800 dark:text-gray-200">
+			  <AiOutlineDelete className="text-2xl" />
+			</td>
+		  </tr>
+		  
+			)}        
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 			</div>
 		</div>
 		
