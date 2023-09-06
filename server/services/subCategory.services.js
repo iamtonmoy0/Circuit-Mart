@@ -3,8 +3,9 @@ const slugify = require('slugify')
 
 // create sub category services
 exports.createSubCategoryServices=async(data)=>{
-	const {name}=data;
-	const createCategory = await subCategoryModel.create({name,slug:slugify(name)});
+	console.log(data)
+	const {name,parent}=data;
+	const createCategory = await subCategoryModel.create({name,parent,slug:slugify(name)});
 	return createCategory;
 };
 

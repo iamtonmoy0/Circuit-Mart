@@ -28,8 +28,8 @@ export const  removeSubCategory =async(slug,token)=>{
 
 }
 // create new category
-export const  createSubCategory =async(category,token)=>{
-	return await axios.post(`${import.meta.env.VITE_Base_Url}/sub-category`,category,{
+export const  createSubCategory =async(data,token)=>{
+	return await axios.post(`${import.meta.env.VITE_Base_Url}/sub-category`,data,{
 		headers:{
 			token
 		}

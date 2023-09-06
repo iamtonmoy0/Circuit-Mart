@@ -47,7 +47,7 @@ updateCategory(slug,category,user.token)
     </div>
 
     {/* Card */}
-    <CategoryForm handleSubmit={handleUpdate} name={name}/>
+    <CategoryForm handleSubmit={handleUpdate} name={name} button={"Update Category"}/>
     {/* End Card */}
   </div>
     </div>

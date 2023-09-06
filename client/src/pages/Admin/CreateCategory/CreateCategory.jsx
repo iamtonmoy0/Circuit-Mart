@@ -86,7 +86,7 @@ getCategories()
       </h2>
     </div>
  {/* create category forms */}
- <CategoryForm handleSubmit={handleSubmit} />
+ <CategoryForm handleSubmit={handleSubmit} button={'Create Category'} />
 </div>
 
 
