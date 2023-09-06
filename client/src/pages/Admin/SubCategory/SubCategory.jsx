@@ -3,8 +3,11 @@ import { getCategories } from "../../../functions/categoryFunctions"
 import CategoryForm from "../../Shared/CategoryForms/CategoryForm";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { createSubCategory, getSubCategories } from "../../../functions/subCategoryFunctions";
+import { createSubCategory, getSubCategories, removeSubCategory } from "../../../functions/subCategoryFunctions";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import Swal from "sweetalert2";
+import * as routePath from '../../../routes/routePath';
+import { Link } from "react-router-dom";
 
 const SubCategory = () => {
 	const [categories,setCategories]=useState([]);
@@ -50,6 +53,31 @@ const SubCategory = () => {
 		})
 		
 	}
+	// handle remove sub category
+	const handleRemove=async(slug)=>{
+		Swal.fire({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this sub-category !",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+		if (result.isConfirmed) {
+		// remove category
+		removeSubCategory(slug,user.token)
+			.then((res)=>{
+			loadSubCategories()
+			Swal.fire(
+			`${res.data.data.name} Deleted!`,
+			'Your sub-category has been deleted.',
+			'success'
+			);
+		})
+		}
+		})
+	}
 	return (
 		<div className="block items-center px-20">
 			{/* parent category  */}
@@ -85,10 +113,10 @@ const SubCategory = () => {
 			<td className="flex-grow px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
 			  {c.name}
 			</td>
-			<td className="px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
+			<Link to={`${routePath.UPDATE_SUB_CATEGORY}/${c.slug}`} className="cursor-pointer px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
 			  <AiOutlineEdit className="text-2xl" />
-			</td>
-			<td className="px-6 py-4 text-sm text-red-800 dark:text-gray-200">
+			</Link>
+			<td className="cursor-pointer px-6 py-4 text-sm text-red-800 dark:text-gray-200" onClick={()=>handleRemove(c.slug)}>
 			  <AiOutlineDelete className="text-2xl" />
 			</td>
 		  </tr>
