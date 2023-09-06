@@ -1,9 +1,9 @@
-const { createCategoryServices, getLatestCategoryServices, getCategoryBySlugNameServices, removeCategoryBySlugNameServices, updateCategoryBySlugNameServices } = require("../services/category.services")
+const categoryServices = require("../services/category.services")
 
 // create new category
 exports.createCategoryController=async(req,res,next)=>{
 	try {
-		const result = await createCategoryServices(req.body);
+		const result = await categoryServices.createCategoryServices(req.body);
 		res.status(200).json({
 			status:"success",
 			data:result
@@ -19,7 +19,7 @@ exports.createCategoryController=async(req,res,next)=>{
 // get latest category
 exports.getLatestCategoryController=async(req,res,next)=>{
 	try {
-		const result = await getLatestCategoryServices();
+		const result = await categoryServices.getLatestCategoryServices();
 		res.status(200).json({
 			status:"success",
 			data:result
@@ -36,7 +36,7 @@ exports.getLatestCategoryController=async(req,res,next)=>{
 // get category by slug
 exports.getCategoryBySlugNameController=async(req,res,next)=>{
 	try {
-		const category = await getCategoryBySlugNameServices(req.params.slug)
+		const category = await categoryServices.getCategoryBySlugNameServices(req.params.slug)
 		res.status(200).json({
 			status:'success',
 			data:category
@@ -53,7 +53,7 @@ exports.getCategoryBySlugNameController=async(req,res,next)=>{
 // update category by slug
 exports.updateCategoryBySlugNameController=async(req,res,next)=>{
 	try {
-		const category = await updateCategoryBySlugNameServices(req.params.slug,req.body)
+		const category = await categoryServices.updateCategoryBySlugNameServices(req.params.slug,req.body)
 		res.status(200).json({
 			status:'success',
 			data:category
@@ -71,7 +71,7 @@ exports.updateCategoryBySlugNameController=async(req,res,next)=>{
 // remove category by slug name
 exports.removeCategoryBySlugNameController=async(req,res,next)=>{
 	try {
-		const category = await removeCategoryBySlugNameServices(req.params.slug)
+		const category = await categoryServices.removeCategoryBySlugNameServices(req.params.slug)
 		res.status(200).json({
 			status:'success',
 			data:category
