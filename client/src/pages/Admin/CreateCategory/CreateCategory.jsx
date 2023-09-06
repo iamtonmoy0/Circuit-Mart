@@ -100,7 +100,7 @@ getCategories()
 
   <div className="flex pt-4  ">
     
-    <Link  to={`${routePath.UPDATECATEGORY}/${c.slug}`}
+    <Link  to={`${routePath.UPDATE_CATEGORY}/${c.slug}`}
     className=" mr-4 ">
       <span className="cursor-pointer text-yellow-600">
         <AiOutlineEdit className="text-2xl" />

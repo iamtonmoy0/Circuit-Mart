@@ -18,6 +18,7 @@ import AdminRoute from "./AdminRoute";
 import AdminHome from "../pages/Admin/AdminHome/AdminHome";
 import CreateCategory from "../pages/Admin/CreateCategory/CreateCategory";
 import UpdateCategory from "../pages/Admin/UpdateCategory/UpdateCategory";
+import SubCategory from "../pages/Admin/SubCategory/SubCategory";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -79,8 +80,12 @@ const route = createBrowserRouter([
 				element:<CreateCategory/>
 			},
 			{
-				path:`${routePath.UPDATECATEGORY}/:slug`,
+				path:`${routePath.UPDATE_CATEGORY}/:slug`,
 				element:<UpdateCategory/>
+			},
+			{
+				path:routePath.SUB_CATEGORY,
+				element:<SubCategory/>
 			},
 		]
 	},
