@@ -1,5 +1,4 @@
 import { Toaster } from "react-hot-toast";
-import Header from "../../../components/Header/Header";
 import { Link, Outlet } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
 import { BiSolidCategory } from "react-icons/bi";
@@ -11,7 +10,6 @@ const AdminDashboard = () => {
 	return (
 		<>
 			<Toaster/>
-      <Header  />
       
 <div className="">
 			{/* ========== MAIN CONTENT ========== */}
@@ -45,9 +43,9 @@ const AdminDashboard = () => {
   {/* End Sidebar Toggle */}
 
   {/* Sidebar */}
-  <div id="application-sidebar-brand" className="hs-overlay  hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[40]  w-64 bg-orange-400 pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 ">
+  <div id="application-sidebar-brand" className="hs-overlay  hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[40]  w-64 bg-[#27005D] pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 ">
     
-    <div className="px-6 pt-16">
+    <div className="px-6 ">
       <a className="flex-none text-xl font-semibold text-white" href="#" aria-label="Brand">Admin Panel</a>
     </div>
 
@@ -76,62 +74,13 @@ const AdminDashboard = () => {
               <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
             </svg>
           </a>
-
-          <div id="users-accordion-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-            <ul className="hs-accordion-group pl-3 pt-2" data-hs-accordion-always-open>
-              <li className="hs-accordion" id="users-accordion-sub-1">
-                <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                  Sub Menu 1
-
-                  <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-                  </svg>
-
-                  <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-                  </svg>
-                </a>
-
                 <div id="users-accordion-sub-1-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
                   <ul className="pt-2 pl-2">
-                    <li>
+                    <Link to={routePath.PRODUCT}>
                       <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                        Link 1
+                        Add Product
                       </a>
-                    </li>
-                    <li>
-                      <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                        Link 2
-                      </a>
-                    </li>
-                    <li>
-                      <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                        Link 3
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li className="hs-accordion" id="users-accordion-sub-2">
-                <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                  Sub Menu 2
-
-                  <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-                  </svg>
-
-                  <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-                  </svg>
-                </a>
-
-                <div id="users-accordion-sub-2-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden pl-2">
-                  <ul className="pt-2 pl-2">
-                    <li>
-                      <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                        Link 1
-                      </a>
-                    </li>
+                    </Link>
                     <li>
                       <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                         Link 2
@@ -144,9 +93,7 @@ const AdminDashboard = () => {
                     </li>
                   </ul>
                 </div>
-              </li>
-            </ul>
-          </div>
+           
         </li>
 
         <li className="hs-accordion" id="account-accordion">
@@ -188,7 +135,7 @@ const AdminDashboard = () => {
         </li>
 
         <li  className="hs-accordion" id="projects-accordion">
-          <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5   hs-accordion-active:text-white hs-accordion-active:hover:bg-blue-700 text-sm text-white hover:text-white rounded-md " href="javascript:;">
+          <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5   hs-accordion-active:text-white hover:bg-blue-700 text-sm text-white hover:text-white rounded-md " href="javascript:;">
             <BiSolidCategory/>
             Category
 

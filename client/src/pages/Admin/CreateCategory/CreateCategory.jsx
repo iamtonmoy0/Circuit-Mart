@@ -92,8 +92,8 @@ getCategories()
 
 {/* search  form */}
 <SearchForm handleChange={handleChange} keywords={keywords} />
-  {/* categories */}
-  <div className="pt-10 grid grid-cols-3 gap-2">
+  {/* categories table */}
+  {/* <div className="pt-10 grid grid-cols-3 gap-2">
   {categories.filter(searched(keywords)).map(c=>(
     <div className="bg-gray-200 flex justify-between items-center p-4 rounded-md shadow-md mb-4" key={c._id}>
   <div>{c.name}</div>
@@ -116,7 +116,41 @@ getCategories()
 </div>
 
 ))}
+</div> */}
+
+<div className="flex flex-col">
+  <div className="-m-1.5 overflow-x-auto">
+    <div className="p-1.5 min-w-full inline-block align-middle">
+      <div className="overflow-hidden">
+        <table className="min-w-full">
+          <thead>
+            <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Name</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            {categories.filter(searched(keywords)).map(c=>
+			<tr key={c._id} className="flex flex-row justify-between items-center">
+			<td className="flex-grow px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+			{c.name}
+			</td>
+			<Link to={`${routePath.UPDATE_CATEGORY}/${c.slug}`} className="cursor-pointer px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
+			<AiOutlineEdit className="text-2xl" />
+			</Link>
+			<td className="cursor-pointer px-6 py-4 text-sm text-red-800 dark:text-gray-200" onClick={()=>handleRemove(c.slug)}>
+			<AiOutlineDelete className="text-2xl" />
+			</td>
+		</tr>
+  
+			)}        
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 </div>
 {/* End Comment Form */}
 		</>

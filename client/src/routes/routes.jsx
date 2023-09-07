@@ -18,8 +18,9 @@ import AdminRoute from "./AdminRoute";
 import AdminHome from "../pages/Admin/AdminHome/AdminHome";
 import CreateCategory from "../pages/Admin/CreateCategory/CreateCategory";
 import UpdateCategory from "../pages/Admin/UpdateCategory/UpdateCategory";
-import SubCategory from "../pages/Admin/SubCategory/SubCategory";
+import SubCategory from "../pages/Admin/CreateSubCategory/SubCategory";
 import UpdateSubCategory from "../pages/Admin/UpdateSubCategory/UpdateSubCategory";
+import CreateProduct from "../pages/Admin/CreateProduct/CreateProduct";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -91,6 +92,10 @@ const route = createBrowserRouter([
 			{
 				path:`${routePath.UPDATE_SUB_CATEGORY}/:slug`,
 				element:<UpdateSubCategory/>
+			},
+			{
+				path:routePath.PRODUCT,
+				element:<CreateProduct/>
 			},
 		]
 	},
