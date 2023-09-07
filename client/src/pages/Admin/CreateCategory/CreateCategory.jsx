@@ -93,30 +93,6 @@ getCategories()
 {/* search  form */}
 <SearchForm handleChange={handleChange} keywords={keywords} />
   {/* categories table */}
-  {/* <div className="pt-10 grid grid-cols-3 gap-2">
-  {categories.filter(searched(keywords)).map(c=>(
-    <div className="bg-gray-200 flex justify-between items-center p-4 rounded-md shadow-md mb-4" key={c._id}>
-  <div>{c.name}</div>
-
-  <div className="flex pt-4  ">
-    
-    <Link  to={`${routePath.UPDATE_CATEGORY}/${c.slug}`}
-    className=" mr-4 ">
-      <span className="cursor-pointer text-yellow-600">
-        <AiOutlineEdit className="text-2xl" />
-      </span>
-    </Link>
-    <span
-      onClick={() => handleRemove(c.slug)}
-      className="cursor-pointer  text-red-600"
-    >
-      <AiOutlineDelete className="text-2xl" />
-    </span>
-  </div>
-</div>
-
-))}
-</div> */}
 
 <div className="flex flex-col">
   <div className="-m-1.5 overflow-x-auto">
