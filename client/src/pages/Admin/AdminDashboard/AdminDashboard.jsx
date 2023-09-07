@@ -2,6 +2,10 @@ import { Toaster } from "react-hot-toast";
 import Header from "../../../components/Header/Header";
 import { Link, Outlet } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
+import { BiSolidCategory } from "react-icons/bi";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { MdOutlineCategory } from "react-icons/md";
+import { BsFillInboxesFill } from "react-icons/bs";
 
 const AdminDashboard = () => {
 	return (
@@ -61,9 +65,7 @@ const AdminDashboard = () => {
 
         <li className="hs-accordion" id="users-accordion">
           <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-            <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"></path>
-            </svg>
+          <BsFillInboxesFill/>
             Product
 
             <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,52 +187,51 @@ const AdminDashboard = () => {
           </div>
         </li>
 
-        <Link to={routePath.CATEGORY} className="hs-accordion" id="projects-accordion">
+        <li  className="hs-accordion" id="projects-accordion">
           <a className="hs-accordion-toggle flex items-center gap-x-3.5 py-2 px-2.5   hs-accordion-active:text-white hs-accordion-active:hover:bg-blue-700 text-sm text-white hover:text-white rounded-md " href="javascript:;">
-            <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"></path>
-              <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z"></path>
-            </svg>
+            <BiSolidCategory/>
             Category
 
-            {/* <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="hs-accordion-active:block ml-auto hidden w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
             </svg>
 
             <svg className="hs-accordion-active:hidden ml-auto block w-3 h-3 text-white group-hover:text-white" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
-            </svg> */}
+            </svg>
           </a>
 
-          {/* <div id="projects-accordion-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
+          <div id="projects-accordion-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
             <ul className="pt-2 pl-2">
-              <li>
+              <Link to={routePath.CATEGORY}>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                  Link 1
+                <AiOutlineAppstoreAdd/>
+                 Add  Category
                 </a>
-              </li>
-              <li>
+              </Link>
+              <Link to={routePath.SUB_CATEGORY}>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                  Link 2
+                 <MdOutlineCategory/>
+                  Sub Category
                 </a>
-              </li>
+              </Link>
               <li>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                   Link 3
                 </a>
               </li>
             </ul>
-          </div> */}
-        </Link>
-
-        <Link to={routePath.SUB_CATEGORY}><a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">
+          </div>
+        </li>
+{/* !future use */}
+        {/* <Link to={routePath.SUB_CATEGORY}><a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">
           <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
           </svg>
           Sub Category
         </a>
-        </Link>
+        </Link> */}
         <li>
 		<a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">
           <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
