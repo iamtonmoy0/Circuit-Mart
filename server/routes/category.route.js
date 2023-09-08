@@ -14,6 +14,6 @@ router.route('/category/:slug')
  .get(categoryController.getCategoryBySlugNameController)
  .patch(authCheck,adminCheck,categoryController.updateCategoryBySlugNameController)
  .delete(authCheck,adminCheck,categoryController.removeCategoryBySlugNameController)
-
+router.route('/category/subs/:id').get(categoryController.getSubCategoryByCategoryIdController)
 
 module.exports=router;

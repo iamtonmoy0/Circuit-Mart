@@ -36,3 +36,11 @@ export const  createCategory =async(category,token)=>{
 	});
 
 }
+// get sub category by category id
+
+export const getSubsByCategoryId = async (id) =>{
+ return await axios.get(`${import.meta.env.VITE_Base_Url}/category/subs/${id}`);
+
+}
+
+

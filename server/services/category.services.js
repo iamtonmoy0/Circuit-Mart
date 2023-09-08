@@ -1,4 +1,5 @@
 const categoryModel = require('../models/category.model');
+const subCategoryModel = require('../models/subCategory.model');
 const slugify = require('slugify')
 // create category services
 exports.createCategoryServices=async(data)=>{
@@ -29,3 +30,7 @@ exports.removeCategoryBySlugNameServices=async(data)=>{
 const category = await categoryModel.findOneAndRemove({slug:data}); 
 return  category;
 }
+// get sub category by category id
+exports.getSubCategoriesByCategoryIdServices=async(id)=>{
+	return await subCategoryModel.find({parent:id});
+};

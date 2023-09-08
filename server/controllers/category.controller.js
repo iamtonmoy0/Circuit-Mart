@@ -85,3 +85,20 @@ exports.removeCategoryBySlugNameController=async(req,res,next)=>{
 		})
 	}
 }
+// get sub-category by category id
+exports.getSubCategoryByCategoryIdController=async(req,res,next)=>{
+	try {
+		console.log(req.params.id)
+		const result = await categoryServices.getSubCategoriesByCategoryIdServices(req.params.id)
+		res.status(200).json({
+			status:"success",
+			data:result
+		})
+	} catch (error) {
+		res.status(400).json({
+			status:'fail',
+			message:'Failed to get sub category',
+			err:error.message
+		})
+	}
+}

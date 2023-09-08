@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/productFunctions";
 import toast from "react-hot-toast";
 import { getSubCategories } from "../../../functions/subCategoryFunctions";
-import { getCategories } from "../../../functions/categoryFunctions";
+import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
 
 const CreateProduct = () => {
 	const {user}= useSelector(state=>({...state}))
@@ -51,8 +51,22 @@ const loadSubCategory=()=>{
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setProduct({ ...product, [name]: value });
+
 		console.log(e.target.name,'=>' ,e.target.value)
 	};
+	// handle category change
+	// !ERROR the value is not setting on the category field 
+	const handleCategoryChange=(e)=>{
+	e.preventDefault();
+	setProduct({ ...product, category: e.target.value });
+	getSubsByCategoryId(e.target.value)
+	.then(res=>{
+		console.log(res)
+		setProduct({ ...product, allsubs: res.data.data});
+	}).catch(err=>{
+		toast.error(err.message)
+	})}
+
 	// handle submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -68,8 +82,9 @@ const loadSubCategory=()=>{
 	
 	return (
 		<div className="w-full mx-auto mt-8 px-10 bg-white rounded-md shadow-md">
-		<h2 className="text-2xl font-semibold mb-4">Product Create Form</h2>
-		<form onSubmit={handleSubmit} className="">
+		<h2 className="text-2xl text-center font-semibold mb-4">Product Create Form</h2>
+		<hr  className="w-80 mx-auto"/>
+		<form onSubmit={handleSubmit} className="pt-10">
 		<div className="grid lg:grid-cols-2 gap-4">
 			
 			<div className="mb-4">
@@ -155,7 +170,7 @@ const loadSubCategory=()=>{
           id="category"
           name="category"
           value={product.category}
-          onChange={handleChange}
+          onChange={handleCategoryChange}
           className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
         //   required
         >
