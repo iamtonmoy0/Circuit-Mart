@@ -6,7 +6,8 @@ import { getSubCategories } from "../../../functions/subCategoryFunctions";
 import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
 
 const CreateProduct = () => {
-	const {user}= useSelector(state=>({...state}))
+	const {user}= useSelector(state=>({...state}));
+	const [subOptions,setSubOptions]=useState([])
 	const [product, setProduct] = useState({
 		title: "",
 		description: "",
@@ -26,11 +27,9 @@ const CreateProduct = () => {
 
 	useEffect(()=>{
 	loadParentCategories();
-	loadSubCategory();
 			
-
 	},[])
-
+console.log(product)
 //    get all parent category
 const loadParentCategories=()=>{
 	getCategories()
@@ -38,14 +37,7 @@ const loadParentCategories=()=>{
 		setProduct({...product,categories:res.data.data})
 	})
 }
-// get all sub category
-const loadSubCategory=()=>{
-	// getSubCategories()
-	// .then(res=>{
-	// 	console.log(res)
-	// 	setProduct({ ...product, allsubs: res.data.data});
-	// }).catch(error=>console.log(error))
-}
+
 
 	// handle change
 	const handleChange = (e) => {
@@ -55,14 +47,14 @@ const loadSubCategory=()=>{
 		console.log(e.target.name,'=>' ,e.target.value)
 	};
 	// handle category change
-	// !ERROR the value is not setting on the category field 
 	const handleCategoryChange=(e)=>{
-	e.preventDefault();
-	setProduct({ ...product, category: e.target.value });
+	e.preventDefault()
+	setProduct({...product, category: e.target.value })
 	getSubsByCategoryId(e.target.value)
 	.then(res=>{
 		console.log(res)
-		setProduct({ ...product, allsubs: res.data.data});
+		setSubOptions( res.data.data);
+		
 	}).catch(err=>{
 		toast.error(err.message)
 	})}
@@ -201,7 +193,7 @@ const loadSubCategory=()=>{
             Select Sub-Category
           </option>
           {/*  options dynamically based on categories */}
-          {product.allsubs.map((cat, index) => (
+          {subOptions.map((cat, index) => (
             <option key={index} value={cat._id}>
               {cat.name}
             </option>
