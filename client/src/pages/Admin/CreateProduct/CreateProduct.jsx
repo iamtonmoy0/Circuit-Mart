@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/productFunctions";
 import toast from "react-hot-toast";
+import { getSubCategories } from "../../../functions/subCategoryFunctions";
+import { getCategories } from "../../../functions/categoryFunctions";
 
 const CreateProduct = () => {
 	const {user}= useSelector(state=>({...state}))
@@ -11,28 +13,53 @@ const CreateProduct = () => {
 		price: "",
 		categories: [],
 		category: "",
-		subs: [],
+		allsubs: [],
+		subs: '',
 		shipping: "",
 		quantity: "",
 		images: [],
 		colors: ["Black", "Brown", "Silver", "White", "Blue"],
-		brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
+		brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "Asus"],
 		color: "",
 		brand: "",
 	});
-	
+
+	useEffect(()=>{
+	loadParentCategories();
+	loadSubCategory();
+			
+
+	},[])
+
+//    get all parent category
+const loadParentCategories=()=>{
+	getCategories()
+	.then(res=>{
+		setProduct({...product,categories:res.data.data})
+	})
+}
+// get all sub category
+const loadSubCategory=()=>{
+	// getSubCategories()
+	// .then(res=>{
+	// 	console.log(res)
+	// 	setProduct({ ...product, allsubs: res.data.data});
+	// }).catch(error=>console.log(error))
+}
+
+	// handle change
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setProduct({ ...product, [name]: value });
 		console.log(e.target.name,'=>' ,e.target.value)
 	};
-	
+	// handle submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// Handle form submission here
 		console.log(product);
 		createProduct(product,user.token)
-		.then(res=>{
+		.then(()=>{
 			toast.success('product created')
 		}).catch(err=>{
 			toast.error(err.message)
@@ -55,7 +82,7 @@ const CreateProduct = () => {
 				name="title"
 				value={product.title}
 				onChange={handleChange}
-				className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+				className="mt-1 p-2 w-full outline-none border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
 				required
 			/>
 			</div>
@@ -69,7 +96,7 @@ const CreateProduct = () => {
           name="description"
           value={product.description}
           onChange={handleChange}
-          className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 p-2 w-full outline-none border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           required
         ></textarea>
       </div>
@@ -83,7 +110,7 @@ const CreateProduct = () => {
           name="price"
           value={product.price}
           onChange={handleChange}
-          className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
@@ -97,7 +124,7 @@ const CreateProduct = () => {
           name="quantity"
           value={product.quantity}
           onChange={handleChange}
-          className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
@@ -110,7 +137,7 @@ const CreateProduct = () => {
           name="shipping"
           value={product.shipping}
           onChange={handleChange}
-          className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           required
         >
           <option value="" disabled>
@@ -129,7 +156,7 @@ const CreateProduct = () => {
           name="category"
           value={product.category}
           onChange={handleChange}
-          className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
         //   required
         >
           <option value="" disabled>
@@ -150,16 +177,16 @@ const CreateProduct = () => {
         <select
           id="subs"
           name="subs"
-          value={product.category}
+          value={product.subs}
           onChange={handleChange}
-          className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
         //   required
         >
           <option value="" disabled>
             Select Sub-Category
           </option>
-          {/* Add options dynamically based on your categories */}
-          {product.categories.map((cat, index) => (
+          {/*  options dynamically based on categories */}
+          {product.allsubs.map((cat, index) => (
             <option key={index} value={cat._id}>
               {cat.name}
             </option>
@@ -175,7 +202,7 @@ const CreateProduct = () => {
 				name="color"
 				value={product.color}
 				onChange={handleChange}
-				className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+				className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
 				required
 			>
 				<option value="" disabled>
@@ -197,7 +224,7 @@ const CreateProduct = () => {
 				name="brand"
 				value={product.brand}
 				onChange={handleChange}
-				className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+				className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
 				required
 			>
 				<option value="" disabled>
