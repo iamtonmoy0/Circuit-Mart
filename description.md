@@ -13,6 +13,7 @@
  * React-Hot-Toast
  * React Helmet Async
  * Sweet Alert 2
+ * React -Select
 
  ------------- Back End ------------------
  
@@ -30,3 +31,4 @@
  * Colors
  * Dotenv
  * Firebase-Admin
+ * Cloudinary
