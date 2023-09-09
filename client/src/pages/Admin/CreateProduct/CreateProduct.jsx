@@ -2,20 +2,21 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/productFunctions";
 import toast from "react-hot-toast";
-import { getSubCategories } from "../../../functions/subCategoryFunctions";
 import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
+
 
 const CreateProduct = () => {
 	const {user}= useSelector(state=>({...state}));
 	const [subOptions,setSubOptions]=useState([])
+	// const [showSub,setShowSub]=useState(false)
+
 	const [product, setProduct] = useState({
 		title: "",
 		description: "",
 		price: "",
 		categories: [],
 		category: "",
-		allsubs: [],
-		subs: '',
+		subs: [],
 		shipping: "",
 		quantity: "",
 		images: [],
@@ -24,12 +25,13 @@ const CreateProduct = () => {
 		color: "",
 		brand: "",
 	});
+console.log(product)
+
 
 	useEffect(()=>{
 	loadParentCategories();
 			
 	},[])
-console.log(product)
 //    get all parent category
 const loadParentCategories=()=>{
 	getCategories()
@@ -121,6 +123,7 @@ const loadParentCategories=()=>{
           required
         />
       </div>
+	{/* quantity */}
       <div className="mb-4">
         <label htmlFor="quantity" className="block text-sm font-medium text-gray-600">
           Quantity
@@ -154,6 +157,7 @@ const loadParentCategories=()=>{
           <option value="No">No</option>
         </select>
       </div>
+	{/*category  */}
       <div className="mb-4">
         <label htmlFor="category" className="block text-sm font-medium text-gray-600">
           Category
@@ -164,7 +168,7 @@ const loadParentCategories=()=>{
           value={product.category}
           onChange={handleCategoryChange}
           className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-        //   required
+          required
         >
           <option value="" disabled>
             Select Category
@@ -176,12 +180,14 @@ const loadParentCategories=()=>{
             </option>
           ))}
         </select>
-      </div>	
+      </div>
+		{/*sub category  */}
       <div className="mb-4">
         <label htmlFor="category" className="block text-sm font-medium text-gray-600">
           Sub Category
         </label>
-        <select
+{/* selector */}
+<select
           id="subs"
           name="subs"
           value={product.subs}
@@ -199,7 +205,9 @@ const loadParentCategories=()=>{
             </option>
           ))}
         </select>
+  
       </div>	
+	{/* color select */}
 			<div className="mb-4">
 			<label htmlFor="color" className="block text-sm font-medium text-gray-600">
 				Color
@@ -222,6 +230,7 @@ const loadParentCategories=()=>{
 				))}
 			</select>
 			</div>
+			{/* brand select */}
 			<div className="mb-4">
 			<label htmlFor="brand" className="block text-sm font-medium text-gray-600">
 				Brand
