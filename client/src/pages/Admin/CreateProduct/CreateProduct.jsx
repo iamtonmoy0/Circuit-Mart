@@ -4,28 +4,27 @@ import { createProduct } from "../../../functions/productFunctions";
 import toast from "react-hot-toast";
 import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
 
-
+const initialState={
+	title: "",
+	description: "",
+	price: "",
+	categories: [],
+	category: "",
+	subs: [],
+	shipping: "",
+	quantity: "",
+	images: [],
+	colors: ["Black", "Brown", "Silver", "White", "Blue"],
+	brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "Asus"],
+	color: "",
+	brand: "",
+}
 const CreateProduct = () => {
 	const {user}= useSelector(state=>({...state}));
-	const [subOptions,setSubOptions]=useState([])
-	// const [showSub,setShowSub]=useState(false)
+	const [product, setProduct] = useState(initialState);
+	const [subOptions,setSubOptions]=useState([]);
 
-	const [product, setProduct] = useState({
-		title: "",
-		description: "",
-		price: "",
-		categories: [],
-		category: "",
-		subs: [],
-		shipping: "",
-		quantity: "",
-		images: [],
-		colors: ["Black", "Brown", "Silver", "White", "Blue"],
-		brands: ["Apple", "Samsung", "Microsoft", "Lenovo", "Asus"],
-		color: "",
-		brand: "",
-	});
-console.log(product)
+
 
 
 	useEffect(()=>{
@@ -46,7 +45,7 @@ const loadParentCategories=()=>{
 		const { name, value } = e.target;
 		setProduct({ ...product, [name]: value });
 
-		console.log(e.target.name,'=>' ,e.target.value)
+		// console.log(e.target.name,'=>' ,e.target.value)
 	};
 	// handle category change
 	const handleCategoryChange=(e)=>{
@@ -65,10 +64,13 @@ const loadParentCategories=()=>{
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// Handle form submission here
+		
 		console.log(product);
 		createProduct(product,user.token)
 		.then(()=>{
 			toast.success('product created')
+			setProduct(initialState)
+			
 		}).catch(err=>{
 			toast.error(err.message)
 		})
