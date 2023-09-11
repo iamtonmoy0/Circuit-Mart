@@ -1,4 +1,4 @@
-const { createProductServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -19,13 +19,17 @@ exports.createProductController=async(req,res,next)=>{
 	}
 }
 // get product
-exports.getProductController=async(req,res,next)=>{
+exports.getProductByQueryController=async(req,res,next)=>{
 	try {
-		
+		const result=await getProductByQueryServices(req.params.count)
+		res.status(200).json({
+			status:"success",
+			data:result
+		})
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:"",
+			message:"Fail to get products",
 			err:error.message
 		})
 	}

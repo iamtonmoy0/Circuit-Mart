@@ -1,11 +1,13 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const ImageUploadForm = ({product,setProduct}) => {
 	// file upload handler
 	const handelFileUpload=(e)=>{
 		let files=e.target.files;
-
+		toast.loading('Uploading')
 		let allUploadedFiles = product.images;
+		
 		if(files){
 			for(let i =0; i<files.length; i++){
 				const formData = new FormData();
@@ -16,7 +18,8 @@ const ImageUploadForm = ({product,setProduct}) => {
 						console.log('response:', res);
 						allUploadedFiles.push(res.data.data.display_url);
 						setProduct({...product,images:allUploadedFiles})
-						// console.log(product.images)
+						toast.dismiss();
+						toast.success('image added!');
 					}).catch(err=>{
 						console.log(err.message)
 					})			
@@ -24,13 +27,12 @@ const ImageUploadForm = ({product,setProduct}) => {
 		}
 
 	}
-
 	return (
 		<div>
 		<form className="pt-10">
   <label className="block">
     <span className="sr-only">Choose profile photo</span>
-    <input type="file"  accept="image/*" multiple={true} onChange={handelFileUpload}  className="block w-full text-sm text-gray-500
+    <input required type="file"  accept="image/*" multiple={true} onChange={handelFileUpload}  className="block w-full text-sm text-gray-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-md file:border-0
       file:text-sm file:font-semibold
@@ -40,9 +42,10 @@ const ImageUploadForm = ({product,setProduct}) => {
     "/>
   </label>
 </form>
-{
-	// product.images.map(img=><img src={img} />)
-}
+ {product.images && product.images.map(image=>(<div key={image} className="relative mx-3 mt-6 inline-block">
+<img className="inline-block h-[5.875rem] w-[5.875rem] rounded-md ring-2 ring-white dark:ring-gray-800" src={image} alt="Image Description"/>
+</div>))
+} 
 </div>
 	);
 }
