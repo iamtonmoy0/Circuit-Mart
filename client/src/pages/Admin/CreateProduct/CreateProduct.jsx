@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/productFunctions";
 import toast from "react-hot-toast";
 import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
+import ImageUploadForm from "../../../components/Form/ImageUploadForm";
 
 const initialState={
 	title: "",
@@ -80,6 +81,8 @@ const loadParentCategories=()=>{
 		<div className="w-full mx-auto mt-8 px-10 bg-white rounded-md shadow-md">
 		<h2 className="text-2xl text-center font-semibold mb-4">Product Create Form</h2>
 		<hr  className="w-80 mx-auto"/>
+			{/* image upload form */}
+			<ImageUploadForm  product={product} setProduct={setProduct}  />
 		<form onSubmit={handleSubmit} className="pt-10">
 		<div className="grid lg:grid-cols-2 gap-4">
 			

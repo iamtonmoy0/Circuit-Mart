@@ -1,18 +1,14 @@
-const cloudinary = require('cloudinary');
+const cloudinary  = require("../utils/cloud.config")
 
-// config
-cloudinary.config({
-	cloud_name:process.env.CLOUD_NAME,
-	api_key:process.env.CLOUD_API_KEY,
-	api_secret:process.env.CLOUD_API_SECRET,
-})
-
-exports.uploadDataServices=async(data)=>{
-	return await cloudinary.uploader.upload(data,{
+// upload data services
+exports.uploadDataServices=async(image)=>{
+	console.log(image)
+	return await cloudinary.uploader.upload(image,{
 		public_id:`${Date.now()}`,
 		resource_type:"auto"
 	})
 }
+// remove data services
 exports.removeDataServices=async(image_id)=>{
 	return await cloudinary.uploader.destroy(image_id)
 }

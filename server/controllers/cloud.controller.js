@@ -1,9 +1,9 @@
 // upload data on cloud
 
-const cloudServices = require("../services/cloud.services")
-
+const cloudServices = require("../services/cloud.services");
 exports.uploadDataController=async(req,res,next)=>{
-try {
+
+	try {
 	const result = await cloudServices.uploadDataServices(req.body.image)
 	res.status(200).json({
 		statue:"success",
