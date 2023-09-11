@@ -10,6 +10,7 @@ export const UPDATE_CATEGORY =`${CATEGORY}`
 export const SUB_CATEGORY =`${WELCOME_AS_ADMIN}/sub-category`
 export const UPDATE_SUB_CATEGORY =`${SUB_CATEGORY}`
 export const PRODUCT =`${WELCOME_AS_ADMIN}/product`
+export const ALL_PRODUCTS =`${WELCOME_AS_ADMIN}/products`
 // user route
 export const WELCOME_AS_USER ='/user/dashboard'
 export const USER_WISHLIST =`${WELCOME_AS_USER}/wishlist`

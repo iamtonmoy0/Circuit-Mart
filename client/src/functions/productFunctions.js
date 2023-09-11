@@ -8,3 +8,8 @@ export const createProduct=async(product,token)=>{
 		},
 	})
 };
+// get product
+
+export const getAllProducts=async(limit)=>{
+	return await axios.get(`${import.meta.env.VITE_Base_Url}/products/${limit}`)
+}

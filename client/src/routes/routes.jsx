@@ -21,6 +21,7 @@ import UpdateCategory from "../pages/Admin/UpdateCategory/UpdateCategory";
 import SubCategory from "../pages/Admin/CreateSubCategory/SubCategory";
 import UpdateSubCategory from "../pages/Admin/UpdateSubCategory/UpdateSubCategory";
 import CreateProduct from "../pages/Admin/CreateProduct/CreateProduct";
+import AllProducts from "../pages/Admin/AllProducts/AllProducts";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -96,6 +97,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.PRODUCT,
 				element:<CreateProduct/>
+			},
+			{
+				path:routePath.ALL_PRODUCTS,
+				element:<AllProducts/>
 			},
 		]
 	},

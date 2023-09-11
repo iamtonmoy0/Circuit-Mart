@@ -115,11 +115,11 @@ const AdminDashboard = () => {
 
           <div id="account-accordion-child" className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
             <ul className="pt-2 pl-2">
-              <li>
+              <Link to={routePath.ALL_PRODUCTS}>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
-                  Link 1
+                  All Products
                 </a>
-              </li>
+              </Link>
               <li>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                   Link 2

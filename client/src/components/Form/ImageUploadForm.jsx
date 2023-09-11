@@ -13,7 +13,7 @@ const ImageUploadForm = ({product,setProduct}) => {
 				const formData = new FormData();
 				formData.append("image", files[i]);
 		
-					axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IBB}`,formData)
+					axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_CLOUD}`,formData)
 						.then(res=>{
 						console.log('response:', res);
 						allUploadedFiles.push(res.data.data.display_url);
@@ -21,6 +21,7 @@ const ImageUploadForm = ({product,setProduct}) => {
 						toast.dismiss();
 						toast.success('image added!');
 					}).catch(err=>{
+						toast.dismiss();
 						console.log(err.message)
 					})			
 			}

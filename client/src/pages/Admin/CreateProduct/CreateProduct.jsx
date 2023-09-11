@@ -71,6 +71,7 @@ const loadParentCategories=()=>{
 		.then(()=>{
 			toast.success('product created')
 			setProduct(initialState)
+			setProduct({...product,images:[]})
 			
 		}).catch(err=>{
 			toast.error(err.message)
