@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices, deleteProductByIdServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -35,8 +35,13 @@ exports.getProductByQueryController=async(req,res,next)=>{
 	}
 }
 // get all products
-exports.getAllProductsController=async(req,res,next)=>{
+exports.getProductBySlugController=async(req,res,next)=>{
 	try {
+		const result = await getProductBySlugServices(req.params.slug)
+		res.status(200).json({
+			status:'success',
+			data:result
+		})
 		
 	} catch (error) {
 		res.status(400).json({

@@ -13,6 +13,9 @@ exports.getProductByQueryServices=async(limit)=>{
 
 // remove product by id
 exports.deleteProductByIdServices=async(id)=>{
-	console.log(id)
 	return await productModel.findByIdAndRemove(id)
+}
+// get product by slug
+exports.getProductBySlugServices=async(slug)=>{
+	return await productModel.findOne({slug:slug}).populate('category').populate('subs')
 }

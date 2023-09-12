@@ -5,6 +5,7 @@ import {AiOutlineDelete,AiOutlineEdit} from 'react-icons/ai';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
+import { UPDATE_PRODUCT } from "../../../routes/routePath";
 
 const AllProducts = () => {
 	const[products,setProducts]=useState([]);
@@ -81,10 +82,11 @@ key={p._id}>
   </div>
 </a>
 {/* delete and update */}
-<div className="flex justify-between">
-		<Link  className="cursor-pointer px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
+<div className="flex justify-between border border-gray-200">
+		<Link to={`${UPDATE_PRODUCT}/${p.slug}`} className="cursor-pointer px-6 py-4 text-right text-sm text-orange-400 dark:text-gray-200">
 			<AiOutlineEdit className="text-2xl" />
 		</Link>
+		<div className="border border-spacing-0 border-gray-200"></div>
 		<button className="cursor-pointer px-6 py-4 text-sm text-red-800 dark:text-gray-200" onClick={()=>handleDeleteProduct(p._id)}>
 			<AiOutlineDelete className="text-2xl" />
 		</button>

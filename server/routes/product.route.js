@@ -13,8 +13,9 @@ router.route('/product')
 
  router.route('/product/:id')
  .delete(authMiddleware.authCheck,authMiddleware.adminCheck,productController.removeProduct)
-
+router.route('/product/:slug')
+ .get(productController.getProductBySlugController)
  router.route('/products/:count')
  .get(productController.getProductByQueryController)
- 
+
 module.exports=router;

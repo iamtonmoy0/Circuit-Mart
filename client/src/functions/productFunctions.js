@@ -13,6 +13,9 @@ export const createProduct=async(product,token)=>{
 export const getAllProducts=async(limit)=>{
 	return await axios.get(`${import.meta.env.VITE_Base_Url}/products/${limit}`)
 }
+export const getProductBySlug=async(slug)=>{
+	return await axios.get(`${import.meta.env.VITE_Base_Url}/product/${slug}`)
+}
 
 // remove product 
 export const deleteProduct=async(id,token)=>{
