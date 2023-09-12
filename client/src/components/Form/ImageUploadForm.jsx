@@ -13,7 +13,7 @@ const ImageUploadForm = ({product,setProduct}) => {
 				const formData = new FormData();
 				formData.append("image", files[i]);
 		
-					axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_CLOUD}`,formData)
+					axios.post(`${import.meta.env.VITE_CLOUD}`,formData)
 						.then(res=>{
 						console.log('response:', res);
 						allUploadedFiles.push(res.data.data.display_url);

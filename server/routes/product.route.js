@@ -10,6 +10,11 @@ const authMiddleware = require('../middlewares/auth.middleware');
 
 router.route('/product')
  .post(authMiddleware.authCheck,authMiddleware.adminCheck,productController.createProductController)
-router.route('/products/:count')
+
+ router.route('/product/:id')
+ .delete(authMiddleware.authCheck,authMiddleware.adminCheck,productController.removeProduct)
+
+ router.route('/products/:count')
  .get(productController.getProductByQueryController)
+ 
 module.exports=router;

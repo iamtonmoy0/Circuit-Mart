@@ -10,3 +10,9 @@ exports.createProductServices = async (data) => {
 exports.getProductByQueryServices=async(limit)=>{
 	return await productModel.find({}).limit(parseInt(limit)).populate("category").populate("subs").sort([['createdAt','desc']])
 }
+
+// remove product by id
+exports.deleteProductByIdServices=async(id)=>{
+	console.log(id)
+	return await productModel.findByIdAndRemove(id)
+}

@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -61,7 +61,12 @@ exports.updateProductController=async(req,res,next)=>{
 // delete product
 exports.removeProduct=async(req,res,next)=>{
 	try {
-		
+		const result = await deleteProductByIdServices(req.params.id) 
+		res.status(200).json({
+			status : "Success",
+			message:"Product deleted successful",
+			data:result
+		})
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
