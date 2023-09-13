@@ -17,5 +17,5 @@ exports.deleteProductByIdServices=async(id)=>{
 }
 // get product by slug
 exports.getProductBySlugServices=async(slug)=>{
-	return await productModel.findOne({slug:slug}).populate('category').populate('subs')
+	return await productModel.findOne({slug:slug}).populate("category").populate("subs");
 }

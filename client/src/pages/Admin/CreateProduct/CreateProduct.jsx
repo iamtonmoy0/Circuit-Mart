@@ -25,9 +25,6 @@ const CreateProduct = () => {
 	const [product, setProduct] = useState(initialState);
 	const [subOptions,setSubOptions]=useState([]);
 
-
-
-
 	useEffect(()=>{
 	loadParentCategories();
 			
@@ -36,6 +33,7 @@ const CreateProduct = () => {
 const loadParentCategories=()=>{
 	getCategories()
 	.then(res=>{
+		console.log(res)
 		setProduct({...product,categories:res.data.data})
 	})
 }
@@ -54,7 +52,6 @@ const loadParentCategories=()=>{
 	setProduct({...product, category: e.target.value })
 	getSubsByCategoryId(e.target.value)
 	.then(res=>{
-		console.log(res)
 		setSubOptions( res.data.data);
 		
 	}).catch(err=>{
@@ -66,12 +63,11 @@ const loadParentCategories=()=>{
 		e.preventDefault();
 		// Handle form submission here
 		
-		console.log(product);
 		createProduct(product,user.token)
 		.then(()=>{
 			toast.success('product created')
 			setProduct(initialState)
-			setProduct({...product,images:[]})
+			setProduct({...product, product:initialState})
 			
 		}).catch(err=>{
 			toast.error(err.message)
