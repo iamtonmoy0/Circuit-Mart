@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { getProductBySlug } from "../../../functions/productFunctions";
 import { useParams } from "react-router-dom";
 import ImageUploadForm from "../../../components/Form/ImageUploadForm";
-import { getCategories } from "../../../functions/categoryFunctions";
+import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
 
 
 // initial state
@@ -28,7 +28,7 @@ const UpdateProduct = () => {
 const [product,setProduct] = useState(initialState);
 const [categories,setCategories]= useState([]);
 const [subCategories,setSubCategories]= useState([]);
-const {slug} = useParams()
+const {slug} = useParams();
 
 console.log(product)
 	useEffect(()=>{
@@ -43,11 +43,19 @@ getProductBySlug(slug)
 .then((res)=>{
 	toast.dismiss()
 	setProduct({...product, ...res.data.data})
+	// loading subs from product category  id
+	getSubsByCategoryId(res.data.data.category?._id)
+	.then(res=>{
+		console.log(res)
+		setSubCategories(res.data.data)
+	})
 }).catch(err=>{
 	toast.dismiss();
 	toast.error(err.message);
 })
 }
+
+console.log(subCategories)
 
 	// load categories
 	const loadParentCategories=()=>{
@@ -68,7 +76,11 @@ const handleChange=(e)=>{
 }
 // handle category change
 const handleCategoryChange=(e)=>{
-
+    setProduct({ ...product, subs: [], category: e.target.value });
+	getSubsByCategoryId(e.target.value)
+	.then((res)=>{
+		setSubCategories(res.data.data)
+	})
 }
 	
 	
@@ -169,13 +181,13 @@ const handleCategoryChange=(e)=>{
         <select
           id="category"
           name="category"
-          value={product.category}
+         value={product.category ? product.category._id : ''}
           onChange={handleCategoryChange}
           className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
           required
         >
           <option value="" disabled>
-            Select Category
+            {'Select Category'}
           </option>
           {/* Add options dynamically based on your categories */}
           {categories.map((cat, index) => (
@@ -194,7 +206,7 @@ const handleCategoryChange=(e)=>{
 <select
           id="subs"
           name="subs"
-          value={product.subs.name}
+		value={product?.subs?.name}
           onChange={handleChange}
           className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
         //   required
@@ -203,11 +215,11 @@ const handleCategoryChange=(e)=>{
             Select Sub-Category
           </option>
           {/*  options dynamically based on categories */}
-          {/* {subOptions.map((cat, index) => (
+          {subCategories.map((cat, index) => (
             <option key={index} value={cat._id}>
               {cat.name}
             </option>
-          ))} */}
+          ))}
         </select>
   
       </div>	

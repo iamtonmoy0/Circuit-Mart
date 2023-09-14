@@ -36,11 +36,11 @@ const productSchema = new schema({
 		ref:"Category",
 		
 	},
-	subs:[{
+	subs:{
 		type:ObjectId,
 		ref:"Sub Category",
 
-	}],
+	},
 	quantity:Number,
 	sold:{
 		type:Number,
