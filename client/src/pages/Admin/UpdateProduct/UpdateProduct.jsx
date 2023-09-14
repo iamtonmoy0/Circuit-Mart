@@ -69,6 +69,7 @@ console.log(subCategories)
 // handle submit--------------------------
 const handleSubmit=(e)=>{
 e.preventDefault();
+
 }
 // handle change-------------------------
 const handleChange=(e)=>{
@@ -209,7 +210,7 @@ const handleCategoryChange=(e)=>{
 		value={product?.subs?.name}
           onChange={handleChange}
           className="mt-1 p-2 w-full border outline-none border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-        //   required
+          required
         >
           <option value="" disabled>
             Select Sub-Category

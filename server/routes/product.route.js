@@ -15,6 +15,7 @@ router.route('/product')
  .delete(authMiddleware.authCheck,authMiddleware.adminCheck,productController.removeProduct)
 router.route('/product/:slug')
  .get(productController.getProductBySlugController)
+ .patch(authMiddleware.authCheck,authMiddleware.adminCheck,productController.updateProductController)
  router.route('/products/:count')
  .get(productController.getProductByQueryController)
 

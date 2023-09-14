@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -54,11 +54,15 @@ exports.getProductBySlugController=async(req,res,next)=>{
 // update product
 exports.updateProductController=async(req,res,next)=>{
 	try {
-		
+		const result = await updateProductServices(req.params.slug,req.body)
+		res.status(200).json({
+			status:'success',
+			data:result
+		})
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',
-			message:"",
+			message:"Failed to update product",
 			err:error.message
 		})
 	}
