@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { getProductBySlug } from "../../../functions/productFunctions";
+import { getProductBySlug, updateProduct } from "../../../functions/productFunctions";
 import { useParams } from "react-router-dom";
 import ImageUploadForm from "../../../components/Form/ImageUploadForm";
 import { getCategories, getSubsByCategoryId } from "../../../functions/categoryFunctions";
@@ -46,7 +46,6 @@ getProductBySlug(slug)
 	// loading subs from product category  id
 	getSubsByCategoryId(res.data.data.category?._id)
 	.then(res=>{
-		console.log(res)
 		setSubCategories(res.data.data)
 	})
 }).catch(err=>{
@@ -55,13 +54,11 @@ getProductBySlug(slug)
 })
 }
 
-console.log(subCategories)
 
 	// load categories
 	const loadParentCategories=()=>{
 		getCategories()
 		.then(res=>{
-			console.log(res)
 			setCategories(res.data.data)
 		})
 	}
@@ -69,7 +66,16 @@ console.log(subCategories)
 // handle submit--------------------------
 const handleSubmit=(e)=>{
 e.preventDefault();
-
+toast.loading('Updating')
+updateProduct(slug,product,user.token)
+.then(res=>{
+	console.log(res)
+	toast.dismiss()
+	toast.success(`product updated`)
+}).catch(err=>{
+	toast.dismiss()
+	toast.error(err.message)
+})
 }
 // handle change-------------------------
 const handleChange=(e)=>{
@@ -276,7 +282,7 @@ const handleCategoryChange=(e)=>{
 				type="submit"
 				className="px-4 py-2 ml-[400px] bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
 			>
-				Create Product
+				Update Product
 			</button>
 		</form>
 		</div>

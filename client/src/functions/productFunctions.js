@@ -8,6 +8,14 @@ export const createProduct=async(product,token)=>{
 		},
 	})
 };
+// update product
+export const updateProduct=async(slug,product,token)=>{
+	return await axios.patch(`${import.meta.env.VITE_Base_Url}/product/${slug}`,product,{
+		headers:{
+			token
+		},
+	})
+};
 // get product
 
 export const getAllProducts=async(limit)=>{
