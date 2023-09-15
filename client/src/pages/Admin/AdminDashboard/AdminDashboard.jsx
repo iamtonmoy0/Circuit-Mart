@@ -2,7 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Link, Outlet } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
 import { BiSolidCategory } from "react-icons/bi";
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { AiOutlineAppstoreAdd, AiOutlineRollback } from "react-icons/ai";
 import { MdOutlineCategory } from "react-icons/md";
 import { BsFillInboxesFill } from "react-icons/bs";
 
@@ -194,6 +194,10 @@ const AdminDashboard = () => {
           </svg>
           Password
         </a>
+		<Link to={routePath.ROOT} className=" mt-10 btn flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md  bg-[#26577C]">
+         <AiOutlineRollback/>
+                  Home
+        </Link>
 		</li>
       </ul>
     </nav>
