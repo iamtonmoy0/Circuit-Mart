@@ -23,6 +23,7 @@ import UpdateSubCategory from "../pages/Admin/UpdateSubCategory/UpdateSubCategor
 import CreateProduct from "../pages/Admin/CreateProduct/CreateProduct";
 import AllProducts from "../pages/Admin/AllProducts/AllProducts";
 import UpdateProduct from "../pages/Admin/UpdateProduct/UpdateProduct";
+import ViewProduct from "../pages/HomePage/ViewProduct/ViewProduct";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -50,6 +51,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.RESET_PASS,
 				element:<SecureRoute> <ForgotPassword/> </SecureRoute> 
+			},
+			{
+				path:`${routePath.VIEW_PRODUCT}/:slug`,
+				element:<ViewProduct/>
 			}
 			
 		]

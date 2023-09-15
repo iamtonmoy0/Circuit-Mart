@@ -1,10 +1,11 @@
 import { AiOutlineEye } from "react-icons/ai";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import * as routePath from '../../../routes/routePath';
 
 const ProductCard = (product) => {
 	// console.log(product)
-	const{title,price,images,description} = product.product
+	const{title,price,images,description,slug} = product.product
 	return (
 		
 <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -41,7 +42,7 @@ const ProductCard = (product) => {
            
         </div>
 		<div className="flex justify-between">
-  <Link className="cursor-pointer text-center text-sm text-blue-400 dark:text-gray-200">
+  <Link to={`${routePath.VIEW_PRODUCT}/${slug}`} className="cursor-pointer text-center text-sm text-blue-400 dark:text-gray-200">
     <div className="flex flex-col items-center">
       <AiOutlineEye className="text-2xl" />
       <p>View Details</p>
