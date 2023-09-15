@@ -33,3 +33,11 @@ export const deleteProduct=async(id,token)=>{
 		}
 	})
 }
+// get product by sorting
+export const getProductBySorting=async(sort,order,limit)=>{
+	return axios.post(`${import.meta.env.VITE_Base_Url}/products`,{
+		sort,
+		order,
+		limit
+	})
+}

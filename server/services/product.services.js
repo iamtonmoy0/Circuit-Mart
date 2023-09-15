@@ -24,3 +24,8 @@ exports.updateProductServices=async(slug,data)=>{
 data.slug=slugify(data.title);
 return await productModel.findOneAndUpdate({slug:slug},data,{new:true})	
 }
+// get product by sort
+exports.getProductBySortServices=async(sorting)=>{
+const {sort,order,limit}=sorting;
+	return await productModel.find({}).populate('category').populate('subs').sort([[sort,order]]).limit(limit)
+}
