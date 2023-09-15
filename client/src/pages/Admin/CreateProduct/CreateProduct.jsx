@@ -66,8 +66,8 @@ const loadParentCategories=()=>{
 		createProduct(product,user.token)
 		.then(()=>{
 			toast.success('product created')
-			setProduct(initialState)
 			setProduct({...product, product:initialState})
+			setProduct(initialState)
 			
 		}).catch(err=>{
 			toast.error(err.message)
