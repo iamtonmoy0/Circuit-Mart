@@ -5,3 +5,10 @@
 
 
 
+.truncate {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 800px; /* Adjust the max-width as needed */
+  }
+  

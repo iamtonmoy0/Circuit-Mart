@@ -26,6 +26,19 @@ return await productModel.findOneAndUpdate({slug:slug},data,{new:true})
 }
 // get product by sort
 exports.getProductBySortServices=async(sorting)=>{
-const {sort,order,limit}=sorting;
-	return await productModel.find({}).populate('category').populate('subs').sort([[sort,order]]).limit(limit)
+const {sort,order,page}=sorting;
+const currentPage = page || 1;
+const productPerPage = 3;
+
+return await productModel.find({})
+ .skip((currentPage-1) * productPerPage)
+ .populate('category')
+ .populate('subs')
+ .sort([[sort,order]])
+ .limit(productPerPage)
+}
+// product pagination
+exports.productPaginationServices=async(pageNo)=>{
+	let total = await productModel.find({}).estimatedDocumentCount();
+	return total
 }

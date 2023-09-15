@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -84,7 +84,7 @@ exports.removeProduct=async(req,res,next)=>{
 		})
 	}
 }
-
+// get product by sort
 exports.getProductBySortController=async(req,res,next)=>{
 	try {
 		const result = await getProductBySortServices(req.body)
@@ -96,6 +96,22 @@ exports.getProductBySortController=async(req,res,next)=>{
 		res.status(400).json({
 			status:'fail',
 			message:"Failed to sort",
+			err:error.message
+		})
+	}
+}
+// product pagination 
+exports.productPaginationController=async(req,res,next)=>{
+	try {
+		const result = await productPaginationServices()
+		res.status(200).json({
+			status:'success',
+			data:result
+		})
+	} catch (error) {
+		res.status(400).json({
+			status:'fail',
+			message:"Failed to paginate",
 			err:error.message
 		})
 	}

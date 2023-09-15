@@ -37,7 +37,7 @@ const ProductCard = (product) => {
             <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
         </div>
         <div className="flex items-center justify-between">
-            <span className="text-md  text-gray-800 dark:text-white">{description}</span>
+            <span className="text-md truncate  text-gray-800 dark:text-white">{description}</span>
            
         </div>
 		<div className="flex justify-between">

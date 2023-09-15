@@ -10,8 +10,10 @@ const authMiddleware = require('../middlewares/auth.middleware');
 
 router.route('/product')
  .post(authMiddleware.authCheck,authMiddleware.adminCheck,productController.createProductController)
-router.route('/products')
-  .post(productController.getProductBySortController)
+ router.route('/products')
+ .post(productController.getProductBySortController)
+router.route('/products/total')
+ .get(productController.productPaginationController)
  
  router.route('/product/:id')
  .delete(authMiddleware.authCheck,authMiddleware.adminCheck,productController.removeProduct)

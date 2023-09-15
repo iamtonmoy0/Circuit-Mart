@@ -34,10 +34,14 @@ export const deleteProduct=async(id,token)=>{
 	})
 }
 // get product by sorting
-export const getProductBySorting=async(sort,order,limit)=>{
+export const getProductBySorting=async(sort,order,page)=>{
 	return axios.post(`${import.meta.env.VITE_Base_Url}/products`,{
 		sort,
 		order,
-		limit
+		page
 	})
+}
+// product count
+export const getProductCount=async()=>{
+	return await axios.get(`${import.meta.env.VITE_Base_Url}/products/total`)
 }

@@ -11,7 +11,7 @@ const Banner = () => {
           Welcome to Circuit Mart
         </p>
         <p className=" text-center text-xl typewriter-text mt-1 text-black font-semibold">
-         New Arrival Here
+         New Arrival Here !
         </p>
       </div>
       {/* End Col */}
