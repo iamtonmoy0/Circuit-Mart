@@ -61,10 +61,12 @@ const productSchema = new schema({
 		type:String,
 		enum:["Apple","Samsung","Lenovo","Asus","Dell"," Razer","Acer","Sony","Microsoft"]
 	},
-	// ratings:[{
-	// 	star:Number,
-	// 	postBy:{type:ObjectId, ref:'User'}
-	// }]
+	ratings:[
+		{
+		star:Number,
+		postBy:{type:ObjectId, ref:"User"}
+		},
+	],
 
 },{timestamps:true})
 
