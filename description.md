@@ -14,6 +14,8 @@
  * React Helmet Async
  * Sweet Alert 2
  * React -Select
+ * React -Tabs
+ * Swiper js
 
  ------------- Back End ------------------
  
