@@ -72,14 +72,11 @@ key={p._id}>
       >
         {p.title}
       </h3>
-
-      <p className="mt-1.5 max-w-[45ch] text-xs text-gray-500">
-	{p.description}
-    </p>
     </div>
 
     <p className="text-gray-900">${p.price}</p>
   </div>
+  <p> Category : {p.category.name}</p>
 </a>
 {/* delete and update */}
 <div className="flex justify-between border border-gray-200">

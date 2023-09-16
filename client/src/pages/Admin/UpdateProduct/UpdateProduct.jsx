@@ -93,11 +93,9 @@ const handleCategoryChange=(e)=>{
 	
 	return (
 		<>
-		{JSON.stringify(product)}
-
 
 		<div className="w-full mx-auto mt-8 px-10 bg-white rounded-md shadow-md">
-		<h2 className="text-2xl text-center font-semibold mb-4">Product Create Form</h2>
+		<h2 className="text-2xl text-center font-semibold mb-4">Product Update Form</h2>
 		<hr  className="w-80 mx-auto"/>
 			{/* image upload form */}
 			<ImageUploadForm  product={product} setProduct={setProduct}  />
