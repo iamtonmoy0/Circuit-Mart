@@ -1,3 +1,4 @@
+import StarRatings from 'react-star-ratings';
 import { useEffect, useState } from "react";
 import { getProductBySlug } from "../../../functions/productFunctions";
 import { useParams } from "react-router-dom";
@@ -17,11 +18,12 @@ import './styles.css';
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { BsFillCartPlusFill } from "react-icons/bs";
-import { AiFillStar } from "react-icons/ai";
+// import { AiFillStar } from "react-icons/ai";
 import { MdFavorite } from "react-icons/md";
 // react tab
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import RatingModal from '../../Shared/RatingModal/RatingModal';
 
 const ViewProduct = () => {
 
@@ -46,7 +48,7 @@ const loadProduct =()=>{
 	})
 }
 	return (
-		<div>
+		<div >
 			<div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
 				<div className=''>
 				{/* slide */}
@@ -87,10 +89,19 @@ const loadProduct =()=>{
 
 				</div>
 				{/* data */}
-				<div>
+				<div >
 				<p className="text-3xl rounded font-semibold bg-blue-400 text-center py-6">{product.title}</p>
 				{/* ratings of product */}
-				<p className="text-center">{product.rating || 'no rating yet'} </p>
+				<StarRatings
+				name={product._id}
+				numberOfStars={5}
+				rating={2}
+				// changeRating={(newRating,name)=>{console.log('new', newRating,'id',name)}}
+				isSelectable={true}
+				starRatedColor='red'
+				starEmptyColor='gray'
+				starWidthAndHeight="15px"
+				/>
 			<div className="bg-gray-100  py-8">
 				<div className="mx-8 pt-5 py-3">
 					<div className=" flex justify-between">
@@ -150,8 +161,20 @@ const loadProduct =()=>{
 					
 					
 				<div className="flex flex-col items-center">
-				<AiFillStar className="text-2xl text-yellow-500" />
-				<p>{user.email?  'Rate Now ' : "Login To Leave A Rating "}</p>
+				{/* <AiFillStar className="text-2xl text-yellow-500" />
+				<p>{user.email?  'Rate Now ' : "Login To Leave A Rating "}</p> */}
+				<RatingModal>
+				<StarRatings
+				name={product._id}
+				numberOfStars={5}
+				rating={2}
+				changeRating={(newRating,name)=>{console.log('new', newRating,'id',name)}}
+				isSelectable={true}
+				starRatedColor='red'
+				starEmptyColor='gray'
+				starWidthAndHeight="15px"
+				/>
+				</RatingModal>
 				</div>
 					
 					

@@ -50,7 +50,7 @@ const NewArrivals = () => {
 	
 	return (
 		<div className='flex flex-col items-center' >
-	<div className="  mx-6 pt-6 grid lg:grid-cols-3 sm:grid-cols-1 gap-4 sm:gap-0">
+	<div className="  mx-6 pt-6 grid lg:grid-cols-3 sm:grid-cols-1 lg:gap-4 sm:gap-2">
 				{products.map(p=><ProductCard key={p._id} product={p} />)}
 	</div>
 	<div className="">
