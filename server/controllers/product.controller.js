@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices, productStarRatingServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -114,5 +114,17 @@ exports.productPaginationController=async(req,res,next)=>{
 			message:"Failed to paginate",
 			err:error.message
 		})
+	}
+}
+// product star rating controller 
+exports.productStartRatingController = async(req,res,next)=>{
+	try {
+		const result = await productStarRatingServices() 
+	} catch (error) {
+		res.status(400).json({
+			status:'fail',
+			message:"Failed to rate the product",
+			err:error.message
+		})	
 	}
 }

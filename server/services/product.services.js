@@ -42,3 +42,7 @@ exports.productPaginationServices=async(pageNo)=>{
 	let total = await productModel.find({}).estimatedDocumentCount();
 	return total
 }
+// product star rating services
+exports.productStarRatingServices=async()=>{
+	
+}

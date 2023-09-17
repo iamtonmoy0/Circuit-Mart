@@ -44,12 +44,12 @@ const BestSellers = () => {
 		
 	}
 	return (
-		<div className='pt-10'>
+		<div className='pt-10 flex flex-col items-center'>
 			<p className='text-2xl text-center font-medium bg-gray-300 py-6'>Best Seller</p>
 			<div className="mx-6 pt-6 grid lg:grid-cols-3 sm:grid-cols-1 gap-4">
 				{products.map(p=><ProductCard key={p._id} product={p} />)}
 	</div>
-	<div className="ml-[500px]">
+	<div className="">
 	<Pagination current={page} totalPage={Math.ceil(productCount/3)} pagination={pagination} />
 
 	</div>

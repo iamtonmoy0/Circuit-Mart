@@ -47,7 +47,7 @@ const loadProduct =()=>{
 }
 	return (
 		<div>
-			<div className="grid lg:grid-cols-2 md:grid-cols-1 gap-0 h-[700px]">
+			<div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
 				<div className=''>
 				{/* slide */}
 				<Swiper
@@ -174,7 +174,7 @@ const loadProduct =()=>{
     <TabPanel className='px-6'>
       <h2>
 		<p>{product.description}</p>
-	  </h2>
+	</h2>
     </TabPanel>
     <TabPanel>
       <h2>This will be the comment section</h2>
