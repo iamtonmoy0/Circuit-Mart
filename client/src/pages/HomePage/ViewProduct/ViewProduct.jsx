@@ -26,10 +26,10 @@ import 'react-tabs/style/react-tabs.css';
 import RatingModal from '../../Shared/RatingModal/RatingModal';
 
 const ViewProduct = () => {
+	const {user} = useSelector(state=>({...state}))
 
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-	const {user} = useSelector(state=>({...state}))
 	const [product,setProduct]=useState({})
 	const {slug} = useParams()
 
@@ -50,8 +50,8 @@ const loadProduct =()=>{
 	return (
 		<div >
 			<div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
-				<div className=''>
 				{/* slide */}
+				<div >
 				<Swiper
         style={{
           '--swiper-navigation-color': '#c4baba',
@@ -77,7 +77,7 @@ const loadProduct =()=>{
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper border border-gray-300  " 
+        className="mySwiper  border border-gray-300  " 
       >
         {
 			product.images && product.images.map(img=><SwiperSlide key={img} >
@@ -88,7 +88,8 @@ const loadProduct =()=>{
       </Swiper>
 
 				</div>
-				{/* data */}
+
+				{/* product data */}
 				<div >
 				<p className="text-3xl rounded font-semibold bg-blue-400 text-center py-6">{product.title}</p>
 				{/* ratings of product */}
@@ -181,7 +182,7 @@ const loadProduct =()=>{
 				</div>
 			</div>
 			{/* coupon! */}
-			<div className='bg-[#337CCF] h-[132px]'>
+			<div className='bg-[#337CCF] h-[120px]'>
 				<p className="text-center text-4xl">Coupon section</p>
 			</div>
 				</div>
