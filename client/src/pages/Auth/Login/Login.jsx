@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import {  REGISTER, RESET_PASS, WELCOME_AS_ADMIN, WELCOME_AS_USER } from "../../../routes/routePath";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthProvider";
@@ -14,6 +14,9 @@ const Login = () => {
   const {loginWithEmail,googleSignIn} =useContext(AuthContext);
   const dispatch =  useDispatch();
   const user = useSelector(state=>({...state}))
+
+const location = useLocation()
+console.log(location)
   // role based redirect
   const roleBasedRedirect = (user) => {
     if (user.role === "admin") {
@@ -90,7 +93,7 @@ const Login = () => {
               <div className="grid gap-y-4">
                 {/* Form Group */}
                 <div>
-                  <label For="email" className="block text-sm mb-2 dark:text-white">Email address</label>
+                  <label for="email" className="block text-sm mb-2 dark:text-white">Email address</label>
                   <div className="relative">
                     <input placeholder="john.doe@gmail.com" type="email" id="email" name="email" className="py-3 px-4 block w-full rounded-md bg-gray-200 text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" required aria-describedby="email-error"/>
                     <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">

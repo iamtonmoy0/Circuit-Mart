@@ -49,7 +49,7 @@ const loadProduct =()=>{
 }
 	return (
 		<div >
-			<div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
+			<div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
 				{/* slide */}
 				<div >
 				<Swiper

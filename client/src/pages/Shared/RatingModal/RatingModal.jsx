@@ -1,29 +1,28 @@
 import { AiFillStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import {   useNavigate,  useParams } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
 const RatingModal = ({children}) => {
 	const {user} = useSelector(state=>({...state}))
+  const navigate =useNavigate();
+  const {slug}=useParams();
+
+const handleModal= ()=>{
+if(user && user.token){
+return
+}else{
+  navigate(routePath.LOGIN,{ state: { from: `/product/${slug}` } })
+}
+  }
+// !TODO : navigation to login with 
 	return (
 		<div>
 		<div className="text-center">
-{
-	user && user.email? 
-	<>
-  <button type="button" className=" px-4 flex flex-col  items-center gap-2 rounded-md border border-transparent text-black" data-hs-overlay="#hs-cookies">
+  <button onClick={handleModal} type="button" className=" px-4 flex flex-col  items-center gap-2 rounded-md border border-transparent text-black" data-hs-overlay="#hs-cookies">
 	<AiFillStar className="text-2xl text-yellow-500" />	
-	<p>Rate Now</p>
+	<p>{user && user.email ? "Rate Now" : "Login for rate product"}</p>
  </button>
-</>
-	:
-	<>
-  <Link to={routePath.LOGIN} className=" px-4 flex flex-col  items-center gap-2 rounded-md border border-transparent text-black" data-hs-overlay="#hs-cookies">
-	<AiFillStar className="text-2xl text-yellow-500" />
-	<p> Login To Leave A Rating </p>
- </Link>
- 
-	</>
-}
+
 </div>
 
 <div id="hs-cookies" className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto">
