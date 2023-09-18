@@ -11,7 +11,7 @@ const handleModal= ()=>{
 if(user && user.token){
 return
 }else{
-  navigate(routePath.LOGIN,{ state: { from: `/product/${slug}` } })
+  navigate(routePath.LOGIN,{ state: { from: `/product/${slug}` } }) //giving a route for redirect after login
 }
   }
 // !TODO : navigation to login with 

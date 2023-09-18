@@ -7,23 +7,27 @@ import toast from "react-hot-toast";
 import {GoMail} from 'react-icons/go'
 import { useDispatch, useSelector } from "react-redux";
 import { createOrUpdate } from "../../../utils/authFunction";
-// import useRedirect from "../../../hooks/useRedirect";
 
 const Login = () => {
   const navigate = useNavigate()
   const {loginWithEmail,googleSignIn} =useContext(AuthContext);
   const dispatch =  useDispatch();
-  const user = useSelector(state=>({...state}))
-
-const location = useLocation()
-console.log(location)
-  // role based redirect
+  const {user} = useSelector(state=>({...state}));
+  const location = useLocation(); //location
+  
+  // role based redirect 
   const roleBasedRedirect = (user) => {
-    if (user.role === "admin") {
-      navigate(WELCOME_AS_ADMIN);
+    const redirect=location.state?.from;
+    if(redirect){
+      navigate(redirect)
+    }else{
+
+      if (user.role === "admin") {
+        navigate(WELCOME_AS_ADMIN);
     } else {
       navigate(WELCOME_AS_USER);
     }
+  }
   };
   
 	// login handler
@@ -93,7 +97,7 @@ console.log(location)
               <div className="grid gap-y-4">
                 {/* Form Group */}
                 <div>
-                  <label for="email" className="block text-sm mb-2 dark:text-white">Email address</label>
+                  <label htmlFor="email" className="block text-sm mb-2 dark:text-white">Email address</label>
                   <div className="relative">
                     <input placeholder="john.doe@gmail.com" type="email" id="email" name="email" className="py-3 px-4 block w-full rounded-md bg-gray-200 text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" required aria-describedby="email-error"/>
                     <div className="hidden absolute inset-y-0 right-0 flex items-center pointer-events-none pr-3">
@@ -109,7 +113,7 @@ console.log(location)
                 {/* Form Group */}
                 <div>
                   <div className="flex justify-between items-center">
-                    <label for="password" className="block text-sm mb-2 dark:text-white">Password</label>
+                    <label htmlFor="password" className="block text-sm mb-2 dark:text-white">Password</label>
                     <Link  to={RESET_PASS}className="text-sm text-blue-600 decoration-2 hover:underline font-medium" href="../examples/html/recover-account.html">Forgot password?</Link>
                   </div>
                   <div className="relative">
@@ -130,7 +134,7 @@ console.log(location)
                     <input id="remember-me" name="remember-me" type="checkbox" className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"/>
                   </div>
                   <div className="ml-3">
-                    <label for="remember-me" className="text-sm dark:text-white">Remember me</label>
+                    <label htmlFor="remember-me" className="text-sm dark:text-white">Remember me</label>
                   </div>
                 </div>
                 {/* End Checkbox */}
