@@ -23,5 +23,5 @@ router.route('/product/:slug')
 router.route('/products/:count')
  .get(productController.getProductByQueryController)
 router.route('/product/star/:id')
-  .put(authMiddleware.authCheck) 
+  .put(authMiddleware.authCheck, productController.productStartRatingController) 
 module.exports=router;
