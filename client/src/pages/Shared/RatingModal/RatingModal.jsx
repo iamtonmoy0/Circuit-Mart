@@ -49,15 +49,6 @@ return
 				starWidthAndHeight="15px"
 				/>
       </div>
-
-      {/* <div className="flex items-center">
-        <button  type="button" className="p-4 w-full inline-flex justify-center items-center gap-2 rounded-bl-xl bg-gray-100 border border-transparent font-semibold text-gray-800 hover:text-blue-600 focus:outline-none focus:ring-2 ring-offset-white focus:ring-gray-100 focus:ring-offset-2 transition-all text-sm dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-cookies">
-          Cancel
-        </button>
-        <button type="button" className="p-4 w-full inline-flex justify-center items-center gap-2 rounded-br-xl border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-cookies">
-         Rate 
-        </button>
-      </div> */}
     </div>
   </div>
 </div>			

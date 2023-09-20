@@ -47,7 +47,7 @@ export const getProductCount=async()=>{
 }
 //  rate star 
 export const  productStarRating =async (id,star,token)=>{
-	return await axios.get(`${import.meta.env.VITE_Base_Url}/products/star/${id}`,{star},{
+	return await axios.put(`${import.meta.env.VITE_Base_Url}/product/star/${id}`,{star},{
 		headers:{
 			token,
 		}

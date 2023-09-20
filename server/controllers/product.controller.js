@@ -117,7 +117,7 @@ exports.productPaginationController=async(req,res,next)=>{
 	}
 }
 // product star rating controller 
-exports.productStartRatingController = async(req,res,next)=>{
+exports.productStarRatingController = async(req,res,next)=>{
 	try {
 		const result = await productStarRatingServices(req.params.id,req.body,req.user)
 

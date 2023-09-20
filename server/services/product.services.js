@@ -45,16 +45,17 @@ exports.productPaginationServices=async(pageNo)=>{
 }
 
 // product star rating services
-exports.productStarRatingServices=async(productId,star,user)=>{
-const product = await productModel.findById({productId})
+exports.productStarRatingServices=async(productId,rating,user)=>{
+
+	const {star}= rating;
+const product = await productModel.findById(productId)
 const userData = await userModel.find({email:user.email})
 // check if current user has rated the product
-const existRating = product.ratings.find(elem=>elem.postBy.toString()=== userData._id.toString())
+const existRating = product.ratings.find(elem=>elem.postBy === userData._id)
 if(existRating === undefined){
 const ratingAdded = await productModel.findByIdAndUpdate(product._id,{
 	$push:{ratings:{star,postedBy:product._id}}
-})
-console.log('new rating added',ratingAdded)
+},{new:true})
 return ratingAdded
 }else{
 	const ratingUpdate = await productModel.updateOne({

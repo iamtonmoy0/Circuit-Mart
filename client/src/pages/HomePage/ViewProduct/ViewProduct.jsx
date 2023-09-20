@@ -1,6 +1,6 @@
 import StarRatings from 'react-star-ratings';
 import { useEffect, useState } from "react";
-import { getProductBySlug } from "../../../functions/productFunctions";
+import { getProductBySlug, productStarRating } from "../../../functions/productFunctions";
 import { useParams } from "react-router-dom";
 import {useSelector} from 'react-redux';
 import toast from "react-hot-toast";
@@ -31,11 +31,20 @@ const ViewProduct = () => {
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 	const [product,setProduct]=useState({})
+	console.log(product)
 	const {slug} = useParams()
 
 useEffect(()=>{
 loadProduct()
 },[])
+
+useEffect(()=>{
+	if(product.ratings && user){
+		const currentUserRating = product.ratings.find(r=>r.postBy === user._id)
+		currentUserRating && setStar(currentUserRating.star)
+	}
+},[product,user])
+
 const loadProduct =()=>{
 	toast.loading('Loading!')
 	getProductBySlug(slug)
@@ -49,10 +58,18 @@ const loadProduct =()=>{
 }
 
 // star rating
-const onStarClick = (newRating,name)=>{
-console.log(newRating,name)
-setStar(newRating)
+const onStarClick = (newRating,id)=>{
+productStarRating(id,newRating,user?.token)
+.then(()=>{
+	toast.success('product rating added')
+	loadProduct()
+	setStar(newRating)
+}).catch(err=>{
+	toast.error(err.message)
+})
+
 }
+
 	return (
 		<div >
 			<div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
