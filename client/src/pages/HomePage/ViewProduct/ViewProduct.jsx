@@ -27,7 +27,7 @@ import RatingModal from '../../Shared/RatingModal/RatingModal';
 
 const ViewProduct = () => {
 	const {user} = useSelector(state=>({...state}))
-
+	const [star,setStar]=useState(0)
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 	const [product,setProduct]=useState({})
@@ -46,6 +46,12 @@ const loadProduct =()=>{
 		toast.dismiss();
 		toast.error(err.message)
 	})
+}
+
+// star rating
+const onStarClick = (newRating,name)=>{
+console.log(newRating,name)
+setStar(newRating)
 }
 	return (
 		<div >
@@ -96,12 +102,12 @@ const loadProduct =()=>{
 				<StarRatings
 				name={product._id}
 				numberOfStars={5}
-				rating={2}
-				// changeRating={(newRating,name)=>{console.log('new', newRating,'id',name)}}
+				rating={star}
 				isSelectable={true}
 				starRatedColor='red'
 				starEmptyColor='gray'
 				starWidthAndHeight="15px"
+				
 				/>
 			<div className="bg-gray-100  py-8">
 				<div className="mx-8 pt-5 py-3">
@@ -164,18 +170,8 @@ const loadProduct =()=>{
 				<div className="flex flex-col items-center">
 				{/* <AiFillStar className="text-2xl text-yellow-500" />
 				<p>{user.email?  'Rate Now ' : "Login To Leave A Rating "}</p> */}
-				<RatingModal>
-				<StarRatings
-				name={product._id}
-				numberOfStars={5}
-				rating={2}
-				changeRating={(newRating,name)=>{console.log('new', newRating,'id',name)}}
-				isSelectable={true}
-				starRatedColor='red'
-				starEmptyColor='gray'
-				starWidthAndHeight="15px"
-				/>
-				</RatingModal>
+				<RatingModal product={product} star={star} onStarClick={onStarClick} />
+			
 				</div>
 					
 					

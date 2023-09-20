@@ -45,3 +45,11 @@ export const getProductBySorting=async(sort,order,page)=>{
 export const getProductCount=async()=>{
 	return await axios.get(`${import.meta.env.VITE_Base_Url}/products/total`)
 }
+//  rate star 
+export const  productStarRating =async (id,star,token)=>{
+	return await axios.get(`${import.meta.env.VITE_Base_Url}/products/star/${id}`,{star},{
+		headers:{
+			token,
+		}
+	})
+}

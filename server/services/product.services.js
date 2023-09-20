@@ -1,5 +1,6 @@
 const productModel = require('../models/product.model');
-const slugify = require('slugify')
+const userModel = require('../models/user.model');
+const slugify = require('slugify');
 // create product
 exports.createProductServices = async (data) => {
 	data.slug = slugify(data.title);
@@ -42,7 +43,26 @@ exports.productPaginationServices=async(pageNo)=>{
 	let total = await productModel.find({}).estimatedDocumentCount();
 	return total
 }
+
 // product star rating services
-exports.productStarRatingServices=async()=>{
-	
+exports.productStarRatingServices=async(productId,star,user)=>{
+const product = await productModel.findById({productId})
+const userData = await userModel.find({email:user.email})
+// check if current user has rated the product
+const existRating = product.ratings.find(elem=>elem.postBy.toString()=== userData._id.toString())
+if(existRating === undefined){
+const ratingAdded = await productModel.findByIdAndUpdate(product._id,{
+	$push:{ratings:{star,postedBy:product._id}}
+})
+console.log('new rating added',ratingAdded)
+return ratingAdded
+}else{
+	const ratingUpdate = await productModel.updateOne({
+		ratings:{$elemMatch:existRating}
+	},
+	{ $set: { "ratings.$.star": star } },
+	{ new: true }
+	)
+	return ratingUpdate
+}
 }

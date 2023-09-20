@@ -119,7 +119,12 @@ exports.productPaginationController=async(req,res,next)=>{
 // product star rating controller 
 exports.productStartRatingController = async(req,res,next)=>{
 	try {
-		const result = await productStarRatingServices() 
+		const result = await productStarRatingServices(req.params.id,req.body,req.user)
+
+		res.status(200).json({
+			status:"success",
+			data:result
+		}) 
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',

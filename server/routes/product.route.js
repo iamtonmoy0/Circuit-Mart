@@ -22,6 +22,6 @@ router.route('/product/:slug')
  .patch(authMiddleware.authCheck,authMiddleware.adminCheck,productController.updateProductController)
 router.route('/products/:count')
  .get(productController.getProductByQueryController)
-router.route('/product/star/id')
+router.route('/product/star/:id')
   .put(authMiddleware.authCheck) 
 module.exports=router;
