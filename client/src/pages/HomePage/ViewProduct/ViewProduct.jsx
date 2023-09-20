@@ -24,6 +24,7 @@ import { MdFavorite } from "react-icons/md";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import RatingModal from '../../Shared/RatingModal/RatingModal';
+import Reviews from '../../Shared/Reviews/Reviews';
 
 const ViewProduct = () => {
 	const {user} = useSelector(state=>({...state}))
@@ -214,7 +215,7 @@ productStarRating(id,newRating,user?.token)
 	</h2>
     </TabPanel>
     <TabPanel>
-      <h2>This will be the comment section</h2>
+		<Reviews product={product} />
     </TabPanel>
   </Tabs>
 		</div>
