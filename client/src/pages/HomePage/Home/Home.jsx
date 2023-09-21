@@ -4,6 +4,7 @@ import NewArrivals from "../NewArrivals/NewArrivals";
 import BestSellers from "../BestSellers/BestSellers";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import CategoryList from "../../../components/Category/CategoryList";
 
 const Home = () => {
 	const location = useLocation();
@@ -16,6 +17,7 @@ const Home = () => {
 			<Helmet>
 				<title>Circuit-Mart| Home</title>
 			</Helmet>
+			<CategoryList/>
 			<Banner/>
 			{/* new product */}
 			<NewArrivals/>
