@@ -26,6 +26,10 @@ app.use(cors()) //cross origin policy
 // route middlewares
 readdirSync('./routes').map(fileName=>app.use('/api/v1',require('./routes/'+fileName)));
 
+app.get('/',(re,res)=>{
+	res.send('server is running!')
+})
+
 app.all('*',(req,res)=>{
 	res.send('invalid route!')
 })
