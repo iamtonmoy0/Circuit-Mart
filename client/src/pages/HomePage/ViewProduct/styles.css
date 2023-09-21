@@ -1,6 +1,6 @@
+/* Default styles for larger screens */
 
-
-  .swiper {
+.swiper {
 	width: 100%;
 	height: 100%;
   }
@@ -9,8 +9,6 @@
 	text-align: center;
 	font-size: 18px;
 	background: #fff;
-  
-	/* Center slide text vertically */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -21,18 +19,6 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-  }
-
-  .swiper {
-	width: 100%;
-	height: 200px;
-	margin-left: auto;
-	margin-right: auto;
-  }
-  
-  .swiper-slide {
-	background-size: cover;
-	background-position: center;
   }
   
   .mySwiper2 {
@@ -56,9 +42,44 @@
 	opacity: 1;
   }
   
-  .swiper-slide img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+  /* Responsive styles for tablets */
+  
+  @media (max-width: 768px) {
+	.swiper {
+	  height: 300px; /* Adjust the height for tablets */
+	}
+	
+	.mySwiper2 {
+	  height: 50%; /* Adjust the height for tablets */
+	}
+	
+	.mySwiper {
+	  height: 10%; /* Adjust the height for tablets */
+	}
+	
+	.mySwiper .swiper-slide {
+	  width: 33.33%; /* Adjust the width for tablets */
+	}
   }
+  
+  /* Responsive styles for mobile devices */
+  
+  @media (max-width: 480px) {
+	.swiper {
+	  height: 200px; /* Adjust the height for mobile devices */
+	}
+	
+	.mySwiper2 {
+	  height: 40%; /* Adjust the height for mobile devices */
+	}
+	
+	.mySwiper {
+	  height: 8%; /* Adjust the height for mobile devices */
+	  padding: 5px 0; /* Adjust padding for mobile devices */
+	}
+	
+	.mySwiper .swiper-slide {
+	  width: 50%; /* Adjust the width for mobile devices */
+	}
+  }
+  

@@ -25,6 +25,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import RatingModal from '../../Shared/RatingModal/RatingModal';
 import Reviews from '../../Shared/Reviews/Reviews';
+import StarRating from '../../Shared/StarRating/StarRating';
 
 const ViewProduct = () => {
 	const {user} = useSelector(state=>({...state}))
@@ -32,7 +33,7 @@ const ViewProduct = () => {
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 	const [product,setProduct]=useState({})
-	console.log(product)
+	// !console.log(product)
 	const {slug} = useParams()
 
 useEffect(()=>{
@@ -72,8 +73,8 @@ productStarRating(id,newRating,user?.token)
 }
 
 	return (
-		<div >
-			<div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-0 h-[700px]">
+		<div className='flex flex-col' >
+			<div className="grid lg:grid-cols-2 md:grid-cols-2  gap-0 h-[700px]">
 				{/* slide */}
 				<div >
 				<Swiper
@@ -85,7 +86,7 @@ productStarRating(id,newRating,user?.token)
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2 h-[200px] "
+        className="mySwiper2 "
       >
 {
 	product.images && product.images.map(img=> <SwiperSlide key={img}>
@@ -116,17 +117,9 @@ productStarRating(id,newRating,user?.token)
 				{/* product data */}
 				<div >
 				<p className="text-3xl rounded font-semibold bg-blue-400 text-center py-6">{product.title}</p>
-				{/* ratings of product */}
-				<StarRatings
-				name={product._id}
-				numberOfStars={5}
-				rating={star}
-				isSelectable={true}
-				starRatedColor='red'
-				starEmptyColor='gray'
-				starWidthAndHeight="15px"
-				
-				/>
+				{/* ratings */}
+				{product && product.ratings && product.ratings.length > 0 ? <StarRating product={product} /> : "No ratings yet"}
+			
 			<div className="bg-gray-100  py-8">
 				<div className="mx-8 pt-5 py-3">
 					<div className=" flex justify-between">
@@ -202,7 +195,7 @@ productStarRating(id,newRating,user?.token)
 				</div>
 			</div>
 			{/* react tab */}
-			<div className="mb-20">
+			<div className="pt-5">
 		<Tabs>
     <TabList>
       <Tab>Description</Tab>
