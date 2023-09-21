@@ -35,10 +35,8 @@ const Reviews = ({product}) => {
 			}).catch(err=>{
 				toast.error(err.message)
 			})
-			
-
-
-		}	 
+		}
+			 
 	return (
 		<div className=" grid lg:grid-cols-2 sm:grid-cols-1 gap-1">
 			<div>

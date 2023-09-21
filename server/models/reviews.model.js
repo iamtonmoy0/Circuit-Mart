@@ -12,7 +12,8 @@ const reviewsSchema = new schema({
 	productId:{
 		type:ObjectId,
 		ref:'Product',
-		required:true
+		required:true,
+		index:true
 	},
 	message:{
 		type : String ,
