@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import * as routePath from '../../../routes/routePath';
-import { useState } from "react";
-import { createReview } from "../../../functions/reviewFunctions";
+import { useEffect, useState } from "react";
+import { createReview, getReview } from "../../../functions/reviewFunctions";
 import toast from "react-hot-toast";
+import { formatDistanceToNow } from 'date-fns';
 
 
 const Reviews = ({product}) => {
@@ -13,6 +14,17 @@ const Reviews = ({product}) => {
 	const {slug}=useParams();
 
 
+useEffect(()=>{
+	loadReview()
+},[])
+
+const loadReview=()=>{
+	getReview(product._id)
+	.then(res=>{
+		setReview(res.data.data)
+	})
+}
+console.log(review)
 
 //handle modal
 	const handleModal= ()=>{
@@ -31,16 +43,33 @@ const Reviews = ({product}) => {
 			const data = {userId:user?._id,productId:product?._id,message}
 			createReview(data,user?.token)
 			.then(res=>{
+				loadReview()
 				console.log(res)
 			}).catch(err=>{
 				toast.error(err.message)
 			})
 		}
-			 
+
 	return (
 		<div className=" grid lg:grid-cols-2 sm:grid-cols-1 gap-1">
-			<div>
-				this is comments by latest
+			<div className='h-[35rem] overflow-y-scroll'>
+			{review && review.map(r => (
+  <div key={r._id} className="border border-gray-300 rounded-lg p-4 mb-4">
+    <div className="flex items-center mb-2">
+      {r.userId && (
+        <img
+          src={r.userId.picture} // Replace with the actual user's profile image URL
+          alt={`${r.userId.name}'s Profile`}
+          className="w-8 h-8 rounded-full mr-2"
+        />
+      )}
+      <span className="text-lg font-semibold">{r.userId && r.userId.name}</span>
+    </div>
+    <p className="text-gray-600">{r.message}</p>
+    <p className="text-sm text-gray-400 mt-2">{formatDistanceToNow(new Date(r.createdAt))} ago</p>
+  </div>
+))}
+
 			</div>
 
 			<div>

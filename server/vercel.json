@@ -1,0 +1,19 @@
+{
+	"version": 2,
+	"builds": [
+	  {
+		"src": "server.js", // Replace with your server entry file
+		"use": "@vercel/node"
+	  }
+	],
+	"routes": [
+	  {
+		"src": "/api/(.*)", // Adjust this route pattern as needed
+		"dest": "server.js" // Replace with your server entry file
+	  }
+	],
+	"env": {
+	  "YOUR_ENV_VARIABLE": "your-value" // Add any environment variables your server needs
+	}
+  }
+  
