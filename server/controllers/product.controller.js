@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices, productStarRatingServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices, productStarRatingServices, getProductsByCategoryIdServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -129,6 +129,22 @@ exports.productStarRatingController = async(req,res,next)=>{
 		res.status(400).json({
 			status:'fail',
 			message:"Failed to rate the product",
+			err:error.message
+		})	
+	}
+}
+// get product by category id controller 
+exports.getProductsByCategoryIdController=async(req,res,next)=>{
+	try {
+		const result = await getProductsByCategoryIdServices(req.params.categoryId)
+		res.status(200).json({
+			status:'success',
+			data:result
+		})
+	} catch (error) {
+		res.status(400).json({
+			status:'fail',
+			message:"Failed to get the products",
 			err:error.message
 		})	
 	}

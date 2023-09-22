@@ -53,3 +53,7 @@ export const  productStarRating =async (id,star,token)=>{
 		}
 	})
 }
+// get product by category id
+export const getProductByCategoryId=async(id)=>{
+return await axios.get(`${import.meta.env.VITE_Base_Url}/category/product/${id}`)
+}

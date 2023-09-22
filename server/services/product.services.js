@@ -67,3 +67,7 @@ return ratingAdded
 	return ratingUpdate
 }
 }
+// get the products by category id services
+exports.getProductsByCategoryIdServices=async(id)=>{
+	return await productModel.find({category:id})
+}

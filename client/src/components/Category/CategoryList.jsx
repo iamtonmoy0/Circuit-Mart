@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../../functions/categoryFunctions";
-
+import { Link } from "react-router-dom";
+import * as routePath from '../../routes/routePath'
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,14 +28,14 @@ const CategoryList = () => {
           {categories && categories.length > 0 && (
             <>
               {categories.map((cat, index) => (
-                <p
+                <Link to={`${routePath.VIEW_BY_CATEGORY}/${cat.slug}`}
                   key={cat._id}
                   className={`${
                     isMenuOpen ? "mb-1" : index !== 0 ? "ml-2" : ""
                   } hover:bg-green-300 py-1 rounded`}
                 >
                   {cat.name}
-                </p>
+                </Link>
               ))}
               {/* Show the "Show More" button inline with categories on mobile and tablet */}
               {categories.length > 15 && (
