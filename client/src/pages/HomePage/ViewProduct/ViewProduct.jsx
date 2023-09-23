@@ -1,7 +1,7 @@
 import StarRatings from 'react-star-ratings';
 import { useEffect, useState } from "react";
 import { getProductBySlug, productStarRating } from "../../../functions/productFunctions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {useSelector} from 'react-redux';
 import toast from "react-hot-toast";
 // Import Swiper React components
@@ -26,7 +26,7 @@ import 'react-tabs/style/react-tabs.css';
 import RatingModal from '../../Shared/RatingModal/RatingModal';
 import Reviews from '../../Shared/Reviews/Reviews';
 import StarRating from '../../Shared/StarRating/StarRating';
-
+import * as routePath from  '../../../routes/routePath'
 const ViewProduct = () => {
 	const {user} = useSelector(state=>({...state}))
 	const [star,setStar]=useState(0)
@@ -129,7 +129,7 @@ productStarRating(id,newRating,user?.token)
 					</div>
 					<div className="  pt-2 flex justify-between ">
 						<p>Category </p>
-						<p className="text-blue-500">{product.category ? product.category.name : 'Unknown Category'}</p>
+						<Link to={`${routePath.VIEW_BY_CATEGORY}/${product.category && product.category.slug }`}  className="text-blue-500">{product.category ? product.category.name : 'Unknown Category'}</Link>
 
 					</div>
 					<div className=" pt-2 flex justify-between">
@@ -212,6 +212,7 @@ productStarRating(id,newRating,user?.token)
     </TabPanel>
   </Tabs>
 		</div>
+		
 		</div>
 	);
 }
