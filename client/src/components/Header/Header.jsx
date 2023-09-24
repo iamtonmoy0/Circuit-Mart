@@ -7,6 +7,9 @@ import toast from 'react-hot-toast';
 import {FiLogOut} from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux';
 import img  from '../../assets/logo.png'
+import Search from '../Search/Search';
+import { AiTwotoneShopping } from 'react-icons/ai';
+import { BsFillCartCheckFill } from 'react-icons/bs';
 const Header = () => {
 
   const {logout}= useContext(AuthContext);
@@ -42,8 +45,17 @@ const Header = () => {
     </div>
     <div id="navbar-collapse-with-animation" className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
       <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7">
+        <Link  className=" mr-28 font-medium flex items-center text-blue-600 sm:py-6 dark:text-blue-500" href="#" aria-current="page">
+			<Search/>
+		</Link>
         <Link to={routePath.ROOT} className="font-medium flex items-center text-blue-600 sm:py-6 dark:text-blue-500" href="#" aria-current="page">
 			<BiGridAlt/> Home
+		</Link>
+        <Link to={routePath.SHOP} className="font-medium text-md flex items-center text-green-600 sm:py-6 dark:text-blue-500" href="#" aria-current="page">
+			<AiTwotoneShopping/> Shop
+		</Link>
+        <Link to={routePath.SHOP} className="font-medium flex items-center text-[tomato] sm:py-6 dark:text-blue-500" href="#" aria-current="page">
+			<BsFillCartCheckFill/>  Cart
 		</Link>
         {/* <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">UserName</a> */}
         {/* <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">Work</a> */}
