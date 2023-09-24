@@ -1,4 +1,4 @@
-const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices, productStarRatingServices, getProductsByCategoryIdServices } = require("../services/product.services")
+const { createProductServices, getProductByQueryServices, deleteProductByIdServices, getProductBySlugServices, updateProductServices, getProductBySortServices, productPaginationServices, productStarRatingServices, getProductsByCategoryIdServices, searchFiltersServices } = require("../services/product.services")
 
 // create Product
 exports.createProductController=async(req,res,next)=>{
@@ -141,6 +141,26 @@ exports.getProductsByCategoryIdController=async(req,res,next)=>{
 			status:'success',
 			data:result
 		})
+	} catch (error) {
+		res.status(400).json({
+			status:'fail',
+			message:"Failed to get the products",
+			err:error.message
+		})	
+	}
+}
+// search filters
+exports.handleQuery=async(req,res,query)=>{
+const product = await searchFiltersServices(query);
+}
+exports.searchFiltersController=async(req,res,next)=>{
+	try {
+		const {query} = req.body;
+		if(query){
+			console.log('query',query)
+			await  this.handleQuery(req,res,query)
+		}
+		
 	} catch (error) {
 		res.status(400).json({
 			status:'fail',

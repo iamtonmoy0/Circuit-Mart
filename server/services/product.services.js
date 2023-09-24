@@ -71,3 +71,7 @@ return ratingAdded
 exports.getProductsByCategoryIdServices=async(id)=>{
 	return await productModel.find({category:id})
 }
+// search filters product 
+exports.searchFiltersServices=async(query)=>{
+	return await productModel.find({$text:{$search:query}});
+}
