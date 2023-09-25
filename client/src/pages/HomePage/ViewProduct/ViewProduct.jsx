@@ -1,4 +1,4 @@
-import StarRatings from 'react-star-ratings';
+
 import { useEffect, useState } from "react";
 import { getProductBySlug, productStarRating } from "../../../functions/productFunctions";
 import { Link, useParams } from "react-router-dom";
