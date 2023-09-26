@@ -25,17 +25,30 @@ getAllProducts(9)
 	toast.error(err.message)
 })
 }
+
 useEffect(()=>{
-	getProductByFilter(text)
-	.then(res=>{
-		setProduct(res.data.data)
-	})
+loadSearchProduct({query:text})
+
 },[text])
+
+const loadSearchProduct=(args)=>{
+    toast.loading('loading')
+	getProductByFilter(args)
+	.then(res=>{
+		toast.dismiss()
+		setProduct(res.data.data)
+		toast.success(`Total ${res.data.data.length} product available!`)
+
+	}).catch(err=>{
+		toast.dismiss()
+		toast.error(err.message)
+	})
+}
 
 
 	return (
 		<div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
-			{ product && product.length >0 && product.map(p=> <ProductCard  key={product._id} product={p} />
+			{ product && product.length >0 && product.map(p=> <ProductCard  key={p._id} product={p} />
 			)}
 		</div>
 	);

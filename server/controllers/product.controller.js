@@ -150,7 +150,7 @@ exports.getProductsByCategoryIdController=async(req,res,next)=>{
 	}
 }
 // search filters
-exports.handleQuery=async(req,res,query)=>{
+const handleQuery=async(req,res,query)=>{
 const product = await searchFiltersServices(query);
 res.status(200).json({
 	status:"success",
@@ -160,9 +160,9 @@ res.status(200).json({
 exports.searchFiltersController=async(req,res,next)=>{
 	try {
 		const {query} = req.body;
+		console.log('query',query)
 		if(query){
-			console.log('query',query)
-			await  this.handleQuery(req,res,query)
+			await  handleQuery(req,res,query)
 		}
 		
 	} catch (error) {
