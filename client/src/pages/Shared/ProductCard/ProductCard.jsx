@@ -5,7 +5,7 @@ import * as routePath from '../../../routes/routePath';
 import StarRating from "../StarRating/StarRating";
 
 const ProductCard = (product) => {
-	console.log(product)
+	// console.log(product)
 	const{title,price,images,description,slug,ratings} = product.product
 	return (
 		
