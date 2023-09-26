@@ -11,8 +11,10 @@ const ShopHome = () => {
 	const [product,setProduct] = useState([]);
 
 	useEffect(()=>{
-		loadProduct()
-	},[])
+		if(text === ''){
+			loadProduct()
+		}
+	},[text])
 	// default product load
 const loadProduct=()=>{
 toast.loading('loading')
@@ -31,9 +33,9 @@ loadSearchProduct({query:text})
 
 },[text])
 
-const loadSearchProduct=(args)=>{
+const loadSearchProduct=(arg)=>{
     toast.loading('loading')
-	getProductByFilter(args)
+	getProductByFilter(arg)
 	.then(res=>{
 		toast.dismiss()
 		setProduct(res.data.data)

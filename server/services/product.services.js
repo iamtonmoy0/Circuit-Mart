@@ -72,6 +72,9 @@ exports.getProductsByCategoryIdServices=async(id)=>{
 	return await productModel.find({category:id})
 }
 // search filters product 
-exports.searchFiltersServices=async(query)=>{
+exports.searchFiltersServices=async(data)=>{
+	const {query,price,} = data;
+	if(query){
 	return await productModel.find({$text:{$search:query}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
+	}
 }
