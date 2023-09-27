@@ -60,5 +60,5 @@ return await axios.get(`${import.meta.env.VITE_Base_Url}/category/product/${id}`
 
 // get product by search filters
 export const getProductByFilter=async(args)=>{
-	return await axios.post(`${import.meta.env.VITE_DEV_Url}/search/filters`,args)
+	return await axios.post(`${import.meta.env.VITE_Base_Url}/search/filters`,args)
 }

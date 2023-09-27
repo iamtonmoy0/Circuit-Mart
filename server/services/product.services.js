@@ -77,4 +77,11 @@ exports.searchFiltersServices=async(data)=>{
 	if(query){
 	return await productModel.find({$text:{$search:query}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
 	}
+	if(price !== undefined){
+		console.log('price',price)
+		return await productModel.find({price:{
+			$gte:price[0],
+			$lte:price[1]
+		}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
+	}
 }
