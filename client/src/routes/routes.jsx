@@ -26,7 +26,6 @@ import UpdateProduct from "../pages/Admin/UpdateProduct/UpdateProduct";
 import ViewProduct from "../pages/HomePage/ViewProduct/ViewProduct";
 import CategoryHome from "../pages/Category/CategoryHome/CategoryHome";
 import ShopPage from "../pages/Shop/ShopPage/ShopPage";
-import ShopHome from "../pages/Shop/ShopHome/ShopHome";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -62,6 +61,10 @@ const route = createBrowserRouter([
 			{
 				path:`${routePath.VIEW_BY_CATEGORY}/:slug`,
 				element:<CategoryHome/>
+			},
+			{
+				path:routePath.SHOP,
+				element:<ShopPage/>
 			},
 			
 
@@ -122,16 +125,7 @@ const route = createBrowserRouter([
 				element:<UpdateProduct/>
 			},
 		]
-	},
-	{
-		path:routePath.SHOP,
-		element:<ShopPage/>,
-		children:[
-			{
-				path:routePath.SHOP,
-				element:<ShopHome/>
-			},
-		]
-	},
+	}
+	
 ])
 export default route;

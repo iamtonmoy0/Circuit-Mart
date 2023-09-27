@@ -9,43 +9,46 @@ const ShopHome = () => {
 	const {search} = useSelector(state=>({...state}));
 	const {text} = search;
 	const [product,setProduct] = useState([]);
-
+	// const [ok,setOk] = useState();
+	// load product
 	useEffect(()=>{
-		if(text === ''){
-			loadProduct()
+		if (text && text.length > 0) {
+			// If search text is present, load search products
+			setTimeout(()=>{
+				loadSearchProduct({ query: text })		
+			},2000)
+		} else {
+			// If search text is empty, load all products
+			loadProduct();
 		}
 	},[text])
+	
 	// default product load
 const loadProduct=()=>{
-toast.loading('loading')
 getAllProducts(9)
 .then(res=>{
-	toast.dismiss()
 	setProduct(res.data.data)
 }).catch(err=>{
-	toast.dismiss();
 	toast.error(err.message)
 })
 }
 
-useEffect(()=>{
-loadSearchProduct({query:text})
-
-},[text])
-
+// SEARCH PRODUCT LOAD FUNCTION
 const loadSearchProduct=(arg)=>{
-    toast.loading('loading')
 	getProductByFilter(arg)
 	.then(res=>{
-		toast.dismiss()
 		setProduct(res.data.data)
-		toast.success(`Total ${res.data.data.length} product available!`)
-
+		if(res.data.data.length>0){
+		toast.success(`Total ${res.data.data.length} product found!`,{duration:1000,})
+		}
 	}).catch(err=>{
-		toast.dismiss()
 		toast.error(err.message)
 	})
 }
+// Load product based on price range
+// useEffect(()=>{
+
+// },[ok])
 
 
 	return (
