@@ -8,14 +8,16 @@ const Search = () => {
 	const navigate = useNavigate();
 	// handle change 
 	const handleChange=(e)=>{
-		dispatch({
+		setTimeout(()=>{
+			dispatch({
 			type:"SEARCH_QUERY",
 			payload:{text:e.target.value},
 		})
-
 		
-
+		},3000)
+	
 	}
+
 	// handle submit
 	const handleSubmit=(e)=>{
 		e.preventDefault();
@@ -34,7 +36,6 @@ const Search = () => {
             </div>
             <input onChange={handleChange} type="text" id="icon" name="icon" className="py-2 px-4 outline-none pl-11 pr-20 block w-92 md:w-96 bg-gray-100  border-2 border-b-blue-400 hover:border-b-green-300 shadow-sm rounded-md text-sm text-gray-900 focus:z-10 placeholder:text-gray-500" placeholder="Search"/>
             <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none z-20 pr-4">
-              {/* <span className="text-gray-500">Ctrl + /</span> */}
             </div>
           </div>
         </div>

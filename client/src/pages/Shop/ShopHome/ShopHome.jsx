@@ -5,11 +5,10 @@ import ProductCard from "../../Shared/ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 
 
-const ShopHome = () => {
+const ShopHome = ({price,ok}) => {
 	const {search} = useSelector(state=>({...state}));
 	const {text} = search;
 	const [product,setProduct] = useState([]);
-	// const [ok,setOk] = useState();
 	// load product
 	useEffect(()=>{
 		if (text && text.length > 0) {
@@ -17,45 +16,49 @@ const ShopHome = () => {
 			setTimeout(()=>{
 				loadSearchProduct({ query: text })		
 			},2000)
-		} else {
+		} else if(price[1] !== 0 && ok  && text.length==0) {
 			// If search text is empty, load all products
-			loadProduct();
+			loadSearchProduct({price })		
+		}else{
+		loadProduct();
 		}
-	},[text])
+	},[text,price,ok])
 	
-	// default product load
-const loadProduct=()=>{
-getAllProducts(9)
-.then(res=>{
-	setProduct(res.data.data)
-}).catch(err=>{
-	toast.error(err.message)
-})
-}
+console.log(price[1])
 
 // SEARCH PRODUCT LOAD FUNCTION
 const loadSearchProduct=(arg)=>{
 	getProductByFilter(arg)
 	.then(res=>{
 		setProduct(res.data.data)
-		if(res.data.data.length>0){
-		toast.success(`Total ${res.data.data.length} product found!`,{duration:1000,})
-		}
+		// if(res.data.data.length>0){
+		// toast.success(`Total ${res.data.data.length} product found!`,{duration:1000,})
+		// }
 	}).catch(err=>{
 		toast.error(err.message)
 	})
 }
-// Load product based on price range
-// useEffect(()=>{
 
-// },[ok])
+	// default product load
+	const loadProduct=()=>{
+		getAllProducts(9)
+		.then(res=>{
+			setProduct(res.data.data)
+		}).catch(err=>{
+			toast.error(err.message)
+		})
+		}
 
 
 	return (
-		<div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
+		<>
+		<p className="text-3xl text-center   text-[tomato] font-semibold " >Total {product && product.length} Found!</p>
+		<hr />
+		<div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1 pt-4">
 			{ product && product.length >0 && product.map(p=> <ProductCard  key={p._id} product={p} />
 			)}
 		</div>
+			</>
 	);
 }
 

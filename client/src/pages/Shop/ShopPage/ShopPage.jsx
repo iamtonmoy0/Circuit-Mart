@@ -7,9 +7,23 @@ import { Slider } from 'antd';
 import {RiPriceTag3Line} from 'react-icons/ri';
 import ShopHome from '../ShopHome/ShopHome';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const ShopPage = () => {
 const [price,setPrice]=useState([0,0]);
+const dispatch=useDispatch();
+const [ok,setOk] = useState(false);
+
+const handlePrice=(value)=>{
+  dispatch({
+    type:"SEARCH_QUERY",
+    payload:{text:""},
+  })
+  setPrice(value)
+  setTimeout(()=>{
+  setOk(true)
+},3000)
+}
 	console.log(price)
 	return (
 		<>
@@ -53,7 +67,7 @@ const [price,setPrice]=useState([0,0]);
           
           <p className='text-gray-600 text-sm flex gap-x-3.5'><RiPriceTag3Line className='text-red-900' /> Price</p>
 
-      <Slider range tipFormatter={v=>` $${v}`} value={price} onChange={value=>setPrice(value)} defaultValue={[20, 50]} max="5999"  />
+      <Slider range tipFormatter={v=>` $${v}`} value={price} onChange={value=>handlePrice(value)} defaultValue={[0, 0]} max="5999"  />
         </li>
 
         
@@ -65,7 +79,7 @@ const [price,setPrice]=useState([0,0]);
   {/* Content */}
   <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
     {/* Page Heading */}
-    <ShopHome price={price} />
+    <ShopHome price={price} setPrice={setPrice} ok={ok} />
     {/* End Page Heading */}
   </div>
   {/* End Content */}
