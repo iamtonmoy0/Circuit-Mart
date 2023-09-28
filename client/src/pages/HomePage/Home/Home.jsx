@@ -5,6 +5,8 @@ import BestSellers from "../BestSellers/BestSellers";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import CategoryList from "../../../components/Category/CategoryList";
+import Slider from "../Slider/Slider";
+
 
 const Home = () => {
 	const location = useLocation();
@@ -18,6 +20,7 @@ const Home = () => {
 				<title>Circuit-Mart| Home</title>
 			</Helmet>
 			<CategoryList/>
+			<Slider/>
 			<Banner/>
 			{/* new product */}
 			<NewArrivals/>
