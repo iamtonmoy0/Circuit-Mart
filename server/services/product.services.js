@@ -73,7 +73,7 @@ exports.getProductsByCategoryIdServices=async(id)=>{
 }
 // search filters product 
 exports.searchFiltersServices=async(data)=>{
-	const {query,price,} = data;
+	const {query,price,category} = data;
 	if(query){
 	return await productModel.find({$text:{$search:query}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
 	}
@@ -83,5 +83,8 @@ exports.searchFiltersServices=async(data)=>{
 			$gte:price[0],
 			$lte:price[1]
 		}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
+	}
+	if(category){
+		return await productModel.find({category})
 	}
 }

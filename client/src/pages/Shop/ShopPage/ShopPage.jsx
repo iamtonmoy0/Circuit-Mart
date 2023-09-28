@@ -3,16 +3,34 @@ import { Helmet } from 'react-helmet-async';
 import { Link} from 'react-router-dom';
 import img from '../../../assets/logo.png'
 import * as routePath from '../../../routes/routePath';
-import { Slider } from 'antd';
+import { Checkbox, Menu, Slider } from 'antd';
 import {RiPriceTag3Line} from 'react-icons/ri';
 import ShopHome from '../ShopHome/ShopHome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { getCategories } from '../../../functions/categoryFunctions';
+import SubMenu from 'antd/es/menu/SubMenu';
+import { AiFillDownSquare } from 'react-icons/ai';
+import { getProductByFilter } from '../../../functions/productFunctions';
 
 const ShopPage = () => {
-const [price,setPrice]=useState([0,0]);
-const dispatch=useDispatch();
+  const dispatch = useDispatch();
+const [price,setPrice] = useState([0,0]);
 const [ok,setOk] = useState(false);
+const [product,setProduct] = useState([]);
+const [category,setCategory] = useState([]);
+const [catId,setCatId] = useState([]);
+
+useEffect(()=>{
+loadCategory()
+},[])
+// loadCategory
+const loadCategory=()=>{
+getCategories()
+.then(res=>{
+  setCategory(res.data.data)
+})
+}
 
 const handlePrice=(value)=>{
   dispatch({
@@ -24,7 +42,33 @@ const handlePrice=(value)=>{
   setOk(true)
 },3000)
 }
-	console.log(price)
+
+// handle checkbox
+const handleCheckbox=(e)=>{
+  dispatch({
+    type:"SEARCH_QUERY",
+    payload:{text:""},
+  })//making the search bar empty
+ setPrice([0,0]) //setting price 0 0 for querying with category
+
+const idAvailableInState = [...catId];
+const justChecked = e.target.value;
+const foundInState = idAvailableInState.indexOf(justChecked);
+if(foundInState === -1){
+  // if the just checked id is not exist on the state
+  idAvailableInState.push(justChecked)
+}else{
+  // if justChecked id exist on the state
+  idAvailableInState.splice(foundInState , 1 )
+}
+
+setCatId(idAvailableInState)
+getProductByFilter({category:idAvailableInState})
+.then(res=>{
+  setProduct(res.data.data)
+})
+}
+
 	return (
 		<>
 			<Helmet>
@@ -69,6 +113,26 @@ const handlePrice=(value)=>{
 
       <Slider range tipFormatter={v=>` $${v}`} value={price} onChange={value=>handlePrice(value)} defaultValue={[0, 0]} max="5999"  />
         </li>
+        <Menu mode='inline' defaultOpenKeys={['1','2']}>
+          <SubMenu key={'1'}
+          title={
+            <span className='h-6 text-sm text-gray-600 flex'>
+              <AiFillDownSquare className='text-green-600 text-xl' /> Categories
+            </span>
+          }
+          >
+            <div>
+              {category && category.map(cat=>
+                <div key={cat._id}>
+                  <Checkbox className='' onChange={handleCheckbox} value={cat._id} name='category' checked={catId.includes(cat._id)}>
+                  {cat.name}
+                  </Checkbox>
+                </div>
+                )}
+            </div>
+
+          </SubMenu>
+        </Menu>
 
         
       </ul>
@@ -79,7 +143,7 @@ const handlePrice=(value)=>{
   {/* Content */}
   <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
     {/* Page Heading */}
-    <ShopHome price={price} setPrice={setPrice} ok={ok} />
+    <ShopHome price={price} setPrice={setPrice} ok={ok} product={product} setProduct={setProduct}/>
     {/* End Page Heading */}
   </div>
   {/* End Content */}

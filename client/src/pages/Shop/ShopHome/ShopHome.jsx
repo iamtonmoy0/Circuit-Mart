@@ -5,10 +5,9 @@ import ProductCard from "../../Shared/ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 
 
-const ShopHome = ({price,ok}) => {
+const ShopHome = ({price,ok,product,setProduct}) => {
 	const {search} = useSelector(state=>({...state}));
 	const {text} = search;
-	const [product,setProduct] = useState([]);
 	// load product
 	useEffect(()=>{
 		if (text && text.length > 0) {
@@ -24,8 +23,6 @@ const ShopHome = ({price,ok}) => {
 		}
 	},[text,price,ok])
 	
-console.log(price[1])
-
 // SEARCH PRODUCT LOAD FUNCTION
 const loadSearchProduct=(arg)=>{
 	getProductByFilter(arg)
