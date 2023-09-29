@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { getAllProducts, getProductByFilter } from "../../../functions/productFunctions";
 import ProductCard from "../../Shared/ProductCard/ProductCard";

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link} from 'react-router-dom';
 import img from '../../../assets/logo.png'
 import * as routePath from '../../../routes/routePath';
-import { Checkbox, Menu, Radio, Slider } from 'antd';
+import { Checkbox, Menu, Slider } from 'antd';
 import {RiPriceTag3Line} from 'react-icons/ri';
 import ShopHome from '../ShopHome/ShopHome';
 import { useEffect, useState } from 'react';
@@ -19,7 +19,7 @@ import toast from 'react-hot-toast';
 const brands = ["Apple","Samsung","Lenovo","Asus","Dell"," Razer","Acer","Sony","Microsoft","HP"];
 
 const ShopPage = () => {
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 const [price,setPrice] = useState([0,0]);
 const [ok,setOk] = useState(false);
 const [product,setProduct] = useState([]);
