@@ -49,7 +49,7 @@ const loadSearchProduct=(arg)=>{
 
 	return (
 		<>
-		<p className="text-3xl text-center   text-[tomato] font-semibold " >Total {product && product.length} Found!</p>
+		<p className="text-3xl text-center   text-[tomato] font-semibold " > {product && product.length >0 ? `Total ${product.length} Found!` : 'No Product Found'} </p>
 		<hr />
 		<div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1 pt-4">
 			{ product && product.length >0 && product.map(p=> <ProductCard  key={p._id} product={p} />

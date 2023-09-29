@@ -59,7 +59,7 @@ const productSchema = new schema({
 	},
 	brand:{
 		type:String,
-		enum:["Apple","Samsung","Lenovo","Asus","Dell"," Razer","Acer","Sony","Microsoft"]
+		enum:["Apple","Samsung","Lenovo","Asus","Dell"," Razer","Acer","Sony","Microsoft","HP"]
 	},
 	ratings:[
 		{

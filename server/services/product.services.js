@@ -73,7 +73,7 @@ exports.getProductsByCategoryIdServices=async(id)=>{
 }
 // search filters product 
 exports.searchFiltersServices=async(data)=>{
-	const { query, price, category, stars,sub } = data;
+	const { query, price, category, stars,sub,brand } = data;
   
   try {
     if (query) {
@@ -128,6 +128,14 @@ exports.searchFiltersServices=async(data)=>{
     if(sub){
       return await productModel
         .find({subs:sub})
+        .populate('category', '_id name')
+        .populate('subs', '_id name')
+        .populate('ratings');
+    }
+    
+    if(brand){
+      return await productModel
+        .find({brand})
         .populate('category', '_id name')
         .populate('subs', '_id name')
         .populate('ratings');

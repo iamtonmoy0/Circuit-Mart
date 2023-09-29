@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link} from 'react-router-dom';
 import img from '../../../assets/logo.png'
 import * as routePath from '../../../routes/routePath';
-import { Checkbox, Menu, Slider } from 'antd';
+import { Checkbox, Menu, Radio, Slider } from 'antd';
 import {RiPriceTag3Line} from 'react-icons/ri';
 import ShopHome from '../ShopHome/ShopHome';
 import { useEffect, useState } from 'react';
@@ -16,6 +16,8 @@ import StarFilter from '../../../components/StarFilter/StarFilter';
 import { getSubCategories } from '../../../functions/subCategoryFunctions';
 import toast from 'react-hot-toast';
 
+const brands = ["Apple","Samsung","Lenovo","Asus","Dell"," Razer","Acer","Sony","Microsoft","HP"];
+
 const ShopPage = () => {
   const dispatch = useDispatch();
 const [price,setPrice] = useState([0,0]);
@@ -24,6 +26,7 @@ const [product,setProduct] = useState([]);
 const [category,setCategory] = useState([]);
 const [subCategory,setSubCategory] = useState([]);
 const [catId,setCatId] = useState([]);
+// const [brand,setBrand] = useState('');
 
 useEffect(()=>{
 loadCategory()
@@ -43,6 +46,7 @@ const loadSubs=()=>{
     setSubCategory(res.data.data)
   })
 }
+// load brands
 
 const handlePrice=(value)=>{
   dispatch({
@@ -123,7 +127,25 @@ getProductByFilter({sub:id})
   toast.dismiss()
   toast.error(err)
 })
-
+}
+// handle brand
+const handleBrand=(b)=>{
+    setOk(true)
+  toast.loading('Filtering!')
+  dispatch({
+    type:"SEARCH_QUERY",
+    payload:{text:""},
+  })//making the search bar empty
+ setPrice([0,0]) //setting price 0 0 for querying with category
+setCatId([])
+getProductByFilter({brand:b})
+.then(res=>{
+  toast.dismiss()
+  setProduct(res.data.data)
+}).catch(err=>{
+  toast.dismiss()
+  toast.error(err)
+})
 }
 	return (
 		<>
@@ -169,7 +191,7 @@ getProductByFilter({sub:id})
 
       <Slider range tipFormatter={v=>` $${v}`} value={price} onChange={value=>handlePrice(value)} defaultValue={[0, 0]} max="5999"  />
         </li>
-        <Menu mode='inline' defaultOpenKeys={['1','2','3']}>
+        <Menu mode='inline' defaultOpenKeys={['1','2','3','4']}>
           <SubMenu key={'1'}
           title={
             <span className='h-6 text-sm text-gray-600 flex'>
@@ -220,6 +242,23 @@ getProductByFilter({sub:id})
                   {cat.name}
                   </span>
                 </div>
+                )}
+            </div>
+
+          </SubMenu>
+          <SubMenu key={'4'}
+          title={
+            <span className='h-6 text-sm text-gray-600 flex'>
+              <AiFillDownSquare className='text-green-600 text-xl' /> Brand
+            </span>
+          }
+          >
+            <div className='grid grid-cols-2 gap-2'>
+              {brands && brands.map(b=>
+                  <span className='ml-1  gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-lime-500 text-dark text-center cursor-pointer' key={b} onClick={()=>handleBrand(b)} value={b} name='brand'  >
+                  {b}
+                  </span>
+                
                 )}
             </div>
 
