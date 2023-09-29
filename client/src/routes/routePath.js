@@ -6,6 +6,7 @@ export const RESET_PASS ='/Forgot_Password'
 export const VIEW_PRODUCT ='/product'
 export const VIEW_BY_CATEGORY ='/category'
 export const SHOP ='/shop'
+export const CART ='/cart'
 
 // admin route
 export const WELCOME_AS_ADMIN ='/admin/dashboard'

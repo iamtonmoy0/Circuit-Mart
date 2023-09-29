@@ -10,8 +10,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCategories } from '../../../functions/categoryFunctions';
 import SubMenu from 'antd/es/menu/SubMenu';
-import { AiFillDownSquare } from 'react-icons/ai';
+import { AiFillDownSquare, AiOutlineStar } from 'react-icons/ai';
 import { getProductByFilter } from '../../../functions/productFunctions';
+import StarFilter from '../../../components/StarFilter/StarFilter';
 
 const ShopPage = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,19 @@ getProductByFilter({category:idAvailableInState})
 })
 }
 
+// handle star
+const handleStar=(num)=>{
+  dispatch({
+    type:"SEARCH_QUERY",
+    payload:{text:""},
+  })//making the search bar empty
+ setPrice([0,0]) //setting price 0 0 for querying with category
+setCatId([])
+getProductByFilter({stars:num})
+.then(res=>{
+  setProduct(res.data.data)
+})
+}
 	return (
 		<>
 			<Helmet>
@@ -129,6 +143,23 @@ getProductByFilter({category:idAvailableInState})
                   </Checkbox>
                 </div>
                 )}
+            </div>
+
+          </SubMenu>
+          {/* filter by star ratings */}
+          <SubMenu key={'2'}
+          title={
+            <span className='h-6 text-sm text-gray-600 flex'>
+              <AiOutlineStar className='text-red-600 text-xl' /> Ratings
+            </span>
+          }
+          >
+            <div className='flex flex-col'>
+              <StarFilter starClick={handleStar} numOfStar={5}/>
+              <StarFilter starClick={handleStar} numOfStar={4}/>
+              <StarFilter starClick={handleStar} numOfStar={3}/>
+              <StarFilter starClick={handleStar} numOfStar={2}/>
+              <StarFilter starClick={handleStar} numOfStar={1}/>
             </div>
 
           </SubMenu>

@@ -73,18 +73,64 @@ exports.getProductsByCategoryIdServices=async(id)=>{
 }
 // search filters product 
 exports.searchFiltersServices=async(data)=>{
-	const {query,price,category} = data;
-	if(query){
-	return await productModel.find({$text:{$search:query}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
-	}
-	if(price !== undefined){
-		console.log('price',price)
-		return await productModel.find({price:{
-			$gte:price[0],
-			$lte:price[1]
-		}}).populate('category', "_id name").populate('subs',"_id name").populate('ratings');
-	}
-	if(category){
-		return await productModel.find({category})
-	}
+	const { query, price, category, stars } = data;
+  
+  try {
+    if (query) {
+      return await productModel
+        .find({ $text: { $search: query } })
+        .populate('category', '_id name')
+        .populate('subs', '_id name')
+        .populate('ratings');
+    }
+    
+    if (price !== undefined) {
+      console.log('price', price);
+      return await productModel
+        .find({ price: { $gte: price[0], $lte: price[1] } })
+        .populate('category', '_id name')
+        .populate('subs', '_id name')
+        .populate('ratings');
+    }
+    
+    if (category) {
+      return await productModel
+        .find({ category })
+        .populate('category', '_id name')
+        .populate('subs', '_id name')
+        .populate('ratings');
+    }
+    
+    if (stars) {
+      const aggregateResult = await productModel.aggregate([
+        {
+          $project: {
+            document: '$$ROOT',
+            floorAverage: {
+              $floor: { $avg: '$ratings.star' },
+            },
+          },
+        },
+        {
+          $match: { floorAverage: stars },
+        },
+      ]).limit(12).exec();
+
+      if (aggregateResult) {
+        // Handle the aggregate result here
+        return await productModel
+          .find({ _id: { $in: aggregateResult.map(item => item.document._id) } })
+          .populate('category', '_id name')
+          .populate('subs', '_id name')
+          .populate('ratings');
+      }
+    }
+    
+    // If none of the filters match, return an empty array or handle it as needed.
+    return [];
+  } catch (error) {
+    // Handle any errors here
+    console.error(error);
+    throw error;
+  }
 }
