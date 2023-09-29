@@ -13,6 +13,8 @@ import SubMenu from 'antd/es/menu/SubMenu';
 import { AiFillDownSquare, AiOutlineStar } from 'react-icons/ai';
 import { getProductByFilter } from '../../../functions/productFunctions';
 import StarFilter from '../../../components/StarFilter/StarFilter';
+import { getSubCategories } from '../../../functions/subCategoryFunctions';
+import toast from 'react-hot-toast';
 
 const ShopPage = () => {
   const dispatch = useDispatch();
@@ -20,10 +22,12 @@ const [price,setPrice] = useState([0,0]);
 const [ok,setOk] = useState(false);
 const [product,setProduct] = useState([]);
 const [category,setCategory] = useState([]);
+const [subCategory,setSubCategory] = useState([]);
 const [catId,setCatId] = useState([]);
 
 useEffect(()=>{
 loadCategory()
+loadSubs()
 },[])
 // loadCategory
 const loadCategory=()=>{
@@ -31,6 +35,13 @@ getCategories()
 .then(res=>{
   setCategory(res.data.data)
 })
+}
+// load sub category
+const loadSubs=()=>{
+  getSubCategories()
+  .then(res=>{
+    setSubCategory(res.data.data)
+  })
 }
 
 const handlePrice=(value)=>{
@@ -46,6 +57,8 @@ const handlePrice=(value)=>{
 
 // handle checkbox
 const handleCheckbox=(e)=>{
+setOk(true)
+  toast.loading('Filtering!')
   dispatch({
     type:"SEARCH_QUERY",
     payload:{text:""},
@@ -66,12 +79,19 @@ if(foundInState === -1){
 setCatId(idAvailableInState)
 getProductByFilter({category:idAvailableInState})
 .then(res=>{
+
+  toast.dismiss()
   setProduct(res.data.data)
+}).catch(err=>{
+  toast.dismiss()
+  toast.error(err)
 })
 }
 
 // handle star
 const handleStar=(num)=>{
+  setOk(true)
+  toast.loading('Filtering!')
   dispatch({
     type:"SEARCH_QUERY",
     payload:{text:""},
@@ -80,8 +100,30 @@ const handleStar=(num)=>{
 setCatId([])
 getProductByFilter({stars:num})
 .then(res=>{
+  toast.dismiss()
   setProduct(res.data.data)
+}).catch(err=>{toast.dismiss();
+  toast.error(err)})
+}
+// handle subs
+const handleSubs=(id)=>{
+  setOk(true)
+  toast.loading('Filtering!')
+  dispatch({
+    type:"SEARCH_QUERY",
+    payload:{text:""},
+  })//making the search bar empty
+ setPrice([0,0]) //setting price 0 0 for querying with category
+setCatId([])
+getProductByFilter({sub:id})
+.then(res=>{
+  toast.dismiss()
+  setProduct(res.data.data)
+}).catch(err=>{
+  toast.dismiss()
+  toast.error(err)
 })
+
 }
 	return (
 		<>
@@ -127,7 +169,7 @@ getProductByFilter({stars:num})
 
       <Slider range tipFormatter={v=>` $${v}`} value={price} onChange={value=>handlePrice(value)} defaultValue={[0, 0]} max="5999"  />
         </li>
-        <Menu mode='inline' defaultOpenKeys={['1','2']}>
+        <Menu mode='inline' defaultOpenKeys={['1','2','3']}>
           <SubMenu key={'1'}
           title={
             <span className='h-6 text-sm text-gray-600 flex'>
@@ -163,6 +205,25 @@ getProductByFilter({stars:num})
             </div>
 
           </SubMenu>
+          {/* sub category */}
+          <SubMenu key={'3'}
+          title={
+            <span className='h-6 text-sm text-gray-600 flex'>
+              <AiFillDownSquare className='text-green-600 text-xl' />Sub Categories
+            </span>
+          }
+          >
+            <div className='grid grid-cols-2  gap-4'>
+              {subCategory && subCategory.map(cat=>
+                <div key={cat._id}>
+                  <span className='ml-1  gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-purple-500 text-white cursor-pointer' onClick={()=>handleSubs(cat._id)} value={cat._id} name='category' >
+                  {cat.name}
+                  </span>
+                </div>
+                )}
+            </div>
+
+          </SubMenu>
         </Menu>
 
         
@@ -174,7 +235,7 @@ getProductByFilter({stars:num})
   {/* Content */}
   <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:pl-72">
     {/* Page Heading */}
-    <ShopHome price={price} setPrice={setPrice} ok={ok} product={product} setProduct={setProduct}/>
+    <ShopHome price={price} setPrice={setPrice} ok={ok} product={product} setProduct={setProduct} category={category} subs={subCategory}  />
     {/* End Page Heading */}
   </div>
   {/* End Content */}

@@ -73,7 +73,7 @@ exports.getProductsByCategoryIdServices=async(id)=>{
 }
 // search filters product 
 exports.searchFiltersServices=async(data)=>{
-	const { query, price, category, stars } = data;
+	const { query, price, category, stars,sub } = data;
   
   try {
     if (query) {
@@ -124,6 +124,13 @@ exports.searchFiltersServices=async(data)=>{
           .populate('subs', '_id name')
           .populate('ratings');
       }
+    }
+    if(sub){
+      return await productModel
+        .find({subs:sub})
+        .populate('category', '_id name')
+        .populate('subs', '_id name')
+        .populate('ratings');
     }
     
     // If none of the filters match, return an empty array or handle it as needed.

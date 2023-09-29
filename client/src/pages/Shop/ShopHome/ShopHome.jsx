@@ -18,7 +18,7 @@ const ShopHome = ({price,ok,product,setProduct}) => {
 		} else if(price[1] !== 0 && ok  && text.length==0) {
 			// If search text is empty, load all products
 			loadSearchProduct({price })		
-		}else{
+		}else if(!ok){
 		loadProduct();
 		}
 	},[text,price,ok])
