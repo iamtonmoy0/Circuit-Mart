@@ -3,8 +3,11 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import * as routePath from '../../../routes/routePath';
 import StarRating from "../StarRating/StarRating";
+import { useState } from "react";
+import { Tooltip } from "antd";
 
 const ProductCard = ({product}) => {
+  const [tooltip,setTooltip] = useState('Click to add to cart')
 	// console.log(product)
 	const{title,price,images,description,slug,ratings,_id} = product;
 
@@ -19,7 +22,6 @@ const handleAddToCart = ()=>{
     }
     // Check if the product is already in the cart by comparing product IDs
     const existingProduct = cart.find((item) => item._id === product._id);
-
     if (existingProduct) {
       // If the product exists in the cart, you can update its quantity or take other actions
       // For example, you can increment the quantity of the existing product
@@ -31,6 +33,7 @@ const handleAddToCart = ()=>{
 
     // Save the updated cart back to local storage
     localStorage.setItem('cart', JSON.stringify(cart));
+    setTooltip("Added to cart!")
   }
 }
 	return (
@@ -67,10 +70,13 @@ const handleAddToCart = ()=>{
     className="text-center cursor-pointer text-sm text-green-700 dark:text-gray-200"
   
   >
+    <Tooltip title={tooltip}>
+
     <div onClick={handleAddToCart} className="flex flex-col items-center">
       <BsFillCartPlusFill className="text-2xl" />
       <a>Add to cart</a>
     </div>
+    </Tooltip>
   </button>
 </div>
 
