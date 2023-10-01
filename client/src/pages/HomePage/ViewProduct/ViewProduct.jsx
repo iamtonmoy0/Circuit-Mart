@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getProductBySlug, productStarRating } from "../../../functions/productFunctions";
 import { Link, useParams } from "react-router-dom";
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import toast from "react-hot-toast";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -27,8 +27,13 @@ import RatingModal from '../../Shared/RatingModal/RatingModal';
 import Reviews from '../../Shared/Reviews/Reviews';
 import StarRating from '../../Shared/StarRating/StarRating';
 import * as routePath from  '../../../routes/routePath'
+import { Tooltip } from "antd";
+
+
 const ViewProduct = () => {
 	const {user} = useSelector(state=>({...state}))
+	const [tooltip,setTooltip] = useState('Click to add to cart');
+	const dispatch = useDispatch();
 	const [star,setStar]=useState(0)
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -71,6 +76,36 @@ productStarRating(id,newRating,user?.token)
 })
 
 }
+
+
+// handle cart
+const handleAddToCart = ()=>{
+	// Check if the product is already in the cart
+	let cart = [];
+	if (typeof window !== 'undefined') {
+	if (localStorage.getItem('cart')) {
+		cart = JSON.parse(localStorage.getItem('cart'));
+	}
+	// Check if the product is already in the cart by comparing product IDs
+	const existingProduct = cart.find((item) => item._id === product._id);
+	if (existingProduct) {
+		// If the product exists in the cart, you can update its quantity or take other actions
+		// For example, you can increment the quantity of the existing product
+		existingProduct.count += 1;
+	} else {
+		// If the product is not in the cart, add it
+		cart.push({ ...product, count: 1 });
+	}
+  
+	// Save the updated cart back to local storage
+	localStorage.setItem('cart', JSON.stringify(cart));
+	setTooltip("Added to cart!")
+	dispatch({
+		type:"ADD_TO_CART",
+		payload:cart
+	})
+	}
+  }
 
 	return (
 		<div className='flex flex-col' >
@@ -167,10 +202,13 @@ productStarRating(id,newRating,user?.token)
 				</div>
 				{/* action bar */}
 				<div className='flex justify-evenly pt-10'>
-				<div className="flex flex-col items-center">
+				<Tooltip title={tooltip}>
+
+				<div onClick={handleAddToCart} className="flex flex-col items-center">
 				<BsFillCartPlusFill className="text-2xl text-green-700" />
 				<p>Add to cart</p>
 				</div>
+				</Tooltip>
 					
 				<div className="flex flex-col items-center">
 				<MdFavorite className="text-2xl text-red-700" />

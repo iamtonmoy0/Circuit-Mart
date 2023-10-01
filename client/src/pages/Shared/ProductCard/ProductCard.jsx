@@ -5,9 +5,12 @@ import * as routePath from '../../../routes/routePath';
 import StarRating from "../StarRating/StarRating";
 import { useState } from "react";
 import { Tooltip } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({product}) => {
-  const [tooltip,setTooltip] = useState('Click to add to cart')
+  const [tooltip,setTooltip] = useState('Click to add to cart');
+  const dispatch = useDispatch();
+  const {user,cart}= useSelector(state=>({...state}))
 	// console.log(product)
 	const{title,price,images,description,slug,ratings,_id} = product;
 
@@ -34,6 +37,10 @@ const handleAddToCart = ()=>{
     // Save the updated cart back to local storage
     localStorage.setItem('cart', JSON.stringify(cart));
     setTooltip("Added to cart!")
+    dispatch({
+      type:"ADD_TO_CART",
+      payload:cart
+    })
   }
 }
 	return (

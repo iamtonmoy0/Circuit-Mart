@@ -10,10 +10,11 @@ import img  from '../../assets/logo.png'
 import Search from '../Search/Search';
 import { AiTwotoneShopping } from 'react-icons/ai';
 import { BsFillCartCheckFill } from 'react-icons/bs';
+import { Avatar, Badge } from 'antd';
 const Header = () => {
 
   const {logout}= useContext(AuthContext);
-  const {user} = useSelector(state=>({...state}))
+  const {user,cart} = useSelector(state=>({...state}))
   const navigate = useNavigate();
   const dispatch =useDispatch();
   // handle logout
@@ -58,7 +59,9 @@ const Header = () => {
 		</Link>
         
       <Link to={routePath.CART} className="font-medium flex items-center text-[tomato] sm:py-6 dark:text-blue-500" href="#" aria-current="page">
-			<BsFillCartCheckFill/>  Cart
+			<BsFillCartCheckFill/> Cart <Badge className='pb-4' count={cart.length}>
+     
+    </Badge>
 		</Link>
         {/* <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">UserName</a> */}
         {/* <a className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500" href="#">Work</a> */}
