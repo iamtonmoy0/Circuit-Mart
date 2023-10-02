@@ -3,6 +3,8 @@ import {  Link, useNavigate } from "react-router-dom";
 import * as routePath from '../../../routes/routePath';
 import CartTable from "../../../components/CartTable/CartTable";
 import {MdShoppingCartCheckout} from 'react-icons/md'
+import { userCart } from "../../../functions/cartFunctions";
+import toast from "react-hot-toast";
 
 const CartLayout = () => {
 	const {cart,user}=useSelector(state=>({...state}));
@@ -25,6 +27,13 @@ const CartLayout = () => {
 
 // order info to db
 const orderToDb=()=>{
+	userCart(cart,user.token)
+	.then(res=>{
+	navigate(routePath.CHECKOUT)
+	toast.success('Proceeding for payment')
+}).catch(err=>{
+	toast.error(err.message)
+})
 
 }
 	return (

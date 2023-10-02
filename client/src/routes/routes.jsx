@@ -27,6 +27,7 @@ import ViewProduct from "../pages/HomePage/ViewProduct/ViewProduct";
 import CategoryHome from "../pages/Category/CategoryHome/CategoryHome";
 import ShopPage from "../pages/Shop/ShopPage/ShopPage";
 import CartLayout from "../pages/Cart/Layout/CartLayout";
+import CheckOutPage from "../pages/Checkout/CheckoutPage/CheckOutPage";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -71,6 +72,11 @@ const route = createBrowserRouter([
 				path:routePath.CART,
 				element:<CartLayout/>
 			},
+			{
+				path:routePath.CHECKOUT,
+				element:<CheckOutPage/>
+			},
+			
 			
 
 			

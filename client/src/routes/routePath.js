@@ -7,6 +7,7 @@ export const VIEW_PRODUCT ='/product'
 export const VIEW_BY_CATEGORY ='/category'
 export const SHOP ='/shop'
 export const CART ='/cart'
+export const CHECKOUT ='/checkout'
 
 // admin route
 export const WELCOME_AS_ADMIN ='/admin/dashboard'
