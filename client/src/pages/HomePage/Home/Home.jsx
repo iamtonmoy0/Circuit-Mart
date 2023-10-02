@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import CategoryList from "../../../components/Category/CategoryList";
 import Slider from "../Slider/Slider";
+import SideDrawer from "../../../components/SideDrawer/SideDrawer";
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
 			<Helmet>
 				<title>Circuit-Mart| Home</title>
 			</Helmet>
+			<SideDrawer/>
 			<CategoryList/>
 			<Slider/>
 			<Banner/>

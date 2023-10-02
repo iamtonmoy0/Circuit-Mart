@@ -59,7 +59,7 @@ const orderToDb=()=>{
  
 					</>
 					:
-					<p>No product here <Link to={routePath.SHOP}>continue to shop</Link></p>
+					<p>No product available in cart. <Link to={routePath.SHOP} className="text-blue-500 ">Continue To Shop</Link></p>
 					
 					}
 				</div>
