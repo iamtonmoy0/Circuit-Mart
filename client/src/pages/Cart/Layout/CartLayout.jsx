@@ -1,41 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import {  Link, useNavigate } from "react-router-dom";
 import * as routePath from '../../../routes/routePath';
-import { Table } from "antd";
+import CartTable from "../../../components/CartTable/CartTable";
 
-const columns =[ {
-    title: 'Image',
-    dataIndex: 'Image',
-  },
-  {
-    title: 'Title',
-    dataIndex: 'Title',
-  },
-  {
-    title: 'Price',
-    dataIndex: 'price',
-  },
-  {
-    title: 'Brand',
-    dataIndex: 'Brand',
-  },
-  {
-    title: 'Color',
-    dataIndex: 'Color',
-  },
-  {
-    title: 'Count',
-    dataIndex: 'Count',
-  },
-  {
-    title: 'Shipping',
-    dataIndex: 'shipping',
-  },
-  {
-    title: 'Remove',
-    dataIndex: 'remove',
-  },
-]
 
 const CartLayout = () => {
 	const {cart,user}=useSelector(state=>({...state}));
@@ -55,6 +22,18 @@ const CartLayout = () => {
 	}
 
 
+	// handle count change
+	const handleCountChange=(e)=>{
+		console.log(e.target.value)
+		let cart = []
+		if(typeof window != undefined){
+			if(localStorage.getItem('cart'))
+			cart = JSON.parse(localStorage.getItem('cart'))
+		}
+		const isProduct=''
+		
+
+	}
 // order info to db
 const orderToDb=()=>{
 
@@ -64,11 +43,13 @@ const orderToDb=()=>{
 			<h1 className="text-3xl pt-3 text-gray-700">Cart/{cart.length} Products</h1>
 		
 			<div className="flex flex-col lg:flex-row pt-3" >
+
 				<div className="lg:w-8/12 w-full lg:pr-3 pb-4">
 					{cart && cart.length>0 ? 
 					
-				<> 
-		<table className="w-full border-collapse border-gray-200">
+		<>
+
+<table className="w-full border-collapse border-gray-200">
       <thead className="bg-gray-200">
         <tr>
           <th className="p-2">Image</th>
@@ -81,20 +62,10 @@ const orderToDb=()=>{
           <th className="p-2">Remove</th>
         </tr>
       </thead>
-      <tbody>
-        {cart.map((c) => (
-          <tr key={c._id}>
-            <td className="p-2"><img src={c.images[0]} alt="Product" width="50" height="50" /></td>
-            <td className="p-2 text-blue-400"><Link to={`${routePath.VIEW_PRODUCT}/${c.slug}`}>{c.title} </Link> </td>
-            <td className="p-2">${c.price.toFixed(2)}</td>
-            <td className="p-2">{c.brand}</td>
-            <td className="p-2">{c.color}</td>
-            <td className="p-2">{c.count}</td>
-            <td className="p-2">{c.shipping}</td>
-            <td className="p-2"><button className="bg-red-500 text-white px-2 py-1 rounded-md">Delete</button></td>
-          </tr>
-        ))}
-      </tbody>
+    
+	{
+		cart && cart.map(c=><CartTable key={c._id} p={c} />)
+	}
     </table>
  
 					</>
