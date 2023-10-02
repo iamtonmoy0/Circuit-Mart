@@ -62,13 +62,13 @@ const orderToDb=()=>{
 	return (
 		<div className="px-5">
 			<h1 className="text-3xl pt-3 text-gray-700">Cart/{cart.length} Products</h1>
-			{/* {JSON.stringify(cart)} */}
-			<div className="flex pt-3 " >
-				<div className="w-8/12 px-3">
+		
+			<div className="flex flex-col lg:flex-row pt-3" >
+				<div className="lg:w-8/12 w-full lg:pr-3 pb-4">
 					{cart && cart.length>0 ? 
 					
 				<> 
-		 <table className="w-full border-collapse border-gray-200">
+		<table className="w-full border-collapse border-gray-200">
       <thead className="bg-gray-200">
         <tr>
           <th className="p-2">Image</th>
@@ -103,7 +103,7 @@ const orderToDb=()=>{
 					
 					}
 				</div>
-				<div className="w-4/12 px-3">
+				<div className="lg:w-4/12 w-full lg:pl-3 pb-4">
 					<p className="text-center text-2xl font-medium">Order Summery</p>
 					<hr />
 					<p className="pt-2 text-gray-600">Products</p>
