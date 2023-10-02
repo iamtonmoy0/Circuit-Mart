@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  Link, useNavigate } from "react-router-dom";
 import * as routePath from '../../../routes/routePath';
 import CartTable from "../../../components/CartTable/CartTable";
-
+import {MdShoppingCartCheckout} from 'react-icons/md'
 
 const CartLayout = () => {
 	const {cart,user}=useSelector(state=>({...state}));
@@ -22,18 +22,7 @@ const CartLayout = () => {
 	}
 
 
-	// handle count change
-	const handleCountChange=(e)=>{
-		console.log(e.target.value)
-		let cart = []
-		if(typeof window != undefined){
-			if(localStorage.getItem('cart'))
-			cart = JSON.parse(localStorage.getItem('cart'))
-		}
-		const isProduct=''
-		
 
-	}
 // order info to db
 const orderToDb=()=>{
 
@@ -87,7 +76,7 @@ const orderToDb=()=>{
 					<div className="pt-3">
 
 					{user && user.token ? 
-					<button onClick={orderToDb} disabled={!cart.length} className="bg-green-400 mt-4 rounded py-2 px-3 font-semibold text-gray-800">Proceed Checkout</button>
+					<button onClick={orderToDb} disabled={!cart.length} className="bg-green-400 mt-4 rounded py-2 px-3 font-semibold text-gray-800  inline-flex">Proceed Checkout<MdShoppingCartCheckout className="text-xl"/></button>
 					:
 					<button onClick={handleNavigate} className="bg-[tomato] mt-  rounded py-2 px-3 text-md">Login For Confirm Payment</button>
 				}
