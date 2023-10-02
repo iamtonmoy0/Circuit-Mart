@@ -1,12 +1,15 @@
 import {Drawer} from 'antd';
 import { BsCart3 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
+import * as routePath from '../../routes/routePath'
 const SideDrawer = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const {drawer,cart} = useSelector(state=>({...state}));
 	const handleClick=()=>{
-		
+		dispatch({type:'SET_VISIBLE',payload:false});
+		navigate(routePath.SHOP)
 	}
 	return (
 		<Drawer visible={drawer} 
