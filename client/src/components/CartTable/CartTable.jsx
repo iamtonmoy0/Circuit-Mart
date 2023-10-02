@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as routePath from '../../routes/routePath';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
+import { MdRemove, MdRemoveShoppingCart } from 'react-icons/md';
 
 const CartTable = ({ p }) => {
   const { title, images, brand, price, color, count, shipping, slug ,_id,quantity} = p;
@@ -44,7 +45,27 @@ const dispatch = useDispatch()
     }
   };
   
-		
+		// handle delete product
+    const handleRemove = () => {
+      let cart = [];
+  
+      if (typeof window !== "undefined") {
+        if (localStorage.getItem("cart")) {
+          cart = JSON.parse(localStorage.getItem("cart"));
+        }
+        cart.map((product, i) => {
+          if (product._id === _id) {
+            cart.splice(i, 1);
+          }
+        });
+  
+        localStorage.setItem("cart", JSON.stringify(cart));
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: cart,
+        });
+      }
+    };
 	
   return (
     <tbody className="w-full">
@@ -66,7 +87,7 @@ const dispatch = useDispatch()
           </td>
         <td className="p-2">{shipping}</td>
         <td className="p-2">
-          <button className="bg-red-500 text-white px-2 py-1 rounded-md">Delete</button>
+          <button className="bg-red-500 text-white px-2 py-1 rounded-md" onClick={handleRemove}><MdRemoveShoppingCart/></button>
         </td>
       </tr>
     </tbody>
