@@ -28,7 +28,7 @@ const CartLayout = () => {
 // order info to db
 const orderToDb=()=>{
 	userCart(cart,user.token)
-	.then(res=>{
+	.then(()=>{
 	navigate(routePath.CHECKOUT)
 	toast.success('Proceeding for payment')
 }).catch(err=>{
