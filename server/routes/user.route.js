@@ -1,8 +1,12 @@
 const express = require('express');
-
 const router  = express.Router();
 
-router.route('/user').get((req,res)=>{
-	res.send('hey this is user routes')
-})
+// controllers
+const { userCartController } = require('../controllers/user.controller');
+
+// middleware
+
+router.route('/cart')
+ .get(userCartController)
+ 
 module.exports=router;
