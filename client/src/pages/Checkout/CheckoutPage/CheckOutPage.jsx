@@ -53,7 +53,7 @@ const CheckOutPage = () => {
 	const saveAddress=()=>{
 	toast.loading('please wait')
 updateUserAddress(address,user.token)
-.then(res=>{
+.then(()=>{
 	toast.dismiss()
 	setDisable(false);
 
