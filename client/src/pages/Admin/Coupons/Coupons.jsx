@@ -2,6 +2,7 @@ import { DatePicker } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { createCoupon } from "../../../functions/couponFunctions";
+import toast from "react-hot-toast";
 
 const Coupons = () => {
 	const [coupon,setCoupon]= useState('');
@@ -11,10 +12,17 @@ const Coupons = () => {
 	// submit handler
 	const handleSubmit=(e)=>{
 		e.preventDefault()
-  console.log(coupon,discount,date.$d)
+		toast.loading('please wait')
   createCoupon({name:coupon,expiry:date.$d,discount:discount},user.token)
-  .then(res=>{
-	console.log(res)
+  .then(()=>{
+	toast.dismiss();
+	setDiscount('')
+	setDate('')
+	setCoupon('')
+	toast.success('Coupon created')
+  }).catch(err=>{
+	toast.dismiss()
+	toast.error(err.message)
   })
 	}
 	return (
