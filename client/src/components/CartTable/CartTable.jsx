@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as routePath from '../../routes/routePath';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
-import { MdRemove, MdRemoveShoppingCart } from 'react-icons/md';
+import {  MdRemoveShoppingCart } from 'react-icons/md';
 
 const CartTable = ({ p }) => {
   const { title, images, brand, price, color, count, shipping, slug ,_id,quantity} = p;
@@ -16,9 +16,9 @@ const dispatch = useDispatch()
     // Ensure the new count is within the available quantity range
     const countValue = Math.min(Math.max(newCount, 1), maxCount);
   
-    if (newCount !== countValue) {
+    if (newCount > countValue) {
       // Display a toast message indicating that the count has been limited
-      toast.warning(`Quantity limited to ${countValue}`);
+      toast.error(`Quantity limited to ${countValue}`);
     }
   
     let updatedCart = [];
