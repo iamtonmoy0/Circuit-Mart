@@ -12,7 +12,7 @@ Tech used =>
 
 ## Features:
 This is an e-commerce web application build with react js,node js and firebase for authentication.There are 2 role build for this application .One is user and other is Admin.There has role based redirection and for verifying role firebase token used.
-## Some User functionality:
+## User functionality:
 
 * User can register, login & logout using email.
 * User can view products in the store.
