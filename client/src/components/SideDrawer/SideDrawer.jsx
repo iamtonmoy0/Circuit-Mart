@@ -9,7 +9,7 @@ const SideDrawer = () => {
 	const {drawer,cart} = useSelector(state=>({...state}));
 	const handleClick=()=>{
 		dispatch({type:'SET_VISIBLE',payload:false});
-		navigate(routePath.SHOP)
+		navigate(routePath.CART)
 	}
 	return (
 		<Drawer visible={drawer} 

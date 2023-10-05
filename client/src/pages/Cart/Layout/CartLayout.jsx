@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import {  Link, useNavigate } from "react-router-dom";
 import * as routePath from '../../../routes/routePath';
 import CartTable from "../../../components/CartTable/CartTable";
@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const CartLayout = () => {
 	const {cart,user}=useSelector(state=>({...state}));
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const navigate = useNavigate();
 	// navigation
 	const handleNavigate = ()=>{

@@ -51,3 +51,26 @@ exports.userCartServices = async (cartItem, user) => {
         orderedBy: currentUser._id
     }).save();
 };
+// get user cart data
+exports.getUserCartServices = async (user) => {
+        const currentUser = await userModel.findOne({ email: user.email });
+        console.log("User:", currentUser);
+
+        if (!currentUser) {
+            console.log("User not found");
+            return;
+        }
+		const cartData = await cartModel.findOne({orderedBy:currentUser._id}).populate("products.product","_id title price")
+		return cartData;		
+};
+
+//remove user cart services
+exports.removeUserCartServices=async(user)=>{
+	const currentUser = await userModel.findOne({ email: user.email });
+	if(!currentUser){
+		console.log("User Not Found")
+		return
+	}
+	return await cartModel.findOneAndDelete({orderedBy:currentUser._id});
+	
+}
