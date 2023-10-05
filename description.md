@@ -16,6 +16,8 @@
  * React -Select
  * React -Tabs
  * Swiper js
+ * React-Quill
+ * ImageModal
 
  ------------- Back End ------------------
  
