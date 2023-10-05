@@ -23,3 +23,11 @@ return axios.delete(`${import.meta.env.VITE_Base_Url}/user/cart`,{
 	}
 })
 }
+// update address
+export const updateUserAddress = async(address,token)=>{
+	return axios.put(`${import.meta.env.VITE_Base_Url}/user/address`,{address},{
+		headers:{
+			token
+		}
+	})
+	}

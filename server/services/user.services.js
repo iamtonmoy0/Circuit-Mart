@@ -74,3 +74,8 @@ exports.removeUserCartServices=async(user)=>{
 	return await cartModel.findOneAndDelete({orderedBy:currentUser._id});
 	
 }
+// add user address
+exports.updateAddressService=async(data,user)=>{
+console.log("data",data)
+	return await userModel.findOneAndUpdate({email:user.email},{address:data},{new:true});
+}

@@ -1,5 +1,5 @@
 
-const { userCartServices, getUserCartServices, removeUserCartServices,  } = require('../services/user.services');
+const { userCartServices, getUserCartServices, removeUserCartServices, updateAddressService,  } = require('../services/user.services');
 
 
 // user cart
@@ -47,4 +47,20 @@ exports.removeUserCartController=async(req,res,next)=>{
 			err:error.message
 		})		
 	}
+}
+// update user services
+exports.updateUserAddressController=async(req,res,next)=>{
+try {
+	const result = await updateAddressService(req.body.address,req.user);
+	res.status(200).json({
+		status:'success',
+		data:result
+	})
+	
+} catch (error) {
+	res.status(400).json({
+		status:"fail",
+		err:error.message
+	})	
+}
 }
