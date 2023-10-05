@@ -10,7 +10,8 @@ Tech used =>
 
 ## Features:
 This is an e-commerce web application build with react js,node js and firebase for authentication.There are 2 role build for this application .One is user and other is Admin.There has role based redirection and for verifying role firebase token used.
-###Some User functionality:
+## Some User functionality:
+
 * User can register, login & logout using email.
 * User can view products in the store.
 * User can add product to cart with quantity.
@@ -24,6 +25,7 @@ This is an e-commerce web application build with react js,node js and firebase f
 
 All the state management are done by react redux and for performance pagination system applied.
 To enhance user experience filtering system applied on the shop page.
+
 * User can find prodduct by searching by its name.
 * User can filter out products based on categories like mobile,laptop,watches etc.
 * User can filter products by its price range and latest to oldest.
