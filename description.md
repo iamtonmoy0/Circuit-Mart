@@ -18,6 +18,7 @@
  * Swiper js
  * React-Quill
  * ImageModal
+ * React-datePicker
 
  ------------- Back End ------------------
  

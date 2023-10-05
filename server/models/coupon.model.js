@@ -11,7 +11,7 @@ name:{
 	unique:true,
 	trim:true,
 	uppercase:true,
-	minlength:[6,"too short"],
+	minlength:[4,"too short"],
 	maxlength:[20,"too long"]
 
 },

@@ -28,6 +28,7 @@ import CategoryHome from "../pages/Category/CategoryHome/CategoryHome";
 import ShopPage from "../pages/Shop/ShopPage/ShopPage";
 import CartLayout from "../pages/Cart/Layout/CartLayout";
 import CheckOutPage from "../pages/Checkout/CheckoutPage/CheckOutPage";
+import Coupons from "../pages/Admin/Coupons/Coupons";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -130,6 +131,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.ALL_PRODUCTS,
 				element:<AllProducts/>
+			},
+			{
+				path:routePath.COUPONS,
+				element:<Coupons/>
 			},
 			{
 				path:`${routePath.UPDATE_PRODUCT}/:slug`,

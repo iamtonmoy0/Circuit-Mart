@@ -1,10 +1,10 @@
 import { Toaster } from "react-hot-toast";
 import { Link, Outlet } from "react-router-dom";
 import * as routePath from '../../../routes/routePath'
-import { BiSolidCategory } from "react-icons/bi";
+import { BiAddToQueue, BiSolidCategory } from "react-icons/bi";
 import { AiOutlineAppstoreAdd, AiOutlineRollback } from "react-icons/ai";
-import { MdOutlineCategory } from "react-icons/md";
-import { BsFillInboxesFill } from "react-icons/bs";
+import { MdList, MdOutlineCategory } from "react-icons/md";
+import { BsFillInboxesFill, BsTicketDetailed } from "react-icons/bs";
 
 const AdminDashboard = () => {
 	return (
@@ -78,10 +78,11 @@ const AdminDashboard = () => {
                   <ul className="pt-2 pl-2">
                     <Link to={routePath.PRODUCT}>
                       <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
+                       <BiAddToQueue/>
                         Add Product
                       </a>
                     </Link>
-                    <li>
+                    {/* <li>
                       <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                         Link 2
                       </a>
@@ -90,7 +91,7 @@ const AdminDashboard = () => {
                       <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                         Link 3
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
            
@@ -117,10 +118,11 @@ const AdminDashboard = () => {
             <ul className="pt-2 pl-2">
               <Link to={routePath.ALL_PRODUCTS}>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
+                <MdList/>
                   All Products
                 </a>
               </Link>
-              <li>
+              {/* <li>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                   Link 2
                 </a>
@@ -129,7 +131,7 @@ const AdminDashboard = () => {
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                   Link 3
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </li>
@@ -162,11 +164,11 @@ const AdminDashboard = () => {
                   Sub Category
                 </a>
               </Link>
-              <li>
+              {/* <li>
                 <a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600" href="javascript:;">
                   Link 3
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </li>
@@ -180,12 +182,10 @@ const AdminDashboard = () => {
         </a>
         </Link> */}
         <li>
-		<a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">
-          <svg className="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-          </svg>
+		<Link to={routePath.COUPONS} className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">
+          <BsTicketDetailed/>
           Coupon
-        </a>
+        </Link>
 		</li>
         <li>
 		<a className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white hover:text-white rounded-md hover:bg-blue-600-300" href="javascript:;">

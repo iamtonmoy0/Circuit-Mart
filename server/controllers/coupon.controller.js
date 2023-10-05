@@ -3,7 +3,7 @@ const { createCouponServices, getCouponsServices, deleteCouponServices } = requi
 // create coupon
 exports.createCouponController=async(req,res,next)=>{
 	try {
-		const result = await createCouponServices(req.body);
+		const result = await createCouponServices(req.body.coupon);
 		res.status(200).json({
 			status:"success",
 			data:result

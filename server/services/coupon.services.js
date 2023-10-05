@@ -1,6 +1,7 @@
 const couponModel = require('../models/coupon.model')
 // create coupon
 exports.createCouponServices=async(data)=>{
+	console.log(data)
 	return await couponModel.create(data)
 	
 }
