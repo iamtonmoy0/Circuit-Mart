@@ -12,6 +12,7 @@ const CheckOutPage = () => {
 	const [products,setProducts]= useState([]);
 	const [totalPrice,setTotalPrice] = useState(0);
 	const [address,setAddress] = useState('');
+	const [applyCoupon,setApplyCoupon] = useState('');
 	const [disable,setDisable]= useState(true)
 
 	useEffect(()=>{
@@ -62,6 +63,12 @@ updateUserAddress(address,user.token)
 	toast.error(err.message)
 })
 	}
+	
+// apply coupon to db
+const handleApplyCoupon = ()=>{
+	console.log(applyCoupon)
+}  
+
 	return (
 		<div className="px-5">
 			<h1 className="text-3xl pt-3 text-gray-700">Delivery Address</h1>
@@ -73,6 +80,14 @@ updateUserAddress(address,user.token)
 				<ReactQuill value={address} theme="snow" onChange={(e)=>setAddress(e.target.value)} />
 
 				<button className="bg-blue-500 text-md font-semibold py-2 px-5 mt-5 rounded text-white " onClick={saveAddress}>Save</button>
+				{/* apply coupon */}
+
+				<div className="flex flex-col">
+					<p className="text-3xl pt-6 font-semibold text-gray-600">Got Coupon ?</p>
+					<input type="text" className="form-control mt-5 bg-gray-100 border-b-2 border-b-green-600 rounded hover:border-b-red-600 px-3 py-3 " placeholder="Enter coupon" value={applyCoupon} onChange={(e)=>setApplyCoupon(e.target.value)} />
+					<button onClick={handleApplyCoupon} className='btn bg-blue-600 rounded text-md font-semibold text-white mt-6 py-3 mx-10' >Apply coupon</button>
+				</div>
+				
 				</div>
 				<div className="lg:w-4/12 w-full lg:pl-3 pb-4">
 					<p className="text-center text-2xl font-medium">Order Summery</p>

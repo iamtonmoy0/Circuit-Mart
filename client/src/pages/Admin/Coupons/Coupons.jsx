@@ -48,7 +48,7 @@ loadCoupons()
 	// delete coupon
 	const handleDelete=(id)=>{
 		deleteCouponById(id,user.token)
-		.then(res=>{
+		.then(()=>{
 			toast.success('Deleted successfully')
 			loadCoupons()
 		}).catch(err=>{
