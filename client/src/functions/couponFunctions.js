@@ -5,7 +5,7 @@ export const getCoupon = async()=>{
 }
 // create coupon
 export const createCoupon = async(coupon,token)=>{
-	return axios.post(`${import.meta.env.VITE_DEV_Url}/coupon`,{coupon},{
+	return axios.post(`${import.meta.env.VITE_Base_Url}/coupon`,{coupon},{
 		headers:{
 			token
 		}

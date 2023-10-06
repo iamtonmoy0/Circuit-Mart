@@ -10,7 +10,7 @@ router.route('/coupon')
  .post(authCheck,adminCheck,createCouponController)
 router.route('/coupons')
  .get(getCouponsController)
-router.route('/coupon/couponId')
+router.route('/coupon/:couponId')
  .delete(authCheck,adminCheck,deleteCouponController)
 
 

@@ -1,7 +1,7 @@
 import { DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { createCoupon, getCoupon } from "../../../functions/couponFunctions";
+import { createCoupon, deleteCouponById, getCoupon } from "../../../functions/couponFunctions";
 import toast from "react-hot-toast";
 import {AiFillDelete} from 'react-icons/ai'
 
@@ -21,6 +21,7 @@ const Coupons = () => {
 	setDiscount('')
 	setDate('')
 	setCoupon('')
+	loadCoupons()
 	toast.success('Coupon created')
   }).catch(err=>{
 	toast.dismiss()
@@ -43,6 +44,16 @@ loadCoupons()
 			toast.error(err.message);
 		})
 
+	}
+	// delete coupon
+	const handleDelete=(id)=>{
+		deleteCouponById(id,user.token)
+		.then(res=>{
+			toast.success('Deleted successfully')
+			loadCoupons()
+		}).catch(err=>{
+			toast.error(err.message)
+		})
 	}
 	return (
 		<div>
@@ -87,7 +98,7 @@ loadCoupons()
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{c.expiry}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{c.discount} %</td>
               <td className="pl-16 py-4 whitespace-nowrap  text-sm font-medium">
-                <a className="cursor-pointer " ><AiFillDelete className='text-xl text-red-500' /></a>
+                <a className="cursor-pointer " onClick={()=>handleDelete(c._id)} ><AiFillDelete className='text-xl text-red-500' /></a>
               </td>
             </tr>)}
 
