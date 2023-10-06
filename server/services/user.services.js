@@ -1,6 +1,7 @@
 const userModel = require('../models/user.model');
 const cartModel = require('../models/cart.model');
 const productModel = require('../models/product.model');
+const couponModel = require('../models/coupon.model');
 const { model } = require('mongoose');
 
 // user cart
@@ -76,6 +77,17 @@ exports.removeUserCartServices=async(user)=>{
 }
 // add user address
 exports.updateAddressService=async(data,user)=>{
-console.log("data",data)
+// console.log("data",data)
 	return await userModel.findOneAndUpdate({email:user.email},{address:data},{new:true});
+}
+// apply discount
+exports.applyDiscountServices= async(coupon,user)=>{
+    const isValid = await couponModel.findOne({name:coupon})
+    if(!isValid) return
+    const currentUser = await userModel.findOne({email:user.email});
+    const {products,totalPrice}=await  cartModel.findOne({orderedBy:currentUser._id}).populate("products.product","_id title price")
+// total after discount 
+const totalAfterDiscount = (totalPrice - (totalPrice * isValid.discount)/100).toFixed(2)
+return await cartModel.findOneAndUpdate({orderedBy:currentUser._id} ,{discountPrice:totalAfterDiscount},{new:true})
+
 }

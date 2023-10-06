@@ -29,6 +29,7 @@ import ShopPage from "../pages/Shop/ShopPage/ShopPage";
 import CartLayout from "../pages/Cart/Layout/CartLayout";
 import CheckOutPage from "../pages/Checkout/CheckoutPage/CheckOutPage";
 import Coupons from "../pages/Admin/Coupons/Coupons";
+import Payment from "../pages/Checkout/Payment/Payment";
 // import UserRoute from "./userRoute";
 
 const route = createBrowserRouter([
@@ -76,6 +77,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.CHECKOUT,
 				element:<CheckOutPage/>
+			},
+			{
+				path:routePath.PAYMENT,
+				element:<Payment/>
 			},
 			
 			

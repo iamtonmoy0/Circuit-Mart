@@ -4,16 +4,20 @@ import { deleteUserCart, getUserCart, updateUserAddress } from "../../../functio
 import toast from "react-hot-toast";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
+import { applyDiscountToCart } from "../../../functions/couponFunctions";
+import {useNavigate} from 'react-router-dom'
+import * as routePath from '../../../routes/routePath';
 
 const CheckOutPage = () => {
 	const dispatch = useDispatch();
-	const {user} = useSelector(state=>({...state}));
+	const {user,coupon} = useSelector(state=>({...state}));
 	const [products,setProducts]= useState([]);
 	const [totalPrice,setTotalPrice] = useState(0);
 	const [address,setAddress] = useState('');
 	const [applyCoupon,setApplyCoupon] = useState('');
-	const [disable,setDisable]= useState(true)
+	const [disable,setDisable]= useState(true);
+	const [discountPrice,setDiscountPrice] = useState(0);
+	const navigate = useNavigate()
 
 	useEffect(()=>{
 		loadCart(user.token)
@@ -54,7 +58,8 @@ const CheckOutPage = () => {
 	const saveAddress=()=>{
 	toast.loading('please wait')
 updateUserAddress(address,user.token)
-.then(()=>{
+.then((res)=>{
+	console.log(res)
 	toast.dismiss()
 	setDisable(false);
 
@@ -66,9 +71,26 @@ updateUserAddress(address,user.token)
 	
 // apply coupon to db
 const handleApplyCoupon = ()=>{
-	console.log(applyCoupon)
+	toast.loading('Applying coupon . Please wait')
+	applyDiscountToCart(applyCoupon,user.token)
+	.then(res=>{
+		toast.dismiss();
+		toast.success("you got special discount")
+		setDiscountPrice(res.data.data.discountPrice)
+		setApplyCoupon('')
+		dispatch({
+			type:"COUPON_EXIST",
+			payload:true
+		})
+	}).catch(err=>{
+		toast.dismiss()
+		toast.error(err.message)
+	})
 }  
+const proceedForPayment=()=>{
+	navigate(routePath.PAYMENT)
 
+}
 	return (
 		<div className="px-5">
 			<h1 className="text-3xl pt-3 text-gray-700">Delivery Address</h1>
@@ -77,8 +99,7 @@ const handleApplyCoupon = ()=>{
 
 				<div className="lg:w-8/12 w-full lg:pr-3 pb-4">
 
-				<ReactQuill value={address} theme="snow" onChange={(e)=>setAddress(e.target.value)} />
-
+				<textarea  className='w-full bg-slate-100 border border-lime-300 outline-none' placeholder="Enter address" value={address} onChange={(e)=>setAddress(e.target.value)} id="" cols="30" rows="10"></textarea>
 				<button className="bg-blue-500 text-md font-semibold py-2 px-5 mt-5 rounded text-white " onClick={saveAddress}>Save</button>
 				{/* apply coupon */}
 
@@ -99,12 +120,17 @@ const handleApplyCoupon = ()=>{
 					<hr/>
 					<p className='py-3'>Total: ${totalPrice}</p>
 					<hr />
+					{/* discount price */}
+					{discountPrice >0 ?
+ 					<p className='py-3 bg-green-500 px-6'>Price After Discount : $ {discountPrice }</p>
+					:<></>
+					}
 					<div className="pt-3">
 
 					{user && user.token ? 
 					<div className=" flex justify-between">
 
-					<button  disabled={disable} className="bg-green-400 mt-4 rounded py-2 px-5 font-semibold text-gray-800  inline-flex">Place Order</button>
+					<button  disabled={disable} onClick={proceedForPayment}  className="bg-green-400 mt-4 rounded py-2 px-5 font-semibold text-gray-800  inline-flex">Place Order</button>
 					<button onClick={handleRemove} className="bg-[tomato] mt-4 rounded py-2 px-5 font-semibold text-gray-800  inline-flex">Empty cart</button>
 					</div>
 					:

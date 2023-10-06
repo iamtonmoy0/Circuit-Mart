@@ -19,3 +19,13 @@ export const deleteCouponById = async(id,token)=>{
 		}
 	})
 }
+
+// apply discount
+export const applyDiscountToCart=async (coupon,token) =>{
+	return axios.post(`${import.meta.env.VITE_Base_Url}/user/cart/coupon`,{coupon},{
+		headers:{
+			token
+		}
+	})
+
+}
