@@ -1,13 +1,15 @@
 import { DatePicker } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { createCoupon } from "../../../functions/couponFunctions";
+import { createCoupon, getCoupon } from "../../../functions/couponFunctions";
 import toast from "react-hot-toast";
+import {AiFillDelete} from 'react-icons/ai'
 
 const Coupons = () => {
 	const [coupon,setCoupon]= useState('');
 	const [discount,setDiscount]= useState(0);
 	const [date,setDate]= useState('');
+	const [data,setData]= useState([]);
 	const {user}= useSelector(state=>({...state}))
 	// submit handler
 	const handleSubmit=(e)=>{
@@ -25,9 +27,27 @@ const Coupons = () => {
 	toast.error(err.message)
   })
 	}
+	useEffect(()=>{
+loadCoupons()
+	},[])
+	// load coupons
+	const loadCoupons=()=>{
+		toast.loading('please wait')
+		getCoupon()
+		.then(res=>{
+			toast.dismiss()
+			console.log(res)
+			setData(res.data.data)
+		}).catch(err=>{
+			toast.dismiss();
+			toast.error(err.message);
+		})
+
+	}
 	return (
 		<div>
-      <p className="text-center text-3xl  text-green-600 pt-4">Create Coupon</p>
+      <p className="text-center text-3xl underline text-green-600 pt-4">Create Coupon</p>
+	
 	<form onSubmit={handleSubmit} action=""className="form-control">
 		
 		<div className="px-20">
@@ -45,6 +65,40 @@ const Coupons = () => {
 			</div>
 		<button type="submit" className="btn bg-blue-500 text-white font-semibold ml-20 py-2 px-8 mt-10 rounded" >Create</button>	
 	</form>
+	<div className="px-10">
+		<p className='text-center text-3xl font-semiblod text-green-600' >All Coupons</p>
+		{/* table */}
+		<div className="flex flex-col">
+  <div className="-m-1.5 overflow-x-auto">
+    <div className="p-1.5 min-w-full inline-block align-middle">
+      <div className="overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 ">
+          <thead>
+            <tr>
+              <th scope="col" className="px-6 py-3 text-center text-md font-medium text-gray-500 uppercase">Name</th>
+              <th scope="col" className="px-6 py-3 text-center text-md font-medium text-gray-500 uppercase">Expiry</th>
+              <th scope="col" className="px-6 py-3 text-center text-md font-medium text-gray-500 uppercase">Discount Amount</th>
+              <th scope="col" className="px-6 py-3 text-center text-md font-medium text-gray-500 uppercase">Action</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 dark:divide-gray-700 text-center">
+            { data && data.length>0 && data.map(c=><tr key={c._id}>
+              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{c.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{c.expiry}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{c.discount} %</td>
+              <td className="pl-16 py-4 whitespace-nowrap  text-sm font-medium">
+                <a className="cursor-pointer " ><AiFillDelete className='text-xl text-red-500' /></a>
+              </td>
+            </tr>)}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+		<hr />
+	</div>
     </div>
 	);
 }
