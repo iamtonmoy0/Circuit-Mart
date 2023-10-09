@@ -66,6 +66,7 @@ console.log(paymentIntent) //console log payment intend
 setProcessing(false)
 if(paymentIntent.status === 'succeeded'){
 const data = {
+  orderedBy:user?._id,
   products:cart,
   totalPrice:price,
   paymentId:paymentIntent.id

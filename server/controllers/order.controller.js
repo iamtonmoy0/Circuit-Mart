@@ -3,7 +3,7 @@ const { createPaymentServices, savePaymentServices } = require("../services/orde
 // cheate payment order
 exports.createPaymentController=async(req,res,next)=>{
 	try {
-		const result = await createPaymentServices(req.body.price,req.user);
+		const result = await createPaymentServices(req.body.price);
 		res.status(200).json({
 			status:'success',
 			data:result

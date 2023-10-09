@@ -2,7 +2,7 @@ const orderModel = require('../models/order.model');
 const stripe = require("stripe")(process.env.SECRET_KEY);
 
 // create payment services
-exports.createPaymentServices=async(price,user)=>{
+exports.createPaymentServices=async(price)=>{
 console.log(price)
 const totalAmount = (price*100).toFixed(2)
 	const paymentIntent = await stripe.paymentIntents.create({
@@ -19,9 +19,7 @@ const totalAmount = (price*100).toFixed(2)
 }
 // save payment
 exports.savePaymentServices=async(data,user)=>{
-	
-	console.log('user data',user)
-	data.user= currentUser._id;
+
 	console.log(data)
-	return await orderModel.create({data})
+	return await orderModel.create(data)
 }
