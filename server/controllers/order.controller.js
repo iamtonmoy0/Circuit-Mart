@@ -9,7 +9,7 @@ exports.createPaymentController=async(req,res,next)=>{
 			data:result
 		})
 	} catch (error) {
-		res.status(200).json({
+		res.status(400).json({
 			status:"fail",
 			err:error.message
 		})
@@ -24,7 +24,7 @@ exports.savePaymentController=async(req,res,next)=>{
 			data:result
 		})
 	} catch (error) {
-		res.status(200).json({
+		res.status(400).json({
 			status:"fail",
 			err:error.message
 		})
