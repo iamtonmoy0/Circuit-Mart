@@ -5,7 +5,7 @@ import CartTable from "../../../components/CartTable/CartTable";
 import {MdShoppingCartCheckout} from 'react-icons/md'
 import { userCart } from "../../../functions/cartFunctions";
 import toast from "react-hot-toast";
-
+import { Helmet } from "react-helmet-async";
 const CartLayout = () => {
 	const {cart,user}=useSelector(state=>({...state}));
 	// const dispatch = useDispatch();
@@ -39,6 +39,9 @@ const orderToDb=()=>{
 }
 	return (
 		<div className="px-5">
+			<Helmet>
+				<title>Circuit-Mart | Cart</title>
+			</Helmet>
 			<h1 className="text-3xl pt-3 text-gray-700">Cart/{cart.length} Products</h1>
 		
 			<div className="flex flex-col lg:flex-row pt-3" >

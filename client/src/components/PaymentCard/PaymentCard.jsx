@@ -36,7 +36,7 @@ if (!stripe || !elements) {
 		
 		<form className='w-7/12 ' onSubmit={handleSubmit}>
       <CardElement
-	  className='my-3 bg-gray-200 py-5 px-320'
+	className='my-3 bg-gray-200 py-5 px-320'
         options={{
           style: {
             base: {

@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUserCart, getUserCart, updateUserAddress } from "../../../functions/cartFunctions";
 import toast from "react-hot-toast";
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { applyDiscountToCart } from "../../../functions/couponFunctions";
 import {useNavigate} from 'react-router-dom'
 import * as routePath from '../../../routes/routePath';
-
+import { Helmet } from "react-helmet-async";
 const CheckOutPage = () => {
 	const dispatch = useDispatch();
 	const {user,coupon} = useSelector(state=>({...state}));
@@ -93,6 +92,9 @@ const proceedForPayment=()=>{
 }
 	return (
 		<div className="px-5">
+			<Helmet>
+				<title>Circuit-Mart | Checkout</title>
+			</Helmet>
 			<h1 className="text-3xl pt-3 text-gray-700">Delivery Address</h1>
 		
 			<div className="flex flex-col lg:flex-row pt-3" >
