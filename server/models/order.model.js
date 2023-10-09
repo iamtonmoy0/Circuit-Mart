@@ -15,9 +15,13 @@ const orderSchema = new schema({
 	},
 	totalPrice:Number,
 	status:{
-		type:string,
+		type:String,
 		enum:['processing',"accepted",'delivered','canceled'],
 		default:"processing"
+	},
+	paymentId:{
+		type:String,
+		required:true
 	}
 },{timeseries:true})
 

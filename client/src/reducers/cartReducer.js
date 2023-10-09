@@ -17,3 +17,11 @@ export const cartReducer=(state=initialState,action)=>{
 			return state;	
 	}
 }
+export const priceReducer=(state=initialState,action)=>{
+	switch(action.type){
+		case "TOTAL_CART_PRICE":
+			return action.payload;
+		default:
+			return state;	
+	}
+}

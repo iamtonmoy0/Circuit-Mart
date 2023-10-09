@@ -2,18 +2,26 @@ const orderModel = require('../models/order.model');
 const stripe = require("stripe")(process.env.SECRET_KEY);
 
 // create payment services
-exports.createPaymentServices=async(data,user)=>{
+exports.createPaymentServices=async(price,user)=>{
+console.log(price)
+const totalAmount = (price*100).toFixed(2)
 	const paymentIntent = await stripe.paymentIntents.create({
-		amount: calculateOrderAmount(items),
-		currency: "usd",
-		// In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-		automatic_payment_methods: {
-		  enabled: true,
-		},
+		amount: parseInt(totalAmount),
+        currency: 'usd',
+        payment_method_types: ['card']
+		
 	  });
-	
-	  res.send({
-		clientSecret: paymentIntent.client_secret,
-	  });
+	 const clientSecret= paymentIntent.client_secret
+	  
+	return clientSecret
+	  
 
+}
+// save payment
+exports.savePaymentServices=async(data,currentUser)=>{
+	
+	console.log('user',currentUser)
+	data.user= currentUser._id;
+	console.log(data)
+	return await orderModel.create({data})
 }

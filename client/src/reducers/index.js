@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./userReducer";
 import { searchReducer } from "./searchReducer";
-import { cartReducer } from "./cartReducer";
+import { cartReducer, priceReducer } from "./cartReducer";
 import { drawerReducer } from "./drawerReducer";
 import { couponReducer } from "./couponReducer";
 
@@ -11,6 +11,7 @@ search:searchReducer,
 cart:cartReducer,
 drawer:drawerReducer,
 coupon:couponReducer,
+totalPrice:priceReducer,
 
 });
 export default rootReducer;

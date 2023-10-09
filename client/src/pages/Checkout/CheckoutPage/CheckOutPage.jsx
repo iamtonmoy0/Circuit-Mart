@@ -30,6 +30,10 @@ const CheckOutPage = () => {
 			setProducts(res.data.data.products);
 			setTotalPrice(res.data.data.totalPrice);
 			toast.success('Checkout now')
+			dispatch({
+				type:"TOTAL_CART_PRICE",
+				payload:res.data.data.totalPrice
+			})
 		}).catch(err=>{
 			toast.dismiss();
 			toast.error(err.message);

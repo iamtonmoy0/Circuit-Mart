@@ -1,10 +1,26 @@
 
 import {CardElement,  useElements, useStripe} from '@stripe/react-stripe-js';
+import { useEffect, useState } from 'react';
+import { createPayment, savePayment } from '../../functions/orderFunctions';
+import toast from 'react-hot-toast';
 
 
-const PaymentCard = () => {
+const PaymentCard = ({user,price,cart}) => {
 	const stripe = useStripe();
 const elements = useElements();
+const [processing, setProcessing] = useState(false);
+const [clientSecret, setClientSecret] = useState("");
+
+useEffect(()=>{
+  if(price>0){
+createPayment(price,user.token)
+.then(res=>{
+  setClientSecret(res.data.data)
+}).catch(err=>{
+  toast.error(err.message)
+})
+  }
+},[price])
 
 const handleSubmit=async(e)=>{
 	e.preventDefault()
@@ -29,6 +45,38 @@ if (!stripe || !elements) {
   } else {
 	console.log('[PaymentMethod]', paymentMethod);
   }
+  setProcessing(true)
+  const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+    clientSecret,
+    {
+        payment_method: {
+            card: card,
+            billing_details: {
+                email: user?.email ,
+                name: user?.name 
+            },
+        },
+    },
+);
+
+if (confirmError) {
+    toast.error(confirmError);
+}
+console.log(paymentIntent) //console log payment intend
+setProcessing(false)
+if(paymentIntent.status === 'succeeded'){
+const data = {
+  products:cart,
+  totalPrice:price,
+  paymentId:paymentIntent.id
+};
+savePayment(data,user.token)
+.then(res=>{
+  console.log(res)
+})
+}
+
+
 };
 	return (
 		<div className='pl-[400px]'>
@@ -52,7 +100,8 @@ if (!stripe || !elements) {
           },
         }}
       />
-      <button className='btn bg-blue-500 self-center px-20 py-3 rounded  text-md font-semibold text-white ml-28 mt-6' type="submit" disabled={!stripe}>
+      <button className='btn bg-blue-500 self-center px-20 py-3 rounded  text-md font-semibold text-white ml-28 mt-6' type="submit" 
+      disabled={!stripe || !clientSecret}>
         Pay
       </button>
     </form>
