@@ -3,9 +3,13 @@ import {CardElement,  useElements, useStripe} from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import { createPayment, savePayment } from '../../functions/orderFunctions';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const PaymentCard = ({user,price,cart}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 	const stripe = useStripe();
 const elements = useElements();
 const [processing, setProcessing] = useState(false);
@@ -23,6 +27,7 @@ createPayment(price,user.token)
 },[price])
 
 const handleSubmit=async(e)=>{
+  setProcessing(true)
 	e.preventDefault()
 if (!stripe || !elements) {
 	// Stripe.js has not loaded yet. Make sure to disable
@@ -65,6 +70,15 @@ if (confirmError) {
 console.log(paymentIntent) //console log payment intend
 setProcessing(false)
 if(paymentIntent.status === 'succeeded'){
+  toast.success('Payment successful!');
+// dispatching a cart action
+  dispatch({
+  type:"ADD_TO_CART",
+  payload:[]
+})
+// remove local storage data 
+localStorage.removeItem('cart')
+
 const data = {
   orderedBy:user?._id,
   products:cart,
@@ -73,8 +87,10 @@ const data = {
 };
 savePayment(data,user.token)
 .then(res=>{
-  console.log(res)
-})
+  
+}).catch(err=>console.log(err))
+
+// TODO:navigate to user dashboard
 }
 
 
@@ -102,8 +118,8 @@ savePayment(data,user.token)
         }}
       />
       <button className='btn bg-blue-500 self-center px-20 py-3 rounded  text-md font-semibold text-white ml-28 mt-6' type="submit" 
-      disabled={!stripe || !clientSecret}>
-        Pay
+      disabled={!stripe || !clientSecret || processing}>
+        {processing ? "Please Wait" :"Pay now"}
       </button>
     </form>
 	</div>
