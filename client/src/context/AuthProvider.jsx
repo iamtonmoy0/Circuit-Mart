@@ -57,6 +57,7 @@ const AuthProvider = ({children}) => {
 		}
 		},[])
 // dispatch
+// TODO: need some improvement
 		if(user) {
 		(async () => {
 			try {
@@ -70,7 +71,7 @@ const AuthProvider = ({children}) => {
 		dispatch({
 			type:'LOGGED_IN_USER',
 			payload:{
- 				name:res.data.data.name,
+			name:res.data.data.name,
 			email:res.data.data.email,
 			role:res.data.data.role,
 			_id:res.data.data._id,
