@@ -1,4 +1,4 @@
-import {BiGridAlt, BiUserPlus} from 'react-icons/bi';
+import {BiGridAlt, BiSolidDashboard, BiUserPlus} from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import * as routePath from '../../routes/routePath';
 import { useContext } from 'react';
@@ -8,9 +8,10 @@ import {FiLogOut} from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux';
 import img  from '../../assets/logo.png'
 import Search from '../Search/Search';
-import { AiTwotoneShopping } from 'react-icons/ai';
+import { AiFillHeart, AiTwotoneShopping } from 'react-icons/ai';
 import { BsFillCartCheckFill } from 'react-icons/bs';
 import {  Badge } from 'antd';
+import { RiFileHistoryLine } from 'react-icons/ri';
 const Header = () => {
 
   const {logout}= useContext(AuthContext);
@@ -88,13 +89,16 @@ const Header = () => {
             :
             <>
             <Link to={routePath.WELCOME_AS_USER} className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+            <BiSolidDashboard/>
             Dashboard
            </Link>
              <Link to={routePath.USER_WISHLIST}className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+              <AiFillHeart className='text-red-600'/>
               Wishlist
             </Link>
 
-            <Link className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+            <Link  to={routePath.WELCOME_AS_USER} className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+              <RiFileHistoryLine/>
               Order History
             </Link>
            </>

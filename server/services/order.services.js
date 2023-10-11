@@ -23,3 +23,7 @@ exports.savePaymentServices=async(data,user)=>{
 	console.log(data)
 	return await orderModel.create(data)
 }
+// get order by user id 
+exports.getOrderByIdServices=async(id)=>{
+return await orderModel.find({orderedBy:id})
+}

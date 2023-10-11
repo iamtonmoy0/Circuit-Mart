@@ -1,4 +1,4 @@
-const { createPaymentServices, savePaymentServices } = require("../services/order.services")
+const { createPaymentServices, savePaymentServices, getOrderByIdServices } = require("../services/order.services")
 
 // cheate payment order
 exports.createPaymentController=async(req,res,next)=>{
@@ -21,6 +21,21 @@ exports.savePaymentController=async(req,res,next)=>{
 		const result = await savePaymentServices(req.body.data,req.user);
 		res.status(200).json({
 			status:'success',
+			data:result
+		})
+	} catch (error) {
+		res.status(400).json({
+			status:"fail",
+			err:error.message
+		})
+	}
+}
+// get order by user id
+exports.getOrderByIdController=async(req,res,next)=>{
+	try {
+		const result = await getOrderByIdServices(req.params.id)
+		res.status(200).json({
+			status:"success",
 			data:result
 		})
 	} catch (error) {

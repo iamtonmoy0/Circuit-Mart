@@ -5,7 +5,7 @@ import { createPayment, savePayment } from '../../functions/orderFunctions';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import * as routePath from '../../routes/routePath'
 
 const PaymentCard = ({user,price,cart}) => {
   const dispatch = useDispatch();
@@ -87,10 +87,11 @@ const data = {
 };
 savePayment(data,user.token)
 .then(res=>{
-  
-}).catch(err=>console.log(err))
+navigate(routePath.WELCOME_AS_USER)  ;
+}).catch(err=>{
+  toast.error(err.message)
+})
 
-// TODO:navigate to user dashboard
 }
 
 

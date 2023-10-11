@@ -2,10 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../../context/AuthProvider";
 import toast from "react-hot-toast";
+import {useNavigate} from 'react-router-dom';
+import * as routePath from '../../../routes/routePath';
+
+
 
 const RegisterComplete = () => {
 	const {createUser} = useContext(AuthContext);
-
+	const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,7 +33,9 @@ const RegisterComplete = () => {
         // remove user email fom local storage
         window.localStorage.removeItem("emailForRegistration");
 		toast.success('Account created successfully');
-		//TODO! might need a another dispatch for more security same as login but need to check the res in then function..-------<Login/>
+		// TODO! might need a another dispatch for more security same as login but need to check the res in then function..-------<Login/>
+
+		navigate(routePath.LOGIN)
 		
 		})
 		.catch(error=>{
