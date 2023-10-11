@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getOrderHistory } from "../../functions/orderFunctions";
 import OrderCard from "../../components/OrderCard/OrderCard";
+import toast from "react-hot-toast";
 
 const Welcome = () => {
  const {user}= useSelector(state=>({...state}));
@@ -11,9 +12,14 @@ loadOrder()
   },[])
   // load user order details
   const loadOrder = ()=>{
+    toast.loading('loading')
 getOrderHistory(user._id,user.token)
 .then(res=>{
+  toast.dismiss()
   setOrder(res.data.data)
+}).catch(err=>{
+  toast.dismiss()
+  toast.error(err.message)
 })
   }
   

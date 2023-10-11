@@ -35,13 +35,15 @@ exports.getAllOrderServices=async()=>{
 
 // delete order services
 exports.deleteOrderByIdServices=async(id,user)=>{
-const order = await orderModel.findById(id);
+const order = await orderModel.findById(id).populate('orderedBy','_id');
 if(!order){
 	return
 }
-const currentUser = userModel.find({email:user.email})
-if(currentUser._id === order.orderedBy){
-	return orderModel.findByIdAndDelete(order._id)
+const currentUser =await userModel.findOne({email:user.email})
+// console.log('dorder by id',order.orderedBy._id,'user id',currentUser._id)
+if(currentUser._id.equals(order.orderedBy._id)){
+	// console.log(true)
+	return  await orderModel.findOneAndRemove(order._id,{new:true})
 }
 return []
 }
