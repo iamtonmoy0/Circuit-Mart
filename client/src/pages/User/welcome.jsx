@@ -16,14 +16,13 @@ getOrderHistory(user._id,user.token)
   setOrder(res.data.data)
 })
   }
-  console.log(order)
-
+  
 	return (
-		<div className="px-6">
+		<div className="px-6 ">
       <p className="text-center text-xl font-semibold bg-gray-400 py-3">Order History </p>
-      <div className="order-cart pt-5">
+      <div className="order-cart mt-5">
         {order.length>0 && order.map(p=>
-          <OrderCard key={p._id} order={p} />
+          <OrderCard key={p._id} order={p}  loadOrder={loadOrder}/>
           )
         }
         

@@ -1,4 +1,5 @@
 const orderModel = require('../models/order.model');
+const userModel = require('../models/user.model')
 const stripe = require("stripe")(process.env.SECRET_KEY);
 
 // create payment services
@@ -31,3 +32,16 @@ return await orderModel.find({orderedBy:id})
 exports.getAllOrderServices=async()=>{
 	return await orderModel.find({})
 	}
+
+// delete order services
+exports.deleteOrderByIdServices=async(id,user)=>{
+const order = await orderModel.findById(id);
+if(!order){
+	return
+}
+const currentUser = userModel.find({email:user.email})
+if(currentUser._id === order.orderedBy){
+	return orderModel.findByIdAndDelete(order._id)
+}
+return []
+}

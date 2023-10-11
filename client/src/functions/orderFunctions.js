@@ -24,3 +24,11 @@ export const  getOrderHistory = async(id,token)=>{
 		}
 	})
 }
+// delete order
+export const  deleteOrderHistory = async(id,token)=>{
+	return await axios.delete(`${import.meta.env.VITE_Base_Url}/order-history/${id}`,{
+		headers:{
+			token
+		}
+	})
+}

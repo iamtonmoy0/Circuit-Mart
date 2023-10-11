@@ -85,6 +85,10 @@ const handleApplyCoupon = ()=>{
 			type:"COUPON_EXIST",
 			payload:true
 		})
+		dispatch({
+			type:'TOTAL_CART_PRICE',
+			payload:discountPrice
+		})
 	}).catch(err=>{
 		toast.dismiss()
 		toast.error(err.message)

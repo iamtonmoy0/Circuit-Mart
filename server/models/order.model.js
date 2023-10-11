@@ -16,14 +16,14 @@ const orderSchema = new schema({
 	totalPrice:Number,
 	status:{
 		type:String,
-		enum:['processing',"accepted",'delivered','canceled'],
+		enum:['processing',"accepted",'delivered','cancelled'],
 		default:"processing"
 	},
 	paymentId:{
 		type:String,
 		required:true
 	}
-},{timeseries:true})
+},{timestamps:true})
 
 const orderModel = mongoose.model("Order",orderSchema);
 module.exports=orderModel;

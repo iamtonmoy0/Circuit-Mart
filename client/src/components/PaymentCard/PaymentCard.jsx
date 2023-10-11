@@ -76,6 +76,10 @@ if(paymentIntent.status === 'succeeded'){
   type:"ADD_TO_CART",
   payload:[]
 })
+dispatch({
+  type:"TOTAL_CART_PRICE",
+  payload:0
+})
 // remove local storage data 
 localStorage.removeItem('cart')
 

@@ -1,26 +1,38 @@
 import ModalImage from "react-modal-image";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import * as routePath from '../../routes/routePath';
 import {TbFileInvoice} from 'react-icons/tb';
 import { useSelector } from "react-redux";
+import { deleteOrderHistory } from "../../functions/orderFunctions";
+import toast from "react-hot-toast";
 
-const OrderCard = ({order}) => {
+const OrderCard = ({order,loadOrder}) => {
 	const {user} = useSelector(state=>({...state}))
-	const navigate = useNavigate();
-	// handle cancel order
-	const handleCancel = (e)=>{
-		e.preventDefault()
 
-	}
-	
+		// handle cancel order
+		const handleCancel = (e)=>{
+			e.preventDefault()
+			toast.loading('loading')
+			console.log(order._id)
+			deleteOrderHistory(order._id,user?.token)
+			.then(()=>{
+				toast.dismiss()
+				toast.success('order cancelled!')
+				loadOrder()
+			}).catch(err=>{
+				toast.dismiss()
+				toast.error(err.message)
+
+			})
+		}
 	return (
-		<div>
+		<div className="mt-5 mb-10 ">
 			<div className="flex flex-col">
   <div className="-m-1.5 overflow-x-auto">
     <div className="p-1.5 min-w-full inline-block align-middle">
       <div className="overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 bg-slate-100">
           <thead>
             <tr>
               <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Item</th>
@@ -55,11 +67,11 @@ const OrderCard = ({order}) => {
 </div>
 <div className="flex flex-row justify-between">
 	<p className="text-gray-600 text-sm">Payment ID: <span className="text-blue-500"> {order.paymentId} </span></p>
-	<p className="text-gray-600 text-sm">Status: <span className="text-green-500 font-semibold capitalize ">{order.status}</span> </p>
+	<p className="text-gray-600 text-sm">Status: <span className={`${order.status === 'cancelled' ? 'text-red-700' : order.status ==='processing' ? 'text-green-400': order.status ==='accepted' ? 'text-blue-600':''} font-semibold capitalize`} >{order.status}</span> </p>
 	<p className="text-gray-600 text-sm">Total Price : <span className="text-black ">${order.totalPrice}</span> </p>
 	{order && order.status === 'accepted' || order.status === "delivered" ? 
 	<>
-	    <PDFDownloadLink
+	<PDFDownloadLink
       document={
         <Document>
           <Page style={styles.page}>
@@ -92,8 +104,9 @@ const OrderCard = ({order}) => {
 	</>
 	:
 	<>
-	{order && order.status === 'canceled' ? <></>
-	:<button onClick={handleCancel} className="btn bg-red-500 py-2 px-5 rounded" >Cancel</button>
+	{order && order.status === 'cancelled' ? <></>
+	:
+	<button onClick={handleCancel} className="btn bg-red-500 py-2 px-5 rounded" >Cancel</button>
 
 	}
 	</>
