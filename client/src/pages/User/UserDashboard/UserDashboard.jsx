@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { RiFileHistoryLine } from "react-icons/ri";
 import { AiFillHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -12,7 +13,9 @@ const UserDashboard = () => {
   const {user} = useSelector(state=>({...state}))
 	return (
 		<>
-		{/* header imported here */}
+    <Helmet>
+      <title>Circuit-Mart | Dashboard</title>
+    </Helmet>
 		<Header/>
 		{/* toaster */}
 		<Toaster/>

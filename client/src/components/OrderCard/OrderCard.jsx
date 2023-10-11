@@ -23,10 +23,10 @@ const OrderCard = ({order}) => {
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
           <thead>
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Item</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
-              <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Color</th>
+              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Item</th>
+              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Quantity</th>
+              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Price</th>
+              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Color</th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +42,7 @@ const OrderCard = ({order}) => {
           </div>
 			</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-800 dark:text-gray-200">{p.count}</td>
-              <td className="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{p.count} x {p.price} = {p.count * p.price}</td>
+              <td className="px-6  py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{p.count} x {p.price} = ${p.count * p.price}</td>
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 {p.color}
               </td>
