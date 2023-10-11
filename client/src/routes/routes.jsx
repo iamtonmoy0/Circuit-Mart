@@ -30,6 +30,7 @@ import CartLayout from "../pages/Cart/Layout/CartLayout";
 import CheckOutPage from "../pages/Checkout/CheckoutPage/CheckOutPage";
 import Coupons from "../pages/Admin/Coupons/Coupons";
 import Payment from "../pages/Checkout/Payment/Payment";
+import Invoice from "../components/Invoice/Invoice";
 
 
 const route = createBrowserRouter([
@@ -102,6 +103,10 @@ const route = createBrowserRouter([
 			{
 				path:routePath.USER_WISHLIST,
 				element: <Wishlist/>  
+			},
+			{
+				path:routePath.INVOICE,
+				element: <Invoice/>  
 			},
 		]  
 	},

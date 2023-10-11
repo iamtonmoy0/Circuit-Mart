@@ -27,3 +27,7 @@ exports.savePaymentServices=async(data,user)=>{
 exports.getOrderByIdServices=async(id)=>{
 return await orderModel.find({orderedBy:id})
 }
+// get all orders 
+exports.getAllOrderServices=async()=>{
+	return await orderModel.find({})
+	}

@@ -24,3 +24,4 @@ export const COUPONS =	`${WELCOME_AS_ADMIN}/coupon`
 export const WELCOME_AS_USER ='/user/dashboard'
 export const USER_WISHLIST =`${WELCOME_AS_USER}/wishlist`
 export const USER_PASSWORD =`${WELCOME_AS_USER}/password`
+export const INVOICE =`${WELCOME_AS_USER}/invoice`
