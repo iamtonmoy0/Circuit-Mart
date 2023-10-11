@@ -19,6 +19,8 @@
  * React-Quill
  * ImageModal
  * React-datePicker
+ * React-PDF
+ * React Icons
 
  ------------- Back End ------------------
  
