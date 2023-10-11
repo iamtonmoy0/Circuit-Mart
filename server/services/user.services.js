@@ -91,3 +91,23 @@ const totalAfterDiscount = (totalPrice - (totalPrice * isValid.discount)/100).to
 return await cartModel.findOneAndUpdate({orderedBy:currentUser._id} ,{discountPrice:totalAfterDiscount},{new:true})
 
 }
+// add to wishlist
+exports.addToWishlistServices=async(productId,user)=>{
+	const currentUser = await userModel.find({email:user.email});
+	console.log(user,"user lolo")
+	if (!currentUser) {// Handle the case where the user doesn't exist (e.g., return an error).
+		return { error: 'User not found' };
+	  }
+	  const productIndex = currentUser.wishlist.findIndex((item) => item.productId === productId); 
+	  if (productIndex !== -1) {// The product is already in the wishlist, so you may return nothing or a message.
+		return { message: 'Product already in wishlist' };
+	  }
+	
+  // Step 3: If the product ID is not in the wishlist, add it.
+  currentUser.wishlist.push({ productId });
+
+  // Save the updated user with the new product in the wishlist.
+  return await currentUser.save().populate('wishlist');
+  
+	   
+}

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const {ObjectId} = mongoose.schema;
+const {ObjectId} = mongoose.Schema;
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
@@ -23,7 +23,7 @@ const userSchema = new schema({
 		default:[]
 		},
 	address:String,
-	// wishlist:[{type:ObjectId,ref:"Product" }] //todo:need to comment out after wishlist is created!	
+	wishlist:[{type:ObjectId,ref:"Product" }] 	
 },{timestamps:true});
 
 const userModel = mongoose.model('User',userSchema);

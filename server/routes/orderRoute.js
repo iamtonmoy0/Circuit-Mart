@@ -11,6 +11,8 @@ router.route('/payment-success')
 router.route('/order-history/:id')
  .get(authCheck,getOrderByIdController)
  .delete(authCheck,deleteOrderByIdController)
+//  admin side functionality
 router.route('all-orders')
  .get(authCheck,adminCheck,)
+
 module.exports=router;

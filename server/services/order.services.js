@@ -20,7 +20,6 @@ const totalAmount = (price*100).toFixed(2)
 }
 // save payment
 exports.savePaymentServices=async(data,user)=>{
-
 	console.log(data)
 	return await orderModel.create(data)
 }

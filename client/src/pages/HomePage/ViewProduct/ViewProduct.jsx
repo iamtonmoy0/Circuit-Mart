@@ -28,6 +28,7 @@ import Reviews from '../../Shared/Reviews/Reviews';
 import StarRating from '../../Shared/StarRating/StarRating';
 import * as routePath from  '../../../routes/routePath'
 import { Tooltip } from "antd";
+import { addToWishlist } from "../../../functions/wishlistFunctions";
 
 
 const ViewProduct = () => {
@@ -106,6 +107,25 @@ const handleAddToCart = ()=>{
 	})
 	}
   }
+//   handleWishlist
+const handleWishlist=()=> {
+	console.log(product._id)
+	toast.loading('loading')
+	addToWishlist(product._id,user?.token)
+	.then(res=>{
+		toast.dismiss();
+		toast.success('Added to wishlist')
+		console.log(res)
+		dispatch({
+			type:"WISHLIST",
+			payload:res.data.data.wishlist
+		})
+	}).catch(err=>{
+		toast.dismiss();
+		toast.error(err.message)
+	})
+
+}
 
 	return (
 		<div className='flex flex-col' >
@@ -210,7 +230,7 @@ const handleAddToCart = ()=>{
 				</div>
 				</Tooltip>
 					
-				<div className="flex flex-col items-center">
+				<div onClick={handleWishlist} className="flex flex-col items-center">
 				<MdFavorite className="text-2xl text-red-700" />
 				<p>Add to wishlist</p>
 				</div>

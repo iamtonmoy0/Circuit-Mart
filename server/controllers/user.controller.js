@@ -1,5 +1,5 @@
 
-const { userCartServices, getUserCartServices, removeUserCartServices, updateAddressService, applyDiscountServices,  } = require('../services/user.services');
+const { userCartServices, getUserCartServices, removeUserCartServices, updateAddressService, applyDiscountServices, addToWishlistServices,  } = require('../services/user.services');
 
 
 // user cart
@@ -68,6 +68,21 @@ try {
 exports.applyDiscountController = async(req,res,next)=>{
 	try {
 		const result = await applyDiscountServices(req.body.coupon,req.user)
+		res.status(200).json({
+			status:'success',
+			data:result
+		})
+	} catch (error) {
+		res.status(400).json({
+			status:"fail",
+			err:error.message
+		})		
+	}
+}
+// add to wishlist
+exports.addToWishListController=async(req,res,next)=>{
+	try {
+		const result = await addToWishlistServices(req.params.id,req.user)
 		res.status(200).json({
 			status:'success',
 			data:result
