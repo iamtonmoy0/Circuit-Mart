@@ -2,6 +2,10 @@
 
 [Live Link](https://circuit-mart.netlify.app/)
 
+## Admin
+EMAIL: admin@admin.com
+PASSWORD : 123456
+
 Tech used =>
  * React(Vite)
  * Redux
