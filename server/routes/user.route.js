@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 // controllers
-const { userCartController,getUserCartController, removeUserCartController, updateUserAddressController, applyDiscountController, addToWishListController } = require('../controllers/user.controller');
+const { userCartController,getUserCartController, removeUserCartController, updateUserAddressController, applyDiscountController, addToWishlistController } = require('../controllers/user.controller');
 
 // middleware
 const { authCheck } = require('../middlewares/auth.middleware');
@@ -17,7 +17,7 @@ router.route('/user/address')
 router.route('/user/cart/coupon')
  .post(authCheck,applyDiscountController)
 // withlist
-router.route("/wishlist/:id")
- .post(authCheck,addToWishListController)
+router.route("/user-wishlist/:id")
+ .post(authCheck,addToWishlistController)
 
 module.exports=router;

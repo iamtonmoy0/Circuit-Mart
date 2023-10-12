@@ -107,11 +107,12 @@ const handleAddToCart = ()=>{
 	})
 	}
   }
+
 //   handleWishlist
 const handleWishlist=()=> {
 	console.log(product._id)
 	toast.loading('loading')
-	addToWishlist(product._id,user?.token)
+	addToWishlist(product._id,user.token)
 	.then(res=>{
 		toast.dismiss();
 		toast.success('Added to wishlist')

@@ -80,9 +80,11 @@ exports.applyDiscountController = async(req,res,next)=>{
 	}
 }
 // add to wishlist
-exports.addToWishListController=async(req,res,next)=>{
+exports.addToWishlistController=async(req,res,next)=>{
 	try {
-		const result = await addToWishlistServices(req.params.id,req.user)
+		console.log('params',req.params.id)
+		const result = await addToWishlistServices(req.params.id,req.user);
+		
 		res.status(200).json({
 			status:'success',
 			data:result

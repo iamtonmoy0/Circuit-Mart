@@ -55,14 +55,14 @@ const AuthProvider = ({children}) => {
 		return ()=>{
 			unsubscribe()
 		}
-		},[])
+		},[setUser])
 // dispatch
 // TODO: need some improvement
 		if(user) {
 		(async () => {
 			try {
 				const idTokenResult = await user.getIdTokenResult();
-				// console.log(idTokenResult.token)
+				console.log(idTokenResult.token)
 		// dispatch  state using firebase info
 		currentUser(idTokenResult.token)
 		.then(res=>{
