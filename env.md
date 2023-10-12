@@ -19,9 +19,15 @@ VITE_appId=appId
 
 
 ----------------------Server Side--------------
+
 PORT=3000
+
 DATABASE=db connection key
+
 SECRET_KEY=stripe key
+
 CLOUD_NAME=cloudinary storage name
+
 CLOUD_API_KEY=cloudinary key
+
 CLOUD_API_SECRET=api secret
